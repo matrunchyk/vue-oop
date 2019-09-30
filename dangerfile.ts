@@ -1,5 +1,5 @@
-import { danger, warn, message } from 'danger';
-import { includes } from 'lodash';
+import {danger, warn, message} from 'danger';
+import {includes} from 'lodash';
 import * as fs from 'fs';
 
 // No PR is too small to include a description of why you made a change
@@ -40,7 +40,7 @@ const hasTestChanges = testChanges.length > 0;
 // Warn if there are library changes, but not tests
 if (hasAppChanges && !hasTestChanges) {
   warn(
-    "There are library changes, but not tests. That's OK as long as you're refactoring existing code",
+    'There are library changes, but not tests. That\'s OK as long as you\'re refactoring existing code',
   );
 }
 
