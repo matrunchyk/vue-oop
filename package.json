@@ -1,0 +1,69 @@
+{
+  "name": "vue-model",
+  "version": "0.0.1",
+  "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and RESTful APIs.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matrunchyk/vue-model.git"
+  },
+  "keywords": [
+    "oop",
+    "es6",
+    "model",
+    "repository",
+    "vue",
+    "universal",
+    "umd",
+    "commonjs",
+    "webpack",
+    "collections",
+    "graphql",
+    "rest"
+  ],
+  "author": "Serhii Matrunchyk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/matrunchyk/vue-model/issues"
+  },
+  "homepage": "https://github.com/matrunchyk/vue-model",
+  "devDependencies": {
+    "@types/chai": "^4.2.3",
+    "@types/mocha": "^5.2.7",
+    "@types/clone": "^0.1.30",
+    "@types/uuid": "^3.4.5",
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^12.7.8",
+    "bundlesize": "^0.18.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.2.1",
+    "nyc": "^14.1.1",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  },
+  "bundlesize": [
+    {
+      "name": "vue-model",
+      "path": "./lib/vue-model.min.js",
+      "maxSize": "20 kb"
+    }
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w",
+    "test": "NODE_ENV=test nyc --reporter lcovonly --reporter=text --reporter=text-summary mocha && codecov",
+    "test:watch": "mocha -w ./test/*.spec.js",
+    "bundlesize": "npm run build && bundlesize"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@matrunchyk"
+  },
+  "dependencies": {
+    "clone": "^2.1.2",
+    "collect.js": "^4.16.6",
+    "uuid": "^3.3.3",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1"
+  }
+}

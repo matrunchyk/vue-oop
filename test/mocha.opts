@@ -1,0 +1,6 @@
+-r ts-node/register
+-r test/mocha.env.ts
+-c
+--reporter spec
+--recursive
+
