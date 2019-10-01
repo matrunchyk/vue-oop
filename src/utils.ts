@@ -1,10 +1,10 @@
 import axios from 'axios';
 import {parse, ObjectTypeDefinitionNode, DocumentNode} from 'graphql';
-import {Config, ResolvingRESTOptions} from '@/typings';
+import {Config, ResolvingRESTOptions} from './typings';
 import {DollarApollo} from 'vue-apollo/types/vue-apollo';
 import {Vue} from 'vue/types/vue';
-import Container from '@/Container';
-import UnexpectedException from '@/models/Exceptions/UnexpectedException';
+import Container from './Container';
+import UnexpectedException from './models/Exceptions/UnexpectedException';
 
 export function getApollo(): DollarApollo<Vue> {
   //@ts-ignore

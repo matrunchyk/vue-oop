@@ -1,11 +1,11 @@
 import {GraphQLError, DocumentNode} from 'graphql';
 import InvalidArgumentException from '../models/Exceptions/InvalidArgumentException';
 import Collection from '../models/Collection';
-import getUrl, {config, performSafeRequestREST, performSafeRequestGraphql} from '@/utils';
-import UnexpectedException from '@/models/Exceptions/UnexpectedException';
-import ValidationException from '@/models/Exceptions/ValidationException';
-import UnauthorizedException from '@/models/Exceptions/UnauthorizedException';
-import {EventListeners, EventType, GraphQLErrorBag, KeyValueString, PropertyFunction, ResolvingRESTOptions, UrlResolver, HttpMethod} from '@/typings';
+import getUrl, {config, performSafeRequestREST, performSafeRequestGraphql} from '../utils';
+import UnexpectedException from '../models/Exceptions/UnexpectedException';
+import ValidationException from '../models/Exceptions/ValidationException';
+import UnauthorizedException from '../models/Exceptions/UnauthorizedException';
+import {EventListeners, EventType, GraphQLErrorBag, KeyValueString, PropertyFunction, ResolvingRESTOptions, UrlResolver, HttpMethod} from '../typings';
 
 export default abstract class Repository<M = unknown> {
   /**
@@ -61,7 +61,7 @@ export default abstract class Repository<M = unknown> {
   /**
    * Defines a model which the repository items to be hydrated by
    *
-   * @type {BaseModel|function}
+   * @type {Model|function}
    * @throws {InvalidArgumentException}
    */
   public model: M | unknown = function undefinedMethod(data) {
@@ -168,7 +168,7 @@ export default abstract class Repository<M = unknown> {
    * @param {object} params
    * @param {boolean} collection
    * @param {string} method
-   * @returns {Promise<Collection|BaseModel>}
+   * @returns {Promise<Collection|Model>}
    */
   public async query(queryOrUrl: string | UrlResolver | DocumentNode, params: KeyValueString = {}, collection = false, method: HttpMethod = this.defaultMethod) {
     if (config().graphql) {
@@ -281,19 +281,19 @@ export default abstract class Repository<M = unknown> {
    * Fetches a single model
    *
    * @param {number|string} id
-   * @returns {Promise<BaseModel>}
+   * @returns {Promise<Model>}
    */
   public async one(id) {
     const params = config().graphql ? {uuid: id} : {id};
     const data = await this.query(this.fetchOneQuery, params);
     //@ts-ignore
-    let Model = this.model;
-    if (typeof Model === 'function') {
-      Model = Model(data);
+    let ModelFactory = this.model;
+    if (typeof ModelFactory === 'function') {
+      ModelFactory = ModelFactory(data);
     }
 
     //@ts-ignore
-    return new Model(data);
+    return new ModelFactory(data);
   }
 
   public static one(params) {

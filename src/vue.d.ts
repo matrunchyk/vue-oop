@@ -1,4 +1,4 @@
-import Container from '@/Container';
+import Container from './Container';
 
 declare module 'vue/types/vue' {
   interface Vue {

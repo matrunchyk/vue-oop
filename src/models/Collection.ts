@@ -1,5 +1,5 @@
 import collect from 'collect.js';
-import Model from '@/models/Model';
+import Model from '../models/Model';
 
 /**
  * This is a proxy class-wrapper for collect.js
