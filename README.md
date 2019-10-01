@@ -3,8 +3,8 @@
 Universal library which helps to build OOP-driven models for GraphQL and RESTful API for Vue components.
 Influenced by Laravel Eloquent Models & Collections.
 
-[![npm](https://img.shields.io/npm/v/vue-oop.svg)](https://www.npmjs.com/package/vue-oop) [![GitHub stars](https://img.shields.io/github/stars/digitalideastudio/vue-oop.svg)](https://github.com/digitalideastudio/vue-oop/stargazers)
-![Travis](https://api.travis-ci.org/matrunchyk/vue-oop.svg?branch=master) [![codecov](https://codecov.io/gh/digitalideastudio/vue-oop/branch/master/graph/badge.svg)](https://codecov.io/gh/digitalideastudio/vue-oop) [![GitHub license](https://img.shields.io/github/license/digitalideastudio/vue-oop.svg)](https://github.com/digitalideastudio/vue-oop/blob/master/LICENSE) 
+[![npm](https://img.shields.io/npm/v/vue-oop.svg)](https://www.npmjs.com/package/vue-oop) [![GitHub stars](https://img.shields.io/github/stars/matrunchyk/vue-oop.svg)](https://github.com/matrunchyk/vue-oop/stargazers)
+![Travis](https://api.travis-ci.org/matrunchyk/vue-oop.svg?branch=master) [![codecov](https://codecov.io/gh/matrunchyk/vue-oop/branch/master/graph/badge.svg)](https://codecov.io/gh/matrunchyk/vue-oop) [![GitHub license](https://img.shields.io/github/license/matrunchyk/vue-oop.svg)](https://github.com/matrunchyk/vue-oop/blob/master/LICENSE) 
 
 _Note. If you looking for v1 of this library, switch to a [relevant branch](https://github.com/digitalideastudio/vue-graphql-models/tree/v1)._ 
 
