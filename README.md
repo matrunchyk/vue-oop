@@ -1,8 +1,7 @@
-# Vue Data Models
+# Vue OOP
 
 Universal library which helps to build OOP-driven models for GraphQL and RESTful API for Vue components.
 Influenced by Laravel Eloquent Models & Collections.
-
 
 [![npm](https://img.shields.io/npm/v/vue-oop.svg)](https://www.npmjs.com/package/vue-oop) [![GitHub stars](https://img.shields.io/github/stars/digitalideastudio/vue-oop.svg)](https://github.com/digitalideastudio/vue-oop/stargazers)
 ![Travis](https://api.travis-ci.org/matrunchyk/vue-oop.svg?branch=master) [![codecov](https://codecov.io/gh/digitalideastudio/vue-oop/branch/master/graph/badge.svg)](https://codecov.io/gh/digitalideastudio/vue-oop) [![GitHub license](https://img.shields.io/github/license/digitalideastudio/vue-oop.svg)](https://github.com/digitalideastudio/vue-oop/blob/master/LICENSE) 
@@ -13,6 +12,8 @@ _Note. If you looking for v1 of this library, switch to a [relevant branch](http
 ## Features
 
 * `Model` is a class which acts as a base entity for your models extending this class.
+* `Repository` is a class which manages Model collections (retrieval one or many)
+* `Container` is a IoC container
 * Full encapsulation of GraphQL queries & mutations. No need to call them manually, all you need is to call you Model's methods.
 * All arrays retrieved from GraphQL will be hydrated with respectful collections of models.
 * Supports lazy-loading of GraphQL documents.
@@ -34,9 +35,9 @@ or
 ## Configuration
 
 ```
-import VueDataModel from 'vue-oop';
+import VueOOP from 'vue-oop';
 
-Vue.use(VueDataModel);
+Vue.use(VueOOP);
 ```
 
 ## Documentation
@@ -45,38 +46,56 @@ Vue.use(VueDataModel);
 #### 1. Define your model:
 
 ```
-import { Model, Repository } from 'vue-oop';
+// @/models/Client.js
+import { Model } from 'vue-oop';
 
-export default class Order extends Model {
- // Your additional logic, if needed
- //   ...or just empty class
+export default class Client extends Model {
+  name = 'John';
+  email = 'john@doe.com';
 }
 ```
 
-#### 2. Use it in your component:
+#### 2. Define your repository:
+```
+// @/repositories/ClientRepository.js
+import { Repository } from 'vue-oop';
+import Client from '@/models/Client';
+
+export default class ClientRepository extends Repository {
+  model: Client;
+}
+```
+
+#### 3. Use it in your component:
 
 ```
 <template>
    <ul>
-     <li v-if="model.loading">Loading...</li>
-     <li v-else-if="model.error">Loading Failed!</li>
-     <li v-else v-for="(item, index) in model.results.all()" :key="index">
+     <li v-if="repository.loading">Loading...</li>
+     <li v-else-if="repository.error">Loading Failed!</li>
+     <li v-else v-for="(item, index) in clients.all()" :key="index">
        <p>Name: {{ item.name }}</p>
-       <p>Color: {{ item.color }}</p>
+       <p>Email: {{ item.email }}</p>
      </li>
   </ul>
 </template>
 
 <script>
-import Fruit from '@/models/Fruit';
+import ClientRepository from '@/repositories/ClientRepository';
 
 export default {
   data: () => ({
-    model: new Fruit(),
+    repository: new ClientRepository(),
   }),
 
-  created() {
-    this.model.get();
+  computed: {
+    clients() {
+      return this.repository.dataset;
+    },
+  },
+
+  async created() {
+    await this.repository.many();
   },
 }
 </script>
@@ -90,9 +109,9 @@ Feel free to submit your pull-requests, ideas, proposals and bug reports!
  
 ### TODOs:
 - Add dynamic query/mutation building based on model attributes w/o need to create `.graphql` files at all
+- Add `@Inject` and `@Provide`
 - Make collections optional to make library more lightweight 
-- Rewrite to TypeScript
 - Add subscriptions & events example
 - Write more tests & coverage support
-- Add model versioning support
+- Add model version support
 - Add a configurable operation confirmation when performing some risky operations. For example, automatically display a delete confirmation component when executing `.delete()` method.
