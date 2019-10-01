@@ -21,7 +21,7 @@ export default class Container {
   public set(key: string, value: unknown): void {
     const entries: Entry[] = Array.isArray(key) ? key : [{[key]: value}];
     entries.forEach((entry) => {
-      Object.entries(entry).forEach((key, value) => Container.instance.entries.set(key, value));
+      Object.entries(entry).forEach(([key, value]) => Container.instance.entries.set(key, value));
     });
   }
 

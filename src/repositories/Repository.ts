@@ -1,7 +1,7 @@
 import {GraphQLError, DocumentNode} from 'graphql';
 import InvalidArgumentException from '../models/Exceptions/InvalidArgumentException';
 import Collection from '../models/Collection';
-import getUrl, {config, performSafeRequestREST, performSafeRequestGraphql} from '../utils';
+import {getUrl, config, performSafeRequestREST, performSafeRequestGraphql} from '../utils';
 import UnexpectedException from '../models/Exceptions/UnexpectedException';
 import ValidationException from '../models/Exceptions/ValidationException';
 import UnauthorizedException from '../models/Exceptions/UnauthorizedException';

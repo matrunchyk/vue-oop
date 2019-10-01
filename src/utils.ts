@@ -172,7 +172,7 @@ export function getSchemaQuery(queryName) {
     .find(def => def.name.value === queryName);
 }
 
-export default async function getUrl(_opts: ResolvingRESTOptions) {
+export async function getUrl(_opts: ResolvingRESTOptions) {
   const {url, params} = _opts;
   let resolvedUrl = url;
 
@@ -196,4 +196,8 @@ export default async function getUrl(_opts: ResolvingRESTOptions) {
   }
 
   return resolvedUrl;
+}
+
+export function stripObject(obj) {
+  return JSON.parse(JSON.stringify(obj, (k, v) => (k === 'loading' ? undefined : v)));
 }

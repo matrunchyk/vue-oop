@@ -1,7 +1,7 @@
 import camelCase from 'lodash.camelcase';
 import clone from 'clone';
 import uuid from 'uuid';
-import getUrl, {performSafeRequestREST, performSafeRequestGraphql, config, getSchemaTypeFields} from '../utils';
+import {getUrl, performSafeRequestREST, performSafeRequestGraphql, config, getSchemaTypeFields, stripObject} from '../utils';
 import Collection from './Collection';
 import {ResolvingRESTOptions} from '../typings';
 
@@ -110,7 +110,7 @@ export default abstract class Model {
   }
 
   protected getUpdateVariables() {
-    return this.toCollection().only(this.getInputFields()).all();
+    return stripObject(this.toCollection().only(this.getInputFields()).all());
   }
 
   /**
