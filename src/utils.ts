@@ -119,7 +119,7 @@ export function stripTypename(obj) {
  */
 export async function performSafeRequestGraphql(query: DocumentNode, variables = {}, subscriptions: unknown[] = []) {
   //@ts-ignore
-  const queryName: string = query.definitions.map((def => def.name).find(def => def.kind === 'Name')).value;
+  const queryName: string = query.definitions.map(def => def.name).find(def => def.kind === 'Name').value;
   //@ts-ignore
   const operation = query.definitions.find(def => def.kind === 'OperationDefinition').operation === 'query'
     ? performGqlQuery.bind(null, query, stripTypename(variables), queryName, subscriptions)

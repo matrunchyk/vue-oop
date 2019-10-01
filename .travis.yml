@@ -4,5 +4,11 @@ node_js:
   - "10"
 cache: yarn
 
+scripts:
+  - npm install codecov -g
+
+after_success:
+  - codecov
+
 before_script:
   - yarn danger ci

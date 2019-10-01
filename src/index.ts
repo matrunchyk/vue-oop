@@ -48,10 +48,17 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): void 
     ...options,
   };
 
-  container.set('Vue', Vue);
   container.set('Config', config);
 
   Vue.prototype.$container = container;
+
+  Vue.mixin({
+    created() {
+      if (container.has('Vue')) return;
+
+      container.set('Vue', this);
+    },
+  });
 }
 
 export default VueOOP;

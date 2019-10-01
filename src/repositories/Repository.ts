@@ -108,12 +108,12 @@ export default abstract class Repository<M = unknown> {
     return this.className.toLowerCase();
   }
 
-  get exists() {
-    return this._exists;
-  }
-
   get defaultMethod() {
     return config().graphql ? 'post' : 'get';
+  }
+
+  public exists() {
+    return this._exists;
   }
 
   //@ts-ignore

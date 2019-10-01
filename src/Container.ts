@@ -31,4 +31,8 @@ export default class Container {
     }
     return Container.instance.entries.get(key);
   }
+
+  public has(key: string): unknown {
+    return Container.instance.entries.has(key);
+  }
 }
