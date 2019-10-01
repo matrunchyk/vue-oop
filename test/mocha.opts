@@ -3,4 +3,4 @@
 -c
 --reporter spec
 --recursive
-
+./test/*.spec.ts

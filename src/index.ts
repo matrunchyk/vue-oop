@@ -1,31 +1,60 @@
-import Vue, {PluginObject} from 'vue';
+import _Vue from 'vue';
 import BaseModel from './models/BaseModel';
 import BaseRepository from './repositories/BaseRepository';
 import Container from './Container';
-import {Config} from '@/typings';
+import * as Utils from './utils';
 
 const container = Container.getInstance();
 
 container.set('BaseModel', BaseModel);
 container.set('BaseRepository', BaseRepository);
 
-export default class VueModel implements PluginObject<Config> {
-  [key: string]: any;
+export class VueModelOptions {
+  /**
+   * Use REST plugin.
+   *
+   * @type {boolean}
+   */
+  rest = true;
 
-  install(pVue: typeof Vue, defaultConfig: Config = {}) {
-    const config = {
-      rest: true,
-      graphql: false,
-      ...defaultConfig,
-    };
+  /**
+   * Use GraphQL plugin
+   *
+   * @type {boolean}
+   */
+  graphql = false;
 
-    container.set('Vue', pVue);
-    container.set('Config', config);
+  /**
+   * GraphQL Schema to parse for update variables guesser.
+   *
+   * @type {null}
+   */
+  schema: string = null;
 
-    pVue.prototype.$container = container;
-  }
-};
+  /**
+   * Debug mode
+   *
+   * @type {boolean}
+   */
+  debug = false;
+}
 
+function VueModel<VueModelOptions>(Vue: typeof _Vue, options?: VueModelOptions): void {
+  const config = {
+    rest: true,
+    graphql: false,
+    schema: null,
+    debug: false,
+    ...options,
+  };
+
+  container.set('Vue', Vue);
+  container.set('Config', config);
+
+  Vue.prototype.$container = container;
+}
+
+export default VueModel;
 export {default as Container} from './Container';
 export {default as BaseRepository} from './repositories/BaseRepository';
 export {default as BaseModel} from './models/BaseModel';
@@ -33,3 +62,7 @@ export {default as Collection} from './models/Collection';
 export {default as BaseException} from './models/Exceptions/BaseException';
 export {default as InvalidArgumentException} from './models/Exceptions/InvalidArgumentException';
 export {default as UnexpectedException} from './models/Exceptions/UnexpectedException';
+export {default as UnauthorizedException} from './models/Exceptions/UnauthorizedException';
+export {default as ValidationException} from './models/Exceptions/ValidationException';
+export {Utils, VueModel};
+

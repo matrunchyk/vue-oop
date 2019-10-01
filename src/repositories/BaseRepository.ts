@@ -1,51 +1,11 @@
-import {GraphQLError} from 'graphql';
+import {GraphQLError, DocumentNode} from 'graphql';
 import InvalidArgumentException from '../models/Exceptions/InvalidArgumentException';
 import Collection from '../models/Collection';
-import {config, performSafeRequestREST, performSafeRequestGraphql} from '@/utils';
+import getUrl, {config, performSafeRequestREST, performSafeRequestGraphql} from '@/utils';
 import UnexpectedException from '@/models/Exceptions/UnexpectedException';
 import ValidationException from '@/models/Exceptions/ValidationException';
 import UnauthorizedException from '@/models/Exceptions/UnauthorizedException';
-
-type KeyValueString = { [key: string]: string };
-
-type UrlResolver = (params?: KeyValueString, collection?: boolean) => string;
-
-type ResolvingRESTOptions = {
-  method: string;
-  url: string | UrlResolver;
-  params: unknown;
-}
-
-type PropertyFunction<T> = () => T;
-
-type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch';
-
-type GraphQLErrorType = {
-  extensions: {
-    errorCode: number,
-    message: string,
-  },
-}
-
-type GraphQLErrorBag = {
-  graphQLErrors: GraphQLErrorType[];
-}
-
-export type EventType = {
-  type: string;
-  target: unknown;
-  payload?: unknown;
-};
-
-type EventSubscriber = {
-  fired?: boolean;
-  immediate: boolean;
-  callback: (event: EventType) => void;
-};
-
-type EventListeners = {
-  [key: string]: EventSubscriber[];
-}
+import {EventListeners, EventType, GraphQLErrorBag, KeyValueString, PropertyFunction, ResolvingRESTOptions, UrlResolver, HttpMethod} from '@/typings';
 
 export default abstract class BaseRepository<M = unknown> {
   /**
@@ -94,7 +54,8 @@ export default abstract class BaseRepository<M = unknown> {
    */
   public queryParams: KeyValueString = {};
 
-  public subscriptions() {
+  public subscriptions(): unknown[] {
+    return [];
   }
 
   /**
@@ -160,32 +121,6 @@ export default abstract class BaseRepository<M = unknown> {
     return null;
   }
 
-  protected async getUrl(_opts: ResolvingRESTOptions) {
-    const {url, params} = _opts;
-    let resolvedUrl = url;
-
-    if (typeof url === 'function') {
-      resolvedUrl = await url();
-    } else {
-      resolvedUrl = (resolvedUrl as string).replace(
-        /:([^\s\/]+)/gi,
-        (_, m) => {
-          const param = params[m];
-          const hasParam = param !== undefined;
-
-          if (hasParam) {
-            delete params[m];
-            return param;
-          }
-
-          return m;
-        },
-      );
-    }
-
-    return resolvedUrl;
-  }
-
   public fromArray(array: unknown[], skipEmpty = true) {
     //@ts-ignore
     return new Collection(array.filter(i => i || !skipEmpty).map(i => new this.model(i)));
@@ -235,12 +170,12 @@ export default abstract class BaseRepository<M = unknown> {
    * @param {string} method
    * @returns {Promise<Collection|BaseModel>}
    */
-  public async query(queryOrUrl: string | UrlResolver, params: KeyValueString = {}, collection = false, method: HttpMethod = this.defaultMethod) {
+  public async query(queryOrUrl: string | UrlResolver | DocumentNode, params: KeyValueString = {}, collection = false, method: HttpMethod = this.defaultMethod) {
     if (config().graphql) {
-      let doc = queryOrUrl;
+      let doc = queryOrUrl as unknown as DocumentNode;
 
       if (typeof queryOrUrl === 'function') {
-        doc = await queryOrUrl();
+        doc = await queryOrUrl() as unknown as DocumentNode;
       }
 
       return this.beforeQuery()
@@ -252,7 +187,7 @@ export default abstract class BaseRepository<M = unknown> {
 
     this.method = method;
 
-    const resolvedUrl = await this.getUrl({method, url: queryOrUrl, params});
+    const resolvedUrl = await getUrl({method, url: queryOrUrl as string, params});
     const resolvedMethod = await this.getMethod({method, url: resolvedUrl, params});
 
     return this.beforeQuery()

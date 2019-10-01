@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {parse, ObjectTypeDefinitionNode, DocumentNode} from 'graphql';
-import {Config} from '@/typings';
+import {Config, ResolvingRESTOptions} from '@/typings';
 import {DollarApollo} from 'vue-apollo/types/vue-apollo';
 import {Vue} from 'vue/types/vue';
 import Container from '@/Container';
@@ -114,18 +114,19 @@ export function stripTypename(obj) {
  *
  * @param {object} query
  * @param {object} variables
+ * @param subscriptions
  * @returns {Promise<*>}
  */
-export async function performSafeRequestGraphql(query: DocumentNode, variables = {}) {
+export async function performSafeRequestGraphql(query: DocumentNode, variables = {}, subscriptions: unknown[] = []) {
   //@ts-ignore
   const queryName: string = query.definitions.map((def => def.name).find(def => def.kind === 'Name')).value;
   //@ts-ignore
   const operation = query.definitions.find(def => def.kind === 'OperationDefinition').operation === 'query'
-    ? performGqlQuery
-    : performGqlMutation;
+    ? performGqlQuery.bind(null, query, stripTypename(variables), queryName, subscriptions)
+    : performGqlMutation.bind(null, query, stripTypename(variables));
 
   //@ts-ignore
-  return operation(query, stripTypename(variables), queryName).then(({data}) => data[queryName]);
+  return operation().then(({data}) => data[queryName]);
 }
 
 export function containerGet(key: string) {
@@ -169,4 +170,30 @@ export function getSchemaQuery(queryName) {
     .find(def => def.name.value === 'Query')
     .fields
     .find(def => def.name.value === queryName);
+}
+
+export default async function getUrl(_opts: ResolvingRESTOptions) {
+  const {url, params} = _opts;
+  let resolvedUrl = url;
+
+  if (typeof url === 'function') {
+    resolvedUrl = await url();
+  } else {
+    resolvedUrl = (resolvedUrl as string).replace(
+      /:([^\s\/]+)/gi,
+      (_, m) => {
+        const param = params[m];
+        const hasParam = param !== undefined;
+
+        if (hasParam) {
+          delete params[m];
+          return param;
+        }
+
+        return m;
+      },
+    );
+  }
+
+  return resolvedUrl;
 }

@@ -1,18 +1,9 @@
 import camelCase from 'lodash.camelcase';
 import clone from 'clone';
 import uuid from 'uuid';
-import {performSafeRequestREST, performSafeRequestGraphql, config, getSchemaTypeFields} from '@/utils';
+import getUrl, {performSafeRequestREST, performSafeRequestGraphql, config, getSchemaTypeFields} from '@/utils';
 import Collection from './Collection';
-
-type KeyValueString = { [key: string]: string };
-
-type UrlResolver = (params?: KeyValueString, collection?: boolean) => string;
-
-type ResolvingRESTOptions = {
-  method: string;
-  url: string | UrlResolver;
-  params: unknown;
-}
+import {ResolvingRESTOptions} from '@/typings';
 
 export default abstract class BaseModel {
   public id: string;
@@ -31,7 +22,8 @@ export default abstract class BaseModel {
 
   protected performSafeRequestREST = performSafeRequestREST;
 
-  protected constructor(props) {
+  //noinspection TypeScriptAbstractClassConstructorCanBeMadeProtected
+  public constructor(props = {}) {
     //@ts-ignore
     if (typeof this.defaults === 'function') {
       console.warn('Deprecated: Use property variables or constructor instead. `defaults` will be removed in the next versions.');
@@ -99,32 +91,6 @@ export default abstract class BaseModel {
 
   protected getMethod(_opts: ResolvingRESTOptions) {
     return null;
-  }
-
-  protected async getUrl(_opts: ResolvingRESTOptions) {
-    const {url, params} = _opts;
-    let resolvedUrl = url;
-
-    if (typeof url === 'function') {
-      resolvedUrl = await url();
-    } else {
-      resolvedUrl = (resolvedUrl as string).replace(
-        /:([^\s\/]+)/gi,
-        (_, m) => {
-          const param = params[m];
-          const hasParam = param !== undefined;
-
-          if (hasParam) {
-            delete params[m];
-            return param;
-          }
-
-          return m;
-        },
-      );
-    }
-
-    return resolvedUrl;
   }
 
   public toCollection(skipEmpty = false) {
@@ -196,11 +162,11 @@ export default abstract class BaseModel {
   public async mutate(mutationOrUrl, params, method = this.defaultMethod) {
     if (config().graphql) {
       return this.beforeMutate()
-        .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params))
+        .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params, null))
         .finally(this.afterMutate.bind(this));
     }
 
-    const resolvedUrl = await this.getUrl({method, url: mutationOrUrl, params});
+    const resolvedUrl = await getUrl({method, url: mutationOrUrl, params});
     const resolvedMethod = await this.getMethod({method, url: resolvedUrl, params});
 
     return this.beforeMutate()
