@@ -1,5 +1,5 @@
 import collect from 'collect.js';
-import BaseModel from '@/models/BaseModel';
+import Model from '@/models/Model';
 
 /**
  * This is a proxy class-wrapper for collect.js
@@ -30,7 +30,7 @@ class Collection<Item = unknown> {
    * @param {array} items
    * @returns {Collection|Proxy}
    */
-  constructor(items: Item[] | BaseModel = []) {
+  constructor(items: Item[] | Model = []) {
     this.collection = (collect(items) as unknown) as this;
 
     return new Proxy(this, {

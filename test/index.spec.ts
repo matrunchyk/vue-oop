@@ -4,7 +4,7 @@ import chai from 'chai';
 import Vue from 'vue';
 //import chaiFetchMock from 'chai-fetch-mock';
 //import fetchMock from 'fetch-mock';
-import VueModel, {BaseModel as AbstractBaseModel, InvalidArgumentException, Utils} from '../src/index';
+import VueModel, {Model as AbstractBaseModel, InvalidArgumentException, Utils} from '../src/index';
 
 Vue.use(VueModel, {});
 
@@ -17,7 +17,7 @@ const expect = chai.expect;
 
 let lib;
 
-describe('Given an instance of my BaseModel library', () => {
+describe('Given an instance of my Model library', () => {
   before(() => {
     lib = new BaseModel();
   });
@@ -28,7 +28,7 @@ describe('Given an instance of my BaseModel library', () => {
   });
 });
 
-describe('Given an instance of my Model based on BaseModel', () => {
+describe('Given an instance of my Model based on Model', () => {
   before(() => {
     class MyModel extends BaseModel {
       __typename = 'MyModel';

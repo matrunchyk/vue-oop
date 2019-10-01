@@ -5,7 +5,7 @@ import getUrl, {performSafeRequestREST, performSafeRequestGraphql, config, getSc
 import Collection from './Collection';
 import {ResolvingRESTOptions} from '@/typings';
 
-export default abstract class BaseModel {
+export default abstract class Model {
   public id: string;
 
   public uuid: string = uuid.v4();
@@ -63,7 +63,7 @@ export default abstract class BaseModel {
     return this.className.toLowerCase();
   }
 
-  get data(): BaseModel {
+  get data(): Model {
     return this;
   }
 
@@ -82,7 +82,7 @@ export default abstract class BaseModel {
    * Hydrates object to model
    *
    * @param item
-   * @returns {BaseModel}
+   * @returns {Model}
    */
   protected hydrate(item) {
     //@ts-ignore

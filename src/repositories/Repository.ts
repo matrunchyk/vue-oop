@@ -7,7 +7,7 @@ import ValidationException from '@/models/Exceptions/ValidationException';
 import UnauthorizedException from '@/models/Exceptions/UnauthorizedException';
 import {EventListeners, EventType, GraphQLErrorBag, KeyValueString, PropertyFunction, ResolvingRESTOptions, UrlResolver, HttpMethod} from '@/typings';
 
-export default abstract class BaseRepository<M = unknown> {
+export default abstract class Repository<M = unknown> {
   /**
    * Existing/Loading flag
    *

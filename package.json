@@ -1,5 +1,5 @@
 {
-  "name": "vue-model",
+  "name": "vue-oop",
   "version": "0.1.0",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and RESTful APIs.",
   "keywords": [
@@ -16,13 +16,13 @@
     "vue",
     "webpack"
   ],
-  "homepage": "https://github.com/matrunchyk/vue-model",
+  "homepage": "https://github.com/matrunchyk/vue-oop",
   "bugs": {
-    "url": "https://github.com/matrunchyk/vue-model/issues"
+    "url": "https://github.com/matrunchyk/vue-oop/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/matrunchyk/vue-model.git"
+    "url": "https://github.com/matrunchyk/vue-oop.git"
   },
   "license": "MIT",
   "author": "Serhii Matrunchyk",
@@ -72,13 +72,13 @@
     "vue-apollo": "^3.0.0-rc.7",
     "apollo-client": "^2.4.1"
   },
-  "publishConfig": {
+  "publishConfig.off": {
     "registry": "https://npm.pkg.github.com/@matrunchyk"
   },
   "bundlesize": [
     {
-      "name": "vue-model",
-      "path": "./lib/vue-model.min.js",
+      "name": "vue-oop",
+      "path": "./lib/vue-oop.min.js",
       "maxSize": "20 kb"
     }
   ]

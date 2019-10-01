@@ -142,7 +142,7 @@ export function getParsedSchema() {
   // import schema from 'raw-loader!@/../schema.graphql';
 
   if (!schema) {
-    throw new UnexpectedException('Configuration error: \'schema\' must be passed as a config key, e.g\n\nimport schema from \'raw-loader!@/../schema.graphql\';\n\n//...\n\nVue.use(VueModel, {\n  //...,\n  schema,\n})\n\n;');
+    throw new UnexpectedException('Configuration error: \'schema\' must be passed as a config key, e.g\n\nimport schema from \'raw-loader!@/../schema.graphql\';\n\n//...\n\nVue.use(VueOOP, {\n  //...,\n  schema,\n})\n\n;');
   }
 
   return parse(schema);
