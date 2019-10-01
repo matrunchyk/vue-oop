@@ -1,7 +1,15 @@
 import axios from 'axios';
-import {parse} from 'graphql';
-import Container from '@/Container';
+import {parse, ObjectTypeDefinitionNode, DocumentNode} from 'graphql';
 import {Config} from '@/typings';
+import {DollarApollo} from 'vue-apollo/types/vue-apollo';
+import {Vue} from 'vue/types/vue';
+import Container from '@/Container';
+import UnexpectedException from '@/models/Exceptions/UnexpectedException';
+
+export function getApollo(): DollarApollo<Vue> {
+  //@ts-ignore
+  return Container.getInstance().get('Vue').$apollo;
+}
 
 export function camelToKebab(input: string): string {
   return input.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
@@ -64,8 +72,8 @@ export async function performSafeRequestREST(url, params = {}, method = 'get') {
  * @param {array} subscribeToMore
  * @returns {Promise<any>}
  */
-export function performGqlQuery(query, variables, queryName, subscribeToMore) {
-  return new Promise((result, error) => containerGet('Vue').$apollo.addSmartQuery(queryName, {
+export function performGqlQuery(query, variables, queryName, subscribeToMore?) {
+  return new Promise((result, error) => getApollo().addSmartQuery(queryName, {
     manual: true,
     query,
     subscribeToMore,
@@ -83,8 +91,8 @@ export function performGqlQuery(query, variables, queryName, subscribeToMore) {
  * @returns {Promise<any>}
  */
 export function performGqlMutation(mutation, variables) {
-  return new Promise((resolve, reject) => vm.$apollo.mutate({
-    update(cache, result) {
+  return new Promise((resolve, reject) => getApollo().mutate({
+    update(_cache, result) {
       return resolve(result);
     },
     // optimisticResponse: {],
@@ -108,12 +116,15 @@ export function stripTypename(obj) {
  * @param {object} variables
  * @returns {Promise<*>}
  */
-export async function performSafeRequestGraphql(query, variables = {}) {
-  const queryName = query.definitions.map(def => def.name).find(def => def.kind === 'Name').value;
+export async function performSafeRequestGraphql(query: DocumentNode, variables = {}) {
+  //@ts-ignore
+  const queryName: string = query.definitions.map((def => def.name).find(def => def.kind === 'Name')).value;
+  //@ts-ignore
   const operation = query.definitions.find(def => def.kind === 'OperationDefinition').operation === 'query'
     ? performGqlQuery
     : performGqlMutation;
 
+  //@ts-ignore
   return operation(query, stripTypename(variables), queryName).then(({data}) => data[queryName]);
 }
 
@@ -126,28 +137,35 @@ export function config() {
 }
 
 export function getParsedSchema() {
+  const schema = Container.getInstance().get('schema') as string;
+  // import schema from 'raw-loader!@/../schema.graphql';
+
+  if (!schema) {
+    throw new UnexpectedException('Configuration error: \'schema\' must be passed as a config key, e.g\n\nimport schema from \'raw-loader!@/../schema.graphql\';\n\n//...\n\nVue.use(VueModel, {\n  //...,\n  schema,\n})\n\n;');
+  }
+
   return parse(schema);
 }
 
 export function getSchemaTypeFields(typeName) {
-  return getParsedSchema()
-    .definitions
+  return (getParsedSchema()
+    .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => def.name.value === typeName)
     .fields
     .map(f => f.name.value);
 }
 
 export function getSchemaMutation(mutationName) {
-  return getParsedSchema()
-    .definitions
+  return (getParsedSchema()
+    .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => def.name.value === 'Mutation')
     .fields
     .find(def => def.name.value === mutationName);
 }
 
 export function getSchemaQuery(queryName) {
-  return getParsedSchema()
-    .definitions
+  return (getParsedSchema()
+    .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => def.name.value === 'Query')
     .fields
     .find(def => def.name.value === queryName);

@@ -1,4 +1,4 @@
-import VueApollo from 'vue-apollo';
+import Vue, {PluginObject} from 'vue';
 import BaseModel from './models/BaseModel';
 import BaseRepository from './repositories/BaseRepository';
 import Container from './Container';
@@ -9,25 +9,23 @@ const container = Container.getInstance();
 container.set('BaseModel', BaseModel);
 container.set('BaseRepository', BaseRepository);
 
-const VueModel = {
-  install(Vue, defaultConfig: Config = {}) {
-    const apollo = new DollarApollo(this);
+export default class VueModel implements PluginObject<Config> {
+  [key: string]: any;
+
+  install(pVue: typeof Vue, defaultConfig: Config = {}) {
     const config = {
       rest: true,
       graphql: false,
-      apollo,
       ...defaultConfig,
     };
 
-    container.set('Vue', Vue);
+    container.set('Vue', pVue);
     container.set('Config', config);
 
-    Vue.prototype.container = container;
-    return container;
-  },
+    pVue.prototype.$container = container;
+  }
 };
 
-export default VueModel;
 export {default as Container} from './Container';
 export {default as BaseRepository} from './repositories/BaseRepository';
 export {default as BaseModel} from './models/BaseModel';

@@ -27,9 +27,9 @@ export default abstract class BaseModel {
 
   protected __typename: string | undefined;
 
-  private performSafeRequestGraphql = performSafeRequestGraphql;
+  protected performSafeRequestGraphql = performSafeRequestGraphql;
 
-  private performSafeRequestREST = performSafeRequestREST;
+  protected performSafeRequestREST = performSafeRequestREST;
 
   protected constructor(props) {
     //@ts-ignore
@@ -79,6 +79,10 @@ export default abstract class BaseModel {
     // REST: If id exists, it means it came from the backend
     // GraphQL: If __typename exists, it means it came from the backend
     return !!this.id || (config().graphql && !!this.__typename);
+  }
+
+  get defaultMethod() {
+    return 'post';
   }
 
   // METHODS
@@ -189,15 +193,15 @@ export default abstract class BaseModel {
    * @param {string} method
    * @returns {*|Promise<Array<any>>|void}
    */
-  public async mutate(mutationOrUrl, params, method = 'post') {
+  public async mutate(mutationOrUrl, params, method = this.defaultMethod) {
     if (config().graphql) {
       return this.beforeMutate()
         .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params))
         .finally(this.afterMutate.bind(this));
     }
 
-    const resolvedUrl = this.getUrl({method, url: mutationOrUrl, params});
-    const resolvedMethod = this.getMethod({method, url: mutationOrUrl, params});
+    const resolvedUrl = await this.getUrl({method, url: mutationOrUrl, params});
+    const resolvedMethod = await this.getMethod({method, url: resolvedUrl, params});
 
     return this.beforeMutate()
       .then(this.performSafeRequestREST.bind(this, resolvedUrl, params, resolvedMethod || method))
