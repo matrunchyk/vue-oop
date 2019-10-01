@@ -1,7 +1,8 @@
+import VueApollo from 'vue-apollo';
 import BaseModel from './models/BaseModel';
 import BaseRepository from './repositories/BaseRepository';
 import Container from './Container';
-import {VueModelConfig} from '@/typings';
+import {Config} from '@/typings';
 
 const container = Container.getInstance();
 
@@ -9,10 +10,12 @@ container.set('BaseModel', BaseModel);
 container.set('BaseRepository', BaseRepository);
 
 const VueModel = {
-  install(Vue, defaultConfig: VueModelConfig = {}) {
+  install(Vue, defaultConfig: Config = {}) {
+    const apollo = new DollarApollo(this);
     const config = {
       rest: true,
       graphql: false,
+      apollo,
       ...defaultConfig,
     };
 
