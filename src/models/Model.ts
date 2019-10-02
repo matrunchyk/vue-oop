@@ -63,10 +63,6 @@ export default abstract class Model {
     return this.className.toLowerCase();
   }
 
-  get data(): Model {
-    return this;
-  }
-
   public exists() {
     // REST: If id exists, it means it came from the backend
     // GraphQL: If __typename exists, it means it came from the backend
