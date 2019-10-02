@@ -6,6 +6,7 @@ import UnexpectedException from '../models/Exceptions/UnexpectedException';
 import ValidationException from '../models/Exceptions/ValidationException';
 import UnauthorizedException from '../models/Exceptions/UnauthorizedException';
 import {EventListeners, EventType, GraphQLErrorBag, KeyValueString, PropertyFunction, ResolvingRESTOptions, UrlResolver, HttpMethod} from '../typings';
+import Model from '../models/Model';
 
 export default abstract class Repository<M = unknown> {
   /**
@@ -288,7 +289,8 @@ export default abstract class Repository<M = unknown> {
     const data = await this.query(this.fetchOneQuery, params);
     //@ts-ignore
     let ModelFactory = this.model;
-    if (typeof ModelFactory === 'function') {
+    // Check if ModelFactory is NOT inherit Model
+    if (typeof ModelFactory === 'function' && !(ModelFactory.prototype instanceof Model)) {
       ModelFactory = ModelFactory(data);
     }
 
