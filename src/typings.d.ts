@@ -1,6 +1,7 @@
 export type Config = {
   graphql?: boolean;
   rest?: boolean;
+  schema?: string;
 }
 
 export type KeyValueString = { [key: string]: string };
