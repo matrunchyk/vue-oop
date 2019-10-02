@@ -32,11 +32,29 @@ or
 
 `yarn add vue-oop`
 
-## Configuration
+## Configuration for GraphQL:
 
 ```
+// Import the library itself
 import VueOOP from 'vue-oop';
 
+// Import your schema.graphql file (optional, used for smart resolution of Input Types properties)
+import schema from 'raw-loader!@/../schema.graphql';
+
+// Install the plugin
+Vue.use(VueOOP, {
+  graphql: true,
+  schema,
+});
+```
+
+## Configuration for REST:
+
+```
+// Import the library itself
+import VueOOP from 'vue-oop';
+
+// Install the plugin
 Vue.use(VueOOP);
 ```
 
@@ -72,7 +90,7 @@ export default class ClientRepository extends Repository {
 <template>
    <ul>
      <li v-if="repository.loading">Loading...</li>
-     <li v-else-if="repository.error">Loading Failed!</li>
+     <li v-else-if="repository.error">Loading Failed! Reason: {{ repository.lastError.message }}</li>
      <li v-else v-for="(item, index) in clients.all()" :key="index">
        <p>Name: {{ item.name }}</p>
        <p>Email: {{ item.email }}</p>
@@ -101,17 +119,22 @@ export default {
 </script>
 ```
 
-####[Full Documentation](https://matrunchyk.github.io/vue-oop/#/)
+#### Notes for GraphQL
+In order to generate schema use [fetch-graphql-schema](https://github.com/yoctol/fetch-graphql-schema#fetch-graphql-schema) package with the following command `npx fetch-graphql-schema http://your.api.server/graphql -o schema.graphql -r` 
+If your're using Laravel Lighthouse, use the following command `php artisan lighthouse:print-schema > schema.graphql`.
+Then put your `schema.graphql` file inside of the root folder of your frontend project.
+
+This file is also needed if you use GraphQL plugins for your IDE (such as [JS GraphQL](https://plugins.jetbrains.com/plugin/8097-js-graphql)).
+In future, the library will be automatically fetching the schema from your backend (optionally) for convenience.
 
 ## Contribution
 
 Feel free to submit your pull-requests, ideas, proposals and bug reports!
  
 ### TODOs:
-- Add dynamic query/mutation building based on model attributes w/o need to create `.graphql` files at all
+- Add optional dynamic .graphql document generation based on model attributes and schema
+- Add optional IntrospectionQuery execution so that you don't need to specify `schema.graphql` manually.
 - Add `@Inject` and `@Provide`
-- Make collections optional to make library more lightweight 
 - Add subscriptions & events example
 - Write more tests & coverage support
-- Add model version support
 - Add a configurable operation confirmation when performing some risky operations. For example, automatically display a delete confirmation component when executing `.delete()` method.
