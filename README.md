@@ -123,6 +123,7 @@ export default {
 In order to generate schema use [fetch-graphql-schema](https://github.com/yoctol/fetch-graphql-schema#fetch-graphql-schema) package with the following command `npx fetch-graphql-schema http://your.api.server/graphql -o schema.graphql -r` 
 
 If your're using Laravel Lighthouse, use the following command `php artisan lighthouse:print-schema > schema.graphql`.
+
 Then put your `schema.graphql` file inside of the root folder of your frontend project.
 
 
