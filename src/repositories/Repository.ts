@@ -5,10 +5,11 @@ import {getUrl, config, performSafeRequestREST, performSafeRequestGraphql} from 
 import UnexpectedException from '../models/Exceptions/UnexpectedException';
 import ValidationException from '../models/Exceptions/ValidationException';
 import UnauthorizedException from '../models/Exceptions/UnauthorizedException';
-import {EventListeners, EventType, GraphQLErrorBag, KeyValueString, PropertyFunction, ResolvingRESTOptions, UrlResolver, HttpMethod} from '../typings';
+import {GraphQLErrorBag, KeyValueString, PropertyFunction, ResolvingRESTOptions, UrlResolver, HttpMethod} from '../typings';
 import Model from '../models/Model';
+import EventEmitter from '@/EventEmitter';
 
-export default abstract class Repository<M = unknown> {
+export default abstract class Repository<M = unknown> extends EventEmitter {
   /**
    * Existing/Loading flag
    *
@@ -16,10 +17,6 @@ export default abstract class Repository<M = unknown> {
    * @private
    */
   private _exists = false;
-
-  private _eventListeners: EventListeners = {};
-
-  private _firedEvents: EventType[] = [];
 
   protected performSafeRequestGraphql = performSafeRequestGraphql;
 
@@ -92,13 +89,14 @@ export default abstract class Repository<M = unknown> {
    * @param {object|array|Collection} array
    */
   protected constructor(array: Collection<M> | M[] = null) {
+    super();
     if (array instanceof Collection) {
       this.dataset = array;
     } else if (Array.isArray(array)) {
       this.dataset = this.fromArray(array);
     }
 
-    this.dispatchEvent('construct');
+    this.emit('construct');
   }
 
   get className() {
@@ -135,7 +133,7 @@ export default abstract class Repository<M = unknown> {
   protected onError(e: Error | GraphQLErrorBag) {
     this.lastError = e;
 
-    this.dispatchEvent('onError');
+    this.emit('onError');
 
     if (config().graphql && (e instanceof GraphQLError)) {
       const {
@@ -201,7 +199,7 @@ export default abstract class Repository<M = unknown> {
   public async beforeQuery() {
     this.loading = true;
 
-    this.dispatchEvent('beforeQuery');
+    this.emit('beforeQuery');
   }
 
   public async processResponse(collection, data) {
@@ -211,57 +209,8 @@ export default abstract class Repository<M = unknown> {
   public async afterQuery() {
     this.loading = false;
 
-    this.dispatchEvent('afterQuery');
+    this.emit('afterQuery');
   }
-
-  public on(type, callback: (event: EventType) => void, {immediate = false}) {
-    if (!(type in this._eventListeners)) {
-      this._eventListeners[type] = [];
-    }
-    this._eventListeners[type].push({
-      callback,
-      immediate,
-    });
-
-    const event = this.createEvent(type);
-
-    if (this._firedEvents[type]) {
-      callback(this._firedEvents[type]);
-      return;
-    }
-
-    this._eventListeners[type]
-      .slice()
-      .filter(subscriber => subscriber.fired && subscriber.immediate)
-      .forEach((subscriber) => subscriber.callback(event))
-    ;
-  }
-
-  private createEvent(type, payload?): EventType {
-    return {
-      type,
-      target: this,
-      payload,
-    };
-  }
-
-  private dispatchEvent(type: string, payload?: unknown) {
-    const event = this.createEvent(type, payload);
-
-    this._firedEvents[type] = event;
-
-    if (!(event.type in this._eventListeners)) {
-      return true;
-    }
-    const subscribers = this._eventListeners[event.type].slice();
-
-    for (let i = 0, l = subscribers.length; i < l; i++) {
-      const subscriber = subscribers[i];
-      subscriber.fired = true;
-      subscriber.callback.call(this, event);
-    }
-    return true;
-  };
 
   /**
    * Fetches multiple models

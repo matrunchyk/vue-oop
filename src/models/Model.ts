@@ -4,8 +4,9 @@ import uuid from 'uuid';
 import {getUrl, performSafeRequestREST, performSafeRequestGraphql, config, getSchemaTypeFields, stripObject} from '../utils';
 import Collection from './Collection';
 import {ResolvingRESTOptions} from '../typings';
+import EventEmitter from '@/EventEmitter';
 
-export default abstract class Model {
+export default abstract class Model extends EventEmitter {
   public id: string;
 
   public uuid: string = uuid.v4();
@@ -24,6 +25,7 @@ export default abstract class Model {
 
   //noinspection TypeScriptAbstractClassConstructorCanBeMadeProtected
   public constructor(props = {}) {
+    super();
     //@ts-ignore
     if (typeof this.defaults === 'function') {
       console.warn('Deprecated: Use property variables or constructor instead. `defaults` will be removed in the next versions.');
