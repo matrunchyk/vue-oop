@@ -4,7 +4,7 @@ import uuid from 'uuid';
 import {getUrl, performSafeRequestREST, performSafeRequestGraphql, config, getSchemaTypeFields, stripObject} from '../utils';
 import Collection from './Collection';
 import {ResolvingRESTOptions} from '../typings';
-import EventEmitter from '@/EventEmitter';
+import EventEmitter from '../EventEmitter';
 
 export default abstract class Model extends EventEmitter {
   public id: string;

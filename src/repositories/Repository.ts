@@ -7,7 +7,7 @@ import ValidationException from '../models/Exceptions/ValidationException';
 import UnauthorizedException from '../models/Exceptions/UnauthorizedException';
 import {GraphQLErrorBag, KeyValueString, PropertyFunction, ResolvingRESTOptions, UrlResolver, HttpMethod} from '../typings';
 import Model from '../models/Model';
-import EventEmitter from '@/EventEmitter';
+import EventEmitter from '../EventEmitter';
 
 export default abstract class Repository<M = unknown> extends EventEmitter {
   /**
