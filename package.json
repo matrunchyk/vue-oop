@@ -1,7 +1,7 @@
 {
   "name": "vue-oop",
-  "version": "0.1.19",
-  "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and RESTful APIs.",
+  "version": "0.1.20",
+  "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
     "commonjs",
@@ -14,7 +14,10 @@
     "umd",
     "universal",
     "vue",
-    "webpack"
+    "webpack",
+    "ioc",
+    "container",
+    "loader"
   ],
   "homepage": "https://github.com/matrunchyk/vue-oop",
   "bugs": {
