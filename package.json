@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and RESTful APIs.",
   "keywords": [
     "collections",
@@ -82,5 +82,8 @@
   ],
   "publishConfig.off": {
     "registry": "https://npm.pkg.github.com/@matrunchyk"
-  }
+  },
+  "files": [
+    "dist/**/*"
+  ]
 }
