@@ -101,7 +101,7 @@
     "dist"
   ],
   "files": [
-    "src/typings.d.ts",
+    "src/typings.ts",
     "src/vue.d.ts"
   ]
 }
