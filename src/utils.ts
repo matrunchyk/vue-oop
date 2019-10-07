@@ -179,7 +179,7 @@ export async function getUrl(_opts: ResolvingRESTOptions) {
     resolvedUrl = await url();
   } else {
     resolvedUrl = (resolvedUrl as string).replace(
-      /:([^\s\/]+)/gi,
+      /:([^\s\/?&]+)/gi,
       (_, m) => {
         const param = params[m];
         const hasParam = param !== undefined;
