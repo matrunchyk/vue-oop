@@ -6,6 +6,8 @@ export type Config = {
 
 export type KeyValueString = { [key: string]: string };
 
+export type KeyValueUnknown = { [key: string]: unknown };
+
 export type UrlResolver = (params?: KeyValueString, collection?: boolean) => string;
 
 export type ResolvingRESTOptions = {

@@ -1,3 +1,8 @@
+/*!
+ * VueOOP.js v0.2.1
+ * (c) 2017-2019 Serhii Matrunchyk
+ * Released under the MIT License.
+ */
 import _Vue from 'vue';
 import Model from './models/Model';
 import Repository from './repositories/Repository';

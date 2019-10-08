@@ -1,0 +1,46 @@
+module.exports = {
+  moduleFileExtensions: [
+    'js',
+    'json',
+    'ts',
+  ],
+  transform: {
+    '^.+\\.jsx?$': 'babel-jest',
+    '^.+\\.tsx?$': 'ts-jest',
+  },
+  transformIgnorePatterns: [
+    'node_modules',
+  ],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
+  testMatch: [
+    '**/test/unit/**/*.spec.(js|jsx|ts|tsx)',
+  ],
+  testURL: 'http://localhost/',
+  globals: {
+    'ts-jest': {
+      babelConfig: true,
+    },
+  },
+  collectCoverage: true,
+  coverageReporters: ['lcov', 'html'],
+  collectCoverageFrom: [
+    'src/**/*.{js,ts}',
+  ],
+  coverageThreshold: {
+    global: {
+      statements: 0,
+      branches: 0,
+      functions: 0,
+      lines: 0,
+    },
+  },
+  coverageDirectory: '<rootDir>/test/unit/coverage/',
+  coveragePathIgnorePatterns: [
+    '<rootDir>/node_modules',
+  ],
+  cacheDirectory: '<rootDir>/test/unit/cache/',
+  bail: true,
+  preset: 'ts-jest/presets/js-with-babel',
+};

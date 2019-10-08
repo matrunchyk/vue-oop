@@ -1,14 +1,14 @@
-/* global describe, it, before */
+/* global describe, it, beforeEach */
 
 import chai from 'chai';
 import Vue from 'vue';
 //import chaiFetchMock from 'chai-fetch-mock';
 //import fetchMock from 'fetch-mock';
-import VueModel, {Model as AbstractBaseModel, InvalidArgumentException, Utils} from '../src/index';
+import VueOOP, {Model, InvalidArgumentException, Utils} from '../../src';
 
-Vue.use(VueModel, {});
+Vue.use(VueOOP);
 
-class BaseModel extends AbstractBaseModel {
+class BaseModel extends Model {
 }
 
 const expect = chai.expect;
@@ -18,18 +18,18 @@ const expect = chai.expect;
 let lib;
 
 describe('Given an instance of my Model library', () => {
-  before(() => {
+  beforeEach(() => {
     lib = new BaseModel();
   });
   describe('when I need the __typename', () => {
     it('should return the __typename', () => {
-      expect(lib.__typename).to.be.equal('BaseModel');
+      expect(lib.__typename).to.be.equal(undefined);
     });
   });
 });
 
 describe('Given an instance of my Model based on Model', () => {
-  before(() => {
+  beforeEach(() => {
     class MyModel extends BaseModel {
       __typename = 'MyModel';
     }
@@ -44,44 +44,67 @@ describe('Given an instance of my Model based on Model', () => {
 });
 
 describe('Given an instance of my InvalidArgumentException library', () => {
-  before(() => {
-    lib = new InvalidArgumentException('This is a message');
-  });
   describe('when I need the message', () => {
     it('should return the message', () => {
-      expect(lib.message).to.be.equal('This is a message');
+      const message = 'This is a message';
+      try {
+        throw new InvalidArgumentException(message);
+      } catch (e) {
+        expect(e.message).to.be.eq(message);
+      }
     });
   });
 });
 
 describe('Given Utils object', () => {
-  describe('when I check whether it is a debug mode', () => {
-    it('should return undefined', () => {
-      expect(Utils.containerGet('debug')).to.be.false;
+  beforeEach(() => {
+    const fakeVue = {
+      prototype: {
+        $container: null,
+      },
+      mixin: jest.fn(),
+    };
+    //@ts-ignore
+    VueOOP(fakeVue);
+  });
+
+  describe('when try to get a non-config nonexistent key', () => {
+    it('should throw an error', () => {
+      const t = () => {
+        Utils.containerGet('totally_nonexistent');
+      };
+      expect(t).to.throw('Registry Error: totally_nonexistent is not available in the registry.');
     });
   });
-  /*
-   describe('when I pass loader function and path', () => {
-   it('should return a GQL document', async () => {
-   const obj = {
-   a: 1,
-   };
-   const doc = {fetchPost: obj};
-   const loader = () => Promise.resolve(doc);
-   const res = await Utils.getGQLDocument(loader, 'posts/queries/fetchPost');
 
-   expect(res).to.be.equal(obj);
-   });
-   });
-   describe('when I pass loader function (which fails) and path', () => {
-   it('should return a stubbed GQL document', async () => {
-   const loader = () => Promise.reject();
-   const res = await Utils.getGQLDocument(loader, 'posts/queries/fetchPost');
+  describe('when try to get a config nonexistent key', () => {
+    const t = () => {
+      Utils.containerGet('Config');
+    };
 
-   expect(res).to.be.eql({__fake: true});
-   });
-   });
-   */
+    it('should NOT throw an error', () => {
+      expect(t).to.not.throw();
+    });
+
+    it('should return undefined', () => {
+      expect(t()).to.be.undefined;
+    });
+  });
+
+  describe('when try to get a default config key', () => {
+    it('should throw an error', () => {
+      //@ts-ignore
+      expect(Utils.containerGet('Config').rest).to.be.true;
+    });
+  });
+
+  describe('when I check whether it is a debug mode', () => {
+    it('should return undefined', () => {
+      //@ts-ignore
+      expect(Utils.containerGet('Config').debug).to.be.false;
+    });
+  });
+
   describe('when I pass some original object with __typename', () => {
     it('should return a new cloned object without __typename', () => {
       const original = {
@@ -140,5 +163,5 @@ describe('Given Utils object', () => {
    */
 });
 
-describe('Given VueModel object', () => {
+describe('Given VueOOP object', () => {
 });

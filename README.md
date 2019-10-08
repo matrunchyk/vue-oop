@@ -131,6 +131,40 @@ This file is also needed if you use GraphQL plugins for your IDE (such as [JS Gr
 
 In future, the library will be automatically fetching the schema from your backend (optionally) for convenience.
 
+
+### Advanced Usage
+
+#### Dynamic Repository Query Params
+
+Sometimes we need to be able to pass params NOT in `.many()` or `.one()`. It happens, for example, when `.many()` is called not by you (i.e. 3rd party library or just other component).
+
+To achieve this, you can use the following syntax:
+
+```
+<template>
+  <div>
+    <button v-if="userId" @click="repository.many()">Fetch</button>
+  </div>
+</template>
+
+<script>
+// ...
+data: () => ({
+  repository: new MyRepository(),
+}),
+
+watch: {
+  userId(id) {
+    this.repository.queryParams = { id };
+  },
+},
+// ...
+</script>
+```
+
+Now when the `userId` variable is changed, the `queryParams` are also updated and ready to be called.
+
+
 ## Contribution
 
 Feel free to submit your pull-requests, ideas, proposals and bug reports!

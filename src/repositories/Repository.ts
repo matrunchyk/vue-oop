@@ -5,9 +5,17 @@ import {getUrl, config, performSafeRequestREST, performSafeRequestGraphql} from 
 import UnexpectedException from '../models/Exceptions/UnexpectedException';
 import ValidationException from '../models/Exceptions/ValidationException';
 import UnauthorizedException from '../models/Exceptions/UnauthorizedException';
-import {GraphQLErrorBag, KeyValueString, PropertyFunction, ResolvingRESTOptions, UrlResolver, HttpMethod} from '../typings';
 import Model from '../models/Model';
 import EventEmitter from '../EventEmitter';
+import {
+  GraphQLErrorBag,
+  KeyValueString,
+  PropertyFunction,
+  ResolvingRESTOptions,
+  UrlResolver,
+  HttpMethod,
+  KeyValueUnknown,
+} from '../typings';
 
 export default abstract class Repository<M = unknown> extends EventEmitter {
   /**
@@ -50,7 +58,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    *
    * @type {object}
    */
-  public queryParams: KeyValueString = {};
+  public queryParams: KeyValueUnknown = {};
 
   public subscriptions(): unknown[] {
     return [];
@@ -83,8 +91,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
   public abstract fetchManyQuery: string | PropertyFunction<string>;
 
   /**
-   * Constructs a repository with optionally predefined items.
-   * It uses an async early binding concept to avoid blocking a thread.
+   * Constructs a repository with optionally predefined dataset.
    *
    * @param {object|array|Collection} array
    */
