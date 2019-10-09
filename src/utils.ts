@@ -3,12 +3,12 @@ import {parse, ObjectTypeDefinitionNode, DocumentNode} from 'graphql';
 import {Config, ResolvingRESTOptions} from './typings';
 import {DollarApollo} from 'vue-apollo/types/vue-apollo';
 import {Vue} from 'vue/types/vue';
-import Container from './Container';
+import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
 
 export function getApollo(): DollarApollo<Vue> {
   //@ts-ignore
-  return Container.getInstance().get('Vue').$apollo;
+  return Registry.getInstance().get('Vue').$apollo;
 }
 
 export function camelToKebab(input: string): string {
@@ -129,12 +129,12 @@ export async function performSafeRequestGraphql(query: DocumentNode, variables =
   return operation().then(({data}) => data[queryName]);
 }
 
-export function containerGet(key: string) {
-  return Container.getInstance().get(key);
+export function registryGet(key: string) {
+  return Registry.getInstance().get(key);
 }
 
 export function config() {
-  return containerGet('Config') as Config;
+  return registryGet('Config') as Config;
 }
 
 export function getParsedSchema() {

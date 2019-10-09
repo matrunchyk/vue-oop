@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -35,7 +35,7 @@
     "build": "tsc",
     "bundlesize": "npm run build && bundlesize",
     "dev": "tsc -w",
-    "test": "jest",
+    "test": "jest --config jest.config.json",
     "test:watch": "jest -w"
   },
   "dependencies": {

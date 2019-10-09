@@ -13,7 +13,7 @@ _Note. If you looking for v1 of this library, switch to a [relevant branch](http
 
 * `Model` is a class which acts as a base entity for your models extending this class.
 * `Repository` is a class which manages Model collections (retrieval one or many)
-* `Container` is a IoC container
+* `Registry` is a IoC container
 * Full encapsulation of GraphQL queries & mutations. No need to call them manually, all you need is to call you Model's methods.
 * All arrays retrieved from GraphQL will be hydrated with respectful collections of models.
 * Supports lazy-loading of GraphQL documents.

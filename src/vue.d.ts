@@ -1,7 +1,7 @@
-import Container from './Container';
+import Registry from './Registry';
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $container: Container;
+    $registry: Registry;
   }
 }

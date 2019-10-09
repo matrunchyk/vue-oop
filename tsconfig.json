@@ -10,7 +10,8 @@
     "lib": [
       "esnext",
       "scripthost",
-      "dom"
+      "dom",
+      "es2015.proxy"
     ],
     // "allowJs": true,                       /* Allow javascript files to be compiled. */
     // "checkJs": true,                       /* Report errors in .js files. */

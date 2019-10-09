@@ -187,7 +187,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       return this.beforeQuery()
         .then(this.performSafeRequestGraphql.bind(this, doc, params, this.subscriptions()))
         .then(this.processResponse.bind(this, collection))
-        .catch(this.onError)
+        .catch(this.onError.bind(this))
         .finally(this.afterQuery.bind(this));
     }
 

@@ -5,6 +5,7 @@ import Vue from 'vue';
 //import chaiFetchMock from 'chai-fetch-mock';
 //import fetchMock from 'fetch-mock';
 import VueOOP, {Model, InvalidArgumentException, Utils} from '../../src';
+import Registry from '../../src/Registry';
 
 Vue.use(VueOOP);
 
@@ -16,6 +17,37 @@ const expect = chai.expect;
 //chai.use(chaiFetchMock);
 
 let lib;
+
+describe('Given an instance of the Registry', () => {
+  describe('when I try to instantiate the class directly', () => {
+    let sg1: Registry;
+    it('should return the singleton', () => {
+      //@ts-ignore
+      sg1 = new Registry();
+      //@ts-ignore
+      sg1.test = 123;
+      //@ts-ignore
+      const sg2 = new Registry();
+      expect(sg1).to.be.eq(sg2);
+      expect(sg2.test).to.be.eq(123);
+    });
+
+    afterAll(() => {
+      // We need this for the next test
+      sg1.__jest__destroyInstance();
+    });
+  });
+
+  describe('when I try to an getInstance of the class', () => {
+    it('should return the singleton', () => {
+      const sg1 = Registry.getInstance();
+      const sg2 = Registry.getInstance();
+      expect(sg1).to.be.eq(sg2);
+      //@ts-ignore
+      expect(sg1.test).not.to.be.eq(123);
+    });
+  });
+});
 
 describe('Given an instance of my Model library', () => {
   beforeEach(() => {

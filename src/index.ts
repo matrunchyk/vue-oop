@@ -6,13 +6,13 @@
 import _Vue from 'vue';
 import Model from './models/Model';
 import Repository from './repositories/Repository';
-import Container from './Container';
+import Registry from './Registry';
 import * as Utils from './utils';
 
-const container = Container.getInstance();
+const registry = Registry.getInstance();
 
-container.set('Model', Model);
-container.set('Repository', Repository);
+registry.set('Model', Model);
+registry.set('Repository', Repository);
 
 export class VueOOPOptions {
   /**
@@ -53,21 +53,22 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): void 
     ...options,
   };
 
-  container.set('Config', config);
+  registry.set('Config', config);
 
-  Vue.prototype.$container = container;
+  Vue.prototype.$registry = registry;
 
   Vue.mixin({
     created() {
-      if (container.has('Vue')) return;
+      if (registry.has('Vue')) return;
 
-      container.set('Vue', this);
+      registry.set('Vue', this);
     },
   });
 }
 
 export default VueOOP;
-export {default as Container} from './Container';
+export {default as Registry} from './Registry';
+export {default as RepositoryProvider} from './RepositoryProvider';
 export {default as Repository} from './repositories/Repository';
 export {default as Model} from './models/Model';
 export {default as Collection} from './models/Collection';
