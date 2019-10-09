@@ -14,6 +14,7 @@ const registry = Registry.getInstance();
 registry.set('Model', Model);
 registry.set('Repository', Repository);
 
+// istanbul ignore next
 export class VueOOPOptions {
   /**
    * Use REST plugin.
@@ -59,6 +60,7 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): void 
 
   Vue.mixin({
     created() {
+      // istanbul ignore else
       if (registry.has('Vue')) return;
 
       registry.set('Vue', this);
