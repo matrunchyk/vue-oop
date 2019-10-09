@@ -21,6 +21,8 @@ scripts:
 
 after_success:
   - codecov
+
+after_deploy:
   - npm publish --registry https://npm.pkg.github.com/@matrunchyk
 
 #before_script:
