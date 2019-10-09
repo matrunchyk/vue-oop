@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -36,7 +36,9 @@
     "bundlesize": "npm run build && bundlesize",
     "dev": "tsc -w",
     "test": "jest --config jest.config.json",
-    "test:watch": "jest -w"
+    "test:watch": "jest -w",
+    "publish-github": "npm publish --registry https://npm.pkg.github.com/@matrunchyk",
+    "release": "release-it"
   },
   "dependencies": {
     "app-root-path": "^2.2.1",
@@ -64,6 +66,7 @@
     "danger": "^9.2.1",
     "fetch-mock": "^7.5.1",
     "jest": "^24.9.0",
+    "release-it": "^12.4.3",
     "ts-jest": "^24.1.0",
     "ts-node": "^8.4.1",
     "typescript": "^3.6.3",
@@ -82,9 +85,6 @@
       "maxSize": "20 kb"
     }
   ],
-  "publishConfig.off": {
-    "registry": "https://npm.pkg.github.com/@matrunchyk"
-  },
   "files": [
     "dist/**/*"
   ]
