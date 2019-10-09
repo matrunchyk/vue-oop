@@ -9,6 +9,7 @@ scripts:
 
 after_success:
   - codecov
+  - npm run release -- minor --ci
 
 before_script:
   - yarn danger ci
