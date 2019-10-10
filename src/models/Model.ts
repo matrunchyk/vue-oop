@@ -1,5 +1,5 @@
 import camelCase from 'lodash.camelcase';
-import clone from 'clone';
+import clone from 'lodash.clonedeep';
 import uuid from 'uuid';
 import {getUrl, performSafeRequestREST, performSafeRequestGraphql, config, getSchemaTypeFields, stripObject} from '../utils';
 import Collection from './Collection';
