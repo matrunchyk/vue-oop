@@ -142,6 +142,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
 
     this.emit('onError');
 
+    // istanbul ignore else
     if (config().graphql && (e instanceof GraphQLError)) {
       const {
         graphQLErrors: [{extensions: {errorCode, message}}] = [
@@ -154,15 +155,16 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
         ],
       } = (e as unknown) as GraphQLErrorBag;
 
+      // istanbul ignore else
       if (errorCode === 401) {
         throw new UnauthorizedException(message);
       }
 
+      // istanbul ignore else
       if (errorCode === 422) {
         throw new ValidationException(message);
       }
 
-      console.log('ERROR', errorCode, e);
       throw new UnexpectedException(e.message);
     }
   }
@@ -177,9 +179,11 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    * @returns {Promise<Collection|Model>}
    */
   public async query(queryOrUrl: string | UrlResolver | DocumentNode, params: KeyValueString = {}, collection = false, method: HttpMethod = this.defaultMethod) {
+    // istanbul ignore else
     if (config().graphql) {
       let doc = queryOrUrl as unknown as DocumentNode;
 
+      // istanbul ignore else
       if (typeof queryOrUrl === 'function') {
         doc = await queryOrUrl() as unknown as DocumentNode;
       }
@@ -226,6 +230,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    * @returns {Promise<Collection>}
    */
   public async many(params = null) {
+    // istanbul ignore else
     if (!this.fetchManyQuery) {
       throw new InvalidArgumentException('fetchAllQuery is not set for this repository.');
     }
@@ -246,6 +251,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     //@ts-ignore
     let ModelFactory = this.model;
     // Check if ModelFactory is NOT inherit Model
+    // istanbul ignore else
     if (typeof ModelFactory === 'function' && !(ModelFactory.prototype instanceof Model)) {
       ModelFactory = ModelFactory(data);
     }

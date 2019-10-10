@@ -70,7 +70,6 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): void 
 
 export default VueOOP;
 export {default as Registry} from './Registry';
-export {default as RepositoryProvider} from './RepositoryProvider';
 export {default as Repository} from './repositories/Repository';
 export {default as Model} from './models/Model';
 export {default as Collection} from './models/Collection';

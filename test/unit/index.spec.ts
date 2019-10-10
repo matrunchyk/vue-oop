@@ -135,8 +135,8 @@ describe('Given an instance of my Model based on Model', () => {
   });
 });
 
-describe('Given an instance of my InvalidArgumentException library', () => {
-  describe('when I need the message', () => {
+describe('Given instances of BaseException', () => {
+  describe('when I pass the message to InvalidArgumentException', () => {
     it('should return the message', () => {
       const message = 'This is a message';
       try {
@@ -144,6 +144,33 @@ describe('Given an instance of my InvalidArgumentException library', () => {
         throw new InvalidArgumentException(message);
       } catch (e) {
         expect(e.message).toBe(message);
+      }
+    });
+  });
+
+  describe('when I pass the response-like payload to InvalidArgumentException', () => {
+    it('should return a message in the object', () => {
+      let payload = {
+        data: {
+          message: 'This is a message from the server',
+        },
+      };
+      try {
+        //noinspection ExceptionCaughtLocallyJS
+        throw new InvalidArgumentException(payload);
+      } catch (e) {
+        expect(e.message).toBe(payload.data.message);
+      }
+    });
+  });
+
+  describe('when I do NOT pass the message to InvalidArgumentException', () => {
+    it('should return NO message', () => {
+      try {
+        //noinspection ExceptionCaughtLocallyJS
+        throw new InvalidArgumentException();
+      } catch (e) {
+        expect(e.message).toBe('');
       }
     });
   });

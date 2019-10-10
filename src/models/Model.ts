@@ -3,7 +3,7 @@ import clone from 'lodash.clonedeep';
 import uuid from 'uuid';
 import {getUrl, performSafeRequestREST, performSafeRequestGraphql, config, getSchemaTypeFields, stripObject} from '../utils';
 import Collection from './Collection';
-import {ResolvingRESTOptions} from '../typings';
+import {KeyValueUnknown, ResolvingRESTOptions} from '../typings';
 import EventEmitter from '../EventEmitter';
 
 export default abstract class Model extends EventEmitter {
@@ -26,16 +26,11 @@ export default abstract class Model extends EventEmitter {
   //noinspection TypeScriptAbstractClassConstructorCanBeMadeProtected
   public constructor(props = {}) {
     super();
-    //@ts-ignore
-    if (typeof this.defaults === 'function') {
-      console.warn('Deprecated: Use property variables or constructor instead. `defaults` will be removed in the next versions.');
-      //@ts-ignore
-      Object.assign(this, this.defaults(), props);
-    }
-
+    Object.assign(this, this.defaults(), props);
     Object.assign(this, props);
 
     //@ts-ignore
+    // istanbul ignore else
     if (typeof this.hydrateProps === 'function') {
       console.warn('Deprecated: Use property variables or constructor instead. `hydrateProps` will be removed in the next versions.');
       //@ts-ignore
@@ -65,14 +60,18 @@ export default abstract class Model extends EventEmitter {
     return this.className.toLowerCase();
   }
 
+  get defaultMethod() {
+    return 'post';
+  }
+
   public exists() {
     // REST: If id exists, it means it came from the backend
     // GraphQL: If __typename exists, it means it came from the backend
     return !!this.id || (config().graphql && !!this.__typename);
   }
 
-  get defaultMethod() {
-    return 'post';
+  protected defaults(): KeyValueUnknown {
+    return {};
   }
 
   // METHODS
@@ -118,13 +117,16 @@ export default abstract class Model extends EventEmitter {
    * @return {array<string>}
    */
   public toSubmittable(props = this.submittableProps): unknown {
+    // istanbul ignore else
     if (!props) return [];
+    // istanbul ignore else
     if (Array.isArray(props) && !props.length) return [];
 
     return this.toCollection().only(props).all();
   }
 
   public async create(mutation, params) {
+    // istanbul ignore else
     if (config().graphql) {
       return this.hydrate(
         await this.mutate(mutation, {[camelCase(this.getClassName())]: params}),
@@ -137,6 +139,7 @@ export default abstract class Model extends EventEmitter {
   }
 
   public delete(deleteMutation) {
+    // istanbul ignore else
     if (config().graphql) {
       return this.mutate(deleteMutation, {
         uuid: this.uuid,
@@ -158,6 +161,7 @@ export default abstract class Model extends EventEmitter {
    * @returns {*|Promise<Array<any>>|void}
    */
   public async mutate(mutationOrUrl, params, method = this.defaultMethod) {
+    // istanbul ignore else
     if (config().graphql) {
       return this.beforeMutate()
         .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params, null))

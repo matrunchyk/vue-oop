@@ -4,7 +4,7 @@ type ExceptionPayload = {
   };
 };
 
-export default class BaseException extends Error {
+export default abstract class BaseException extends Error {
   response = {};
 
   constructor(payload: ExceptionPayload | string = '') {
