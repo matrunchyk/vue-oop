@@ -12,7 +12,7 @@ deploy:
     secure: JVSfGSdBY0QVXfrqNJysxBkJM0SpqjQSXer1LalVSgyn97Yo1fJzvYTvH030LDGFd0yNKZXT9JlnkOduuQ5oEVRyVjBM/i+i/uUT+6YDCPAGiTsf/pcQwnvHv8W9wm0TqAPtqhRxE8kmRk6X2Fgxw0YbePhkIWwAsYvLkGXfqSKfTwPy/Y/iPoZhS/G5C0XJVSaZa8LNK45gahgOczaExmDWW6YmNWHetfX9ZggYoPFhAwp+//2VoVKPaRa3jsp/V+TA3OHnqkOcnPSgMEW6J8arzCXWqzPT7/axf3mwLj4Z2FnG3/vuTo7qHXEY+wU3XEYVzwPkuYWYmClsHdRhoYvD/YangNVLB8CZYxKTPSfnZbCQCh7bfh7VuUGTVpQ/dgxl/mrUKv5FNvFICKzxvWm66fKnoALdzwXp+dv6ADfxhz9QbLs/6LGuYOusBUZPSpT4Gs/VurIohpvn2Tru3zM/gcZie317eAcsUHzR8PVccnxhFfJndox0TpS1INlzir4XjZKQ5soxPfCtk2YHlKuTpQZ+eBhT6sCrapXQ6KOLsm3U8YX7X/ZocJRGcsqqpRAyHidjmVmlV4r5p+xeANBhkH6/g3Gn7/HtPZ/qjUqs+K32aHboPewlqxvFWJ8MmnY29a1APiGxLSZYGro1SfTJMhGxeYWa7kOkP3Fy02w=
   tag: next
   on:
-    #    tags: true
+    tags: true
     repo: matrunchyk/vue-oop
     node_js: "10"
 
