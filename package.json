@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
