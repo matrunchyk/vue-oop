@@ -80,12 +80,13 @@ import { Repository } from 'vue-oop';
 import Client from '@/models/Client';
 
 export default class ClientRepository extends Repository {
-  model: Client;
+  model = Client;
 }
 ```
 
 #### Step 3. Use it in your component:
 
+##### JavaScript
 ```
 <template>
    <ul>
@@ -112,6 +113,36 @@ export default {
 }
 </script>
 ```
+
+##### TypeScript
+```
+<template>
+   <ul>
+     <li v-if="repository.loading">Loading...</li>
+     <li v-else-if="repository.error">Loading Failed! Reason: {{ repository.lastError.message }}</li>
+     <li v-else v-for="(item, index) in repository.dataset.all()" :key="index">
+       <p>Name: {{ item.name }}</p>
+       <p>Email: {{ item.email }}</p>
+     </li>
+  </ul>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import ClientRepository from '@/repositories/ClientRepository';
+
+@Component
+export default class ClientsPage extens Vue {
+  repository = new ClientRepository(),
+
+  created() {
+    this.repository.many();
+  }
+}
+</script>
+```
+
 
 #### Notes for GraphQL
 In order to generate schema use [fetch-graphql-schema](https://github.com/yoctol/fetch-graphql-schema#fetch-graphql-schema) package with the following command `npx fetch-graphql-schema http://your.api.server/graphql -o schema.graphql -r` 
