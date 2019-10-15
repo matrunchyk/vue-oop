@@ -133,7 +133,7 @@ import Component from 'vue-class-component';
 import ClientRepository from '@/repositories/ClientRepository';
 
 @Component
-export default class ClientsPage extens Vue {
+export default class ClientsPage extends Vue {
   repository = new ClientRepository(),
 
   created() {
