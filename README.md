@@ -39,7 +39,7 @@ or
 // Import the library itself
 import VueOOP from 'vue-oop';
 
-// Import your schema.graphql file (optional, used for smart resolution of Input Types properties)
+// Import your schema.graphql file (OPTIONAL, used for smart resolution of Input Types properties)
 import schema from 'raw-loader!@/../schema.graphql';
 
 // Install the plugin
@@ -62,7 +62,7 @@ Vue.use(VueOOP);
 ## Documentation
 
 ### Basic Usage
-#### 1. Define your model:
+#### Step 1. Define your model:
 
 ```
 // @/models/Client.js
@@ -74,25 +74,26 @@ export default class Client extends Model {
 }
 ```
 
-#### 2. Define your repository:
+#### Step 2. Define your repository:
 ```
 // @/repositories/ClientRepository.js
 import { Repository } from 'vue-oop';
 import Client from '@/models/Client';
 
 export default class ClientRepository extends Repository {
-  model: Client;
+  model = Client;
 }
 ```
 
-#### 3. Use it in your component:
+#### Step 3. Use it in your component:
 
+##### JavaScript
 ```
 <template>
    <ul>
      <li v-if="repository.loading">Loading...</li>
      <li v-else-if="repository.error">Loading Failed! Reason: {{ repository.lastError.message }}</li>
-     <li v-else v-for="(item, index) in clients.all()" :key="index">
+     <li v-else v-for="(item, index) in repository.dataset.all()" :key="index">
        <p>Name: {{ item.name }}</p>
        <p>Email: {{ item.email }}</p>
      </li>
@@ -107,18 +108,42 @@ export default {
     repository: new ClientRepository(),
   }),
 
-  computed: {
-    clients() {
-      return this.repository.dataset;
-    },
-  },
-
-  async created() {
-    await this.repository.many();
+  created() {
+    this.repository.many();
   },
 }
 </script>
 ```
+
+##### TypeScript
+```
+<template>
+   <ul>
+     <li v-if="repository.loading">Loading...</li>
+     <li v-else-if="repository.error">Loading Failed! Reason: {{ repository.lastError.message }}</li>
+     <li v-else v-for="(item, index) in repository.dataset.all()" :key="index">
+       <p>Name: {{ item.name }}</p>
+       <p>Email: {{ item.email }}</p>
+     </li>
+  </ul>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import Component from 'vue-class-component';
+import ClientRepository from '@/repositories/ClientRepository';
+
+@Component
+export default class ClientsPage extends Vue {
+  repository = new ClientRepository(),
+
+  created() {
+    this.repository.many();
+  }
+}
+</script>
+```
+
 
 #### Notes for GraphQL
 In order to generate schema use [fetch-graphql-schema](https://github.com/yoctol/fetch-graphql-schema#fetch-graphql-schema) package with the following command `npx fetch-graphql-schema http://your.api.server/graphql -o schema.graphql -r` 
