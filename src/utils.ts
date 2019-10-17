@@ -1,4 +1,3 @@
-import axios from 'axios';
 import {parse, ObjectTypeDefinitionNode, DocumentNode} from 'graphql';
 import {Config, ResolvingRESTOptions} from './typings';
 import {DollarApollo} from 'vue-apollo/types/vue-apollo';
@@ -60,6 +59,7 @@ export async function performSafeRequestREST(url, params = {}, method = 'get') {
     body = params;
   }
 
+  const axios = await import('axios');
   return axios[method.toLowerCase()](fullUrl, body).then(status).then(json);
 }
 
