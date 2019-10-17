@@ -5,6 +5,11 @@ import {Vue} from 'vue/types/vue';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
 
+export const defaultRESTHeaders = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json;charset=UTF-8',
+};
+
 export function getApollo(): DollarApollo<Vue> {
   //@ts-ignore
   return Registry.getInstance().get('Vue').$apollo;
@@ -45,7 +50,7 @@ export function json(response) {
   }
 }
 
-export async function performSafeRequestREST(url, params = {}, method = 'get') {
+export async function performSafeRequestREST(url, params = {}, method = 'get', headers = defaultRESTHeaders) {
   let fullUrl = url;
   let body = {};
 
@@ -59,8 +64,11 @@ export async function performSafeRequestREST(url, params = {}, method = 'get') {
     body = params;
   }
 
-  const axios = await import('axios');
-  return axios[method.toLowerCase()](fullUrl, body).then(status).then(json);
+  return fetch(fullUrl, {
+    method: method.toLowerCase(),
+    headers,
+    body: JSON.stringify(body),
+  }).then(status).then(json);
 }
 
 /**
