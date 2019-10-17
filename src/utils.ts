@@ -1,5 +1,5 @@
 import {parse, ObjectTypeDefinitionNode, DocumentNode} from 'graphql';
-import {Config, ResolvingRESTOptions} from './typings';
+import {Config, KeyValueUnknown, ResolvingRESTOptions} from './typings';
 import {DollarApollo} from 'vue-apollo/types/vue-apollo';
 import {Vue} from 'vue/types/vue';
 import Registry from './Registry';
@@ -50,7 +50,7 @@ export function json(response) {
   }
 }
 
-export async function performSafeRequestREST(url, params = {}, method = 'get', headers = defaultRESTHeaders) {
+export async function performSafeRequestREST(url, params = {}, method = 'get', opts: KeyValueUnknown = {}) {
   let fullUrl = url;
   let body = {};
 
@@ -66,8 +66,9 @@ export async function performSafeRequestREST(url, params = {}, method = 'get', h
 
   return fetch(fullUrl, {
     method: method.toLowerCase(),
-    headers,
+    headers: defaultRESTHeaders,
     body: JSON.stringify(body),
+    ...opts,
   }).then(status).then(json);
 }
 

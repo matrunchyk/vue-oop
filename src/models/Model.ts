@@ -172,7 +172,7 @@ export default abstract class Model extends EventEmitter {
     const resolvedMethod = await this.getMethod({method, url: resolvedUrl, params});
 
     return this.beforeMutate()
-      .then(this.performSafeRequestREST.bind(this, resolvedUrl, params, resolvedMethod || method))
+      .then(this.performSafeRequestREST.bind(this, resolvedUrl, params, resolvedMethod || method, null))
       .finally(this.afterMutate.bind(this));
   }
 

@@ -201,7 +201,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     const resolvedMethod = await this.getMethod({method, url: resolvedUrl, params});
 
     return this.beforeQuery()
-      .then(this.performSafeRequestREST.bind(this, resolvedUrl, params || this.queryParams, resolvedMethod || method))
+      .then(this.performSafeRequestREST.bind(this, resolvedUrl, params || this.queryParams, resolvedMethod || method, null))
       .then(this.processResponse.bind(this, collection))
       .catch(this.onError.bind(this))
       .finally(this.afterQuery.bind(this));
