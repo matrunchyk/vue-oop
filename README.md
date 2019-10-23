@@ -82,6 +82,12 @@ import Client from '@/models/Client';
 
 export default class ClientRepository extends Repository {
   model = Client;
+  
+  // For REST
+  // queryMany = '/api/v1/clients';
+
+  // For GraphQL
+  // queryMany: () => import('@/gql/clients/queries/fetchClients.gql');
 }
 ```
 
