@@ -8,6 +8,7 @@ import Model from './models/Model';
 import Repository from './repositories/Repository';
 import Registry from './Registry';
 import * as Utils from './utils';
+import { DocumentNode } from "graphql";
 
 const registry = Registry.getInstance();
 
@@ -35,7 +36,7 @@ export class VueOOPOptions {
    *
    * @type {null}
    */
-  schema: string = null;
+  schema: DocumentNode = null;
 
   /**
    * Debug mode
@@ -69,14 +70,14 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): void 
 }
 
 export default VueOOP;
-export {default as Registry} from './Registry';
-export {default as Repository} from './repositories/Repository';
-export {default as Model} from './models/Model';
-export {default as Collection} from './models/Collection';
-export {default as BaseException} from './models/Exceptions/BaseException';
-export {default as InvalidArgumentException} from './models/Exceptions/InvalidArgumentException';
-export {default as UnexpectedException} from './models/Exceptions/UnexpectedException';
-export {default as UnauthorizedException} from './models/Exceptions/UnauthorizedException';
-export {default as ValidationException} from './models/Exceptions/ValidationException';
-export {Utils, VueOOP};
+export { default as Registry } from './Registry';
+export { default as Repository } from './repositories/Repository';
+export { default as Model } from './models/Model';
+export { default as Collection } from './models/Collection';
+export { default as BaseException } from './models/Exceptions/BaseException';
+export { default as InvalidArgumentException } from './models/Exceptions/InvalidArgumentException';
+export { default as UnexpectedException } from './models/Exceptions/UnexpectedException';
+export { default as UnauthorizedException } from './models/Exceptions/UnauthorizedException';
+export { default as ValidationException } from './models/Exceptions/ValidationException';
+export { Utils, VueOOP };
 

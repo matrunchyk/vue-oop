@@ -1,4 +1,4 @@
-import {parse, ObjectTypeDefinitionNode, DocumentNode} from 'graphql';
+import {ObjectTypeDefinitionNode, DocumentNode} from 'graphql';
 import {Config, KeyValueUnknown, ResolvingRESTOptions} from './typings';
 import {DollarApollo} from 'vue-apollo/types/vue-apollo';
 import {Vue} from 'vue/types/vue';
@@ -146,14 +146,14 @@ export function config() {
   return registryGet('Config') as Config;
 }
 
-export function getParsedSchema() {
+export function getParsedSchema(): DocumentNode {
   const schema = config().schema;
 
   if (!schema) {
     throw new UnexpectedException('Configuration error: \'schema\' must be passed as a config key, e.g\n\nimport schema from \'raw-loader!@/../schema.graphql\';\n\n//...\n\nVue.use(VueOOP, {\n  //...,\n  schema,\n})\n\n;');
   }
 
-  return parse(schema);
+  return schema;
 }
 
 export function getSchemaTypeFields(typeName) {
