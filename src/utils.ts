@@ -1,7 +1,6 @@
-import {ObjectTypeDefinitionNode, DocumentNode} from 'graphql';
-import {Config, KeyValueUnknown, ResolvingRESTOptions} from './typings';
-import {DollarApollo} from 'vue-apollo/types/vue-apollo';
-import {Vue} from 'vue/types/vue';
+import { ObjectTypeDefinitionNode, DocumentNode } from 'graphql';
+import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
+import { Vue } from 'vue/types/vue';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
 
@@ -10,9 +9,8 @@ export const defaultRESTHeaders = {
   'Content-Type': 'application/json;charset=UTF-8',
 };
 
-export function getApollo(): DollarApollo<Vue> {
-  //@ts-ignore
-  return Registry.getInstance().get('Vue').$apollo;
+export function getApollo() {
+  return (Registry.getInstance().get('Vue') as Vue).$apollo;
 }
 
 export function camelToKebab(input: string): string {
@@ -135,7 +133,7 @@ export async function performSafeRequestGraphql(query: DocumentNode, variables =
     : performGqlMutation.bind(null, query, stripTypename(variables));
 
   //@ts-ignore
-  return operation().then(({data}) => data[queryName]);
+  return operation().then(({ data }) => data[queryName]);
 }
 
 export function registryGet(key: string) {
@@ -181,7 +179,7 @@ export function getSchemaQuery(queryName) {
 }
 
 export async function getUrl(_opts: ResolvingRESTOptions) {
-  const {url, params} = _opts;
+  const { url, params } = _opts;
   let resolvedUrl = url;
 
   if (typeof url === 'function') {
