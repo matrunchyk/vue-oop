@@ -60,7 +60,7 @@ export default class Registry {
    * @param value
    */
   public set(key: string | Entry[], value?: unknown): void {
-    const entries: Entry[] = Array.isArray(key) ? key : [{[key]: value}];
+    const entries: Entry[] = Array.isArray(key) ? key : [{ [key]: value }];
     entries.forEach((entry) => {
       Object.entries(entry).forEach(([key, value]) => Registry.instance.entries.set(key, value));
     });
@@ -75,7 +75,8 @@ export default class Registry {
    */
   public get(key: string): unknown {
     if (!Registry.instance.entries.has(key)) {
-      throw new Error(`Registry Error: ${key} is not available in the registry.`);
+      console.warn(`Registry Error: ${key} is not available in the registry.`);
+      return null;
     }
     return Registry.instance.entries.get(key);
   }
