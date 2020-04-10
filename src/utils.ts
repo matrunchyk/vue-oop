@@ -157,7 +157,7 @@ export function getParsedSchema(): DocumentNode {
 export function getSchemaTypeFields(typeName) {
   return (getParsedSchema()
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
-    .find(def => def.name.value === typeName)
+    .find(def => (def.name || {}).value === typeName)
     .fields
     .map(f => f.name.value);
 }
@@ -165,17 +165,17 @@ export function getSchemaTypeFields(typeName) {
 export function getSchemaMutation(mutationName) {
   return (getParsedSchema()
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
-    .find(def => def.name.value === 'Mutation')
+    .find(def => (def.name || {}).value === 'Mutation')
     .fields
-    .find(def => def.name.value === mutationName);
+    .find(def => (def.name || {}).value === mutationName);
 }
 
 export function getSchemaQuery(queryName) {
   return (getParsedSchema()
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
-    .find(def => def.name.value === 'Query')
+    .find(def => (def.name || {}).value === 'Query')
     .fields
-    .find(def => def.name.value === queryName);
+    .find(def => (def.name || {}).value === queryName);
 }
 
 export async function getUrl(_opts: ResolvingRESTOptions) {
