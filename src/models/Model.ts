@@ -67,7 +67,7 @@ export default abstract class Model extends EventEmitter {
   public exists() {
     // REST: If id exists, it means it came from the backend
     // GraphQL: If __typename exists, it means it came from the backend
-    return !!this.id || (config().graphql && !!this.__typename);
+    return !!this.id || (config() && config().graphql && !!this.__typename);
   }
 
   protected defaults(): KeyValueUnknown {
