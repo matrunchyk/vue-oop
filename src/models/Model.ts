@@ -106,8 +106,17 @@ export default abstract class Model extends EventEmitter {
     return getSchemaTypeFields(`${this.getClassName()}Input`);
   }
 
-  protected getUpdateVariables() {
-    return stripObject(this.toCollection().only(this.getInputFields()).all());
+  public getUpdateVariables() {
+    return stripObject(this.toCollection()
+      .only(this.getInputFields())
+      .map(field => {
+        if (Array.isArray(field)) {
+          return field.map(model => ((model instanceof Model) ? model.getUpdateVariables() : model));
+        }
+
+        return field;
+      })
+      .all());
   }
 
   /**
