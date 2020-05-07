@@ -113,6 +113,9 @@ export default abstract class Model extends EventEmitter {
         if (Array.isArray(field)) {
           return field.map(model => ((model instanceof Model) ? model.getUpdateVariables() : model));
         }
+        if (field instanceof Model) {
+          return field.getUpdateVariables();
+        }
 
         return field;
       })
