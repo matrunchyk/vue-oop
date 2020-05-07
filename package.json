@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -50,6 +50,7 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@commitlint/config-conventional": "^8.3.4",
     "@release-it/conventional-changelog": "^1.1.1",
     "@types/graphql": "^14.5.0",
     "@types/jest": "^24.0.18",
@@ -61,7 +62,12 @@
     "apollo-client": "^2.6.4",
     "apollo-link-http-common": "^0.2.15",
     "codecov": "^3.6.1",
+    "commitizen": "^4.1.2",
+    "commitlint": "^8.3.5",
+    "cz-conventional-changelog": "^3.2.0",
+    "cz-gitmoji": "0.0.7",
     "danger": "^9.2.1",
+    "husky": "^4.2.5",
     "jest": "^24.9.0",
     "release-it": "^13.5.5",
     "ts-jest": "^24.1.0",
@@ -87,5 +93,19 @@
   ],
   "publishConfig": {
     "access": "public"
+  },
+  "release-it": {
+    "npm": {
+      "publish": true
+    },
+    "git": {
+      "addUntrackedFiles": true
+    }
+  },
+  "husky": {
+    "hooks": {
+      "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }
