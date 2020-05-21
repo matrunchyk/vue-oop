@@ -1,15 +1,22 @@
 import camelCase from 'lodash.camelcase';
 import clone from 'lodash.clonedeep';
-import uuid from 'uuid';
-import {getUrl, performSafeRequestREST, performSafeRequestGraphql, config, getSchemaTypeFields, stripObject} from '../utils';
+import { v4 } from 'uuid';
+import {
+  getUrl,
+  performSafeRequestREST,
+  performSafeRequestGraphql,
+  config,
+  getSchemaTypeFields,
+  stripObject
+} from '../utils';
 import Collection from './Collection';
-import {KeyValueUnknown, ResolvingRESTOptions} from '../typings';
+import { KeyValueUnknown, ResolvingRESTOptions } from '../typings';
 import EventEmitter from '../EventEmitter';
 
 export default abstract class Model extends EventEmitter {
   public id: string;
 
-  public uuid: string = uuid.v4();
+  public uuid: string = v4();
 
   public loading = false;
 
@@ -40,7 +47,7 @@ export default abstract class Model extends EventEmitter {
 
   generateUuid() {
     console.warn('Deprecated: UUID is generated automatically. `generateUuid` will be removed in the next versions.');
-    this.uuid = uuid.v4();
+    this.uuid = v4();
   }
 
   /**
@@ -141,7 +148,7 @@ export default abstract class Model extends EventEmitter {
     // istanbul ignore else
     if (config().graphql) {
       return this.hydrate(
-        await this.mutate(mutation, {[camelCase(this.getClassName())]: params}),
+        await this.mutate(mutation, { [camelCase(this.getClassName())]: params }),
       );
     }
 
@@ -180,8 +187,8 @@ export default abstract class Model extends EventEmitter {
         .finally(this.afterMutate.bind(this));
     }
 
-    const resolvedUrl = await getUrl({method, url: mutationOrUrl, params});
-    const resolvedMethod = await this.getMethod({method, url: resolvedUrl, params});
+    const resolvedUrl = await getUrl({ method, url: mutationOrUrl, params });
+    const resolvedMethod = await this.getMethod({ method, url: resolvedUrl, params });
 
     return this.beforeMutate()
       .then(this.performSafeRequestREST.bind(this, resolvedUrl, params, resolvedMethod || method, null))
