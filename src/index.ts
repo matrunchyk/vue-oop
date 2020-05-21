@@ -60,9 +60,11 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): void 
   Vue.prototype.$registry = registry;
 
   Vue.mixin({
-    created() {
+    beforeCreate() {
       // istanbul ignore else
-      if (registry.has('Vue')) return;
+      // If a non-root component, or there's already the Vue instance set in Registry, or there's no $apollo yet,
+      // return, as we do need a Vue instance with $apollo in it.
+      if (this.$parent || !this.$apollo || registry.has('Vue')) return;
 
       registry.set('Vue', this);
     },
