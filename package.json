@@ -48,7 +48,8 @@
     "graphql-tag": "^2.10.3",
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
-    "uuid": "^8.1.0"
+    "uuid": "^8.1.0",
+    "snyk": "^1.323.2"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -75,8 +76,7 @@
     "ts-node": "^8.10.1",
     "typescript": "^3.9.3",
     "vue": "^2.6.11",
-    "vue-apollo": "^3.0.3",
-    "snyk": "^1.319.2"
+    "vue-apollo": "^3.0.3"
   },
   "peerDependencies": {
     "apollo-client": "^2.6.10",
