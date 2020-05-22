@@ -1,6 +1,6 @@
 /*!
- * VueOOP.js v0.2.1
- * (c) 2017-2019 Serhii Matrunchyk
+ * VueOOP
+ * (c) 2017-2020 Serhii Matrunchyk
  * Released under the MIT License.
  */
 import _Vue from 'vue';
@@ -8,15 +8,24 @@ import Model from './models/Model';
 import Repository from './repositories/Repository';
 import Registry from './Registry';
 import * as Utils from './utils';
-import { DocumentNode } from "graphql";
+import { DocumentNode, buildClientSchema } from "graphql";
+import { fetchIntrospectionSchema } from './utils';
 
 const registry = Registry.getInstance();
 
 registry.set('Model', Model);
 registry.set('Repository', Repository);
 
+export interface IVueOOPOptions {
+  rest?: boolean;
+  graphql?: boolean;
+  schema?: DocumentNode;
+  schemaUrl?: string;
+  debug?: boolean;
+}
+
 // istanbul ignore next
-export class VueOOPOptions {
+export class VueOOPOptions implements IVueOOPOptions {
   /**
    * Use REST plugin.
    *
@@ -39,6 +48,13 @@ export class VueOOPOptions {
   schema: DocumentNode = null;
 
   /**
+   * URL to fetch introspection GraphQL Schema from.
+   *
+   * @type {null|string}
+   */
+  schemaUrl: string = null;
+
+  /**
    * Debug mode
    *
    * @type {boolean}
@@ -46,14 +62,21 @@ export class VueOOPOptions {
   debug = false;
 }
 
-function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): void {
+async function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): Promise<void> {
   const config = {
     rest: true,
     graphql: false,
     schema: null,
+    schemaUrl: null,
     debug: false,
     ...options,
-  };
+  } as IVueOOPOptions;
+
+  if (config.schemaUrl && config.debug) {
+    const test = await fetchIntrospectionSchema(config.schemaUrl).then(buildClientSchema.bind(null));
+    console.log(test);
+    console.log(config.schema);
+  }
 
   registry.set('Config', config);
 

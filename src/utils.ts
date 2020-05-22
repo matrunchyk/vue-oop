@@ -1,6 +1,7 @@
-import { ObjectTypeDefinitionNode, DocumentNode } from 'graphql';
+import { ObjectTypeDefinitionNode, DocumentNode, IntrospectionQuery } from 'graphql';
 import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
 import { Vue } from 'vue/types/vue';
+import { getIntrospectionQuery } from 'graphql';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
 
@@ -206,4 +207,14 @@ export async function getUrl(_opts: ResolvingRESTOptions) {
 
 export function stripObject(obj) {
   return JSON.parse(JSON.stringify(obj, (k, v) => (k === 'loading' ? undefined : v)));
+}
+
+export function fetchIntrospectionSchema(url: string): Promise<IntrospectionQuery> {
+  return fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query: getIntrospectionQuery })
+  })
+    .then(res => res.json())
+    .then(res => res.data);
 }
