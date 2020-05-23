@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "0.7.1",
+  "version": "0.7.7",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -46,11 +46,12 @@
     "collect.js": "^4.25.0",
     "get-graphql-schema": "^2.1.2",
     "graphql": "^15.0.0",
-    "graphql-tag": "^2.10.3",
+    "graphql-tag": "^2.10.2",
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
-    "uuid": "^8.1.0",
-    "snyk": "^1.323.2"
+    "snyk": "^1.323.2",
+    "to-case": "^2.0.0",
+    "uuid": "^8.1.0"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -77,7 +78,8 @@
     "ts-node": "^8.10.1",
     "typescript": "^3.9.3",
     "vue": "^2.6.11",
-    "vue-apollo": "^3.0.3"
+    "vue-apollo": "^3.0.3",
+    "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "apollo-client": "^2.6.10",

@@ -1,6 +1,5 @@
-import camelCase from 'lodash.camelcase';
 import clone from 'lodash.clonedeep';
-import { v4 } from 'uuid';
+import to from 'to-case';
 import {
   getUrl,
   performSafeRequestREST,
@@ -12,15 +11,23 @@ import {
 import Collection from './Collection';
 import { KeyValueUnknown, ResolvingRESTOptions } from '../typings';
 import EventEmitter from '../EventEmitter';
+import { DocumentNode } from 'graphql';
+import { v4 } from "uuid";
 
 export default abstract class Model extends EventEmitter {
   public id: string;
 
-  public uuid: string = v4();
+  public uuid: string;
 
   public loading = false;
 
   public children: unknown;
+
+  public createMutation?: string | Function | DocumentNode;
+
+  public updateMutation?: string | Function | DocumentNode;
+
+  public deleteMutation?: string | Function | DocumentNode;
 
   protected submittableProps = [];
 
@@ -29,6 +36,8 @@ export default abstract class Model extends EventEmitter {
   protected performSafeRequestGraphql = performSafeRequestGraphql;
 
   protected performSafeRequestREST = performSafeRequestREST;
+
+  private _exists = false;
 
   //noinspection TypeScriptAbstractClassConstructorCanBeMadeProtected
   public constructor(props = {}) {
@@ -46,7 +55,6 @@ export default abstract class Model extends EventEmitter {
   }
 
   generateUuid() {
-    console.warn('Deprecated: UUID is generated automatically. `generateUuid` will be removed in the next versions.');
     this.uuid = v4();
   }
 
@@ -57,7 +65,7 @@ export default abstract class Model extends EventEmitter {
    */
   get doRequest() {
     return config().graphql ? performSafeRequestGraphql : performSafeRequestREST;
-  };
+  }
 
   get className() {
     return this.constructor.name;
@@ -71,10 +79,8 @@ export default abstract class Model extends EventEmitter {
     return 'post';
   }
 
-  public exists() {
-    // REST: If id exists, it means it came from the backend
-    // GraphQL: If __typename exists, it means it came from the backend
-    return !!this.id || (config() && config().graphql && !!this.__typename);
+  public exists(): boolean {
+    return this._exists;
   }
 
   protected defaults(): KeyValueUnknown {
@@ -144,30 +150,58 @@ export default abstract class Model extends EventEmitter {
     return this.toCollection().only(props).all();
   }
 
-  public async create(mutation, params) {
+  public async save() {
+    return this.exists() ? this.update() : this.create();
+  }
+
+  public async create(params?: unknown, mutation?: string | DocumentNode) {
+    const resolvedRequest = this.resolveRequest(mutation, this.createMutation);
+    const resolvedParams = this.resolveParams(params);
+
     // istanbul ignore else
     if (config().graphql) {
       return this.hydrate(
-        await this.mutate(mutation, { [camelCase(this.getClassName())]: params }),
+        await this.mutate(resolvedRequest, resolvedParams),
       );
     }
 
     return this.hydrate(
-      await this.mutate(mutation, params),
+      await this.mutate(resolvedRequest, resolvedParams),
     );
   }
 
-  public delete(deleteMutation) {
+  public async update(params?: unknown, mutation?: string | DocumentNode) {
+    const resolvedRequest = this.resolveRequest(mutation, this.updateMutation);
+    const resolvedParams = this.resolveParams(params);
+
     // istanbul ignore else
     if (config().graphql) {
-      return this.mutate(deleteMutation, {
-        uuid: this.uuid,
-      });
+      return this.hydrate(
+        await this.mutate(resolvedRequest, resolvedParams),
+      );
     }
 
-    return this.mutate(deleteMutation, {
+    return this.hydrate(
+      await this.mutate(resolvedRequest, resolvedParams),
+    );
+  }
+
+  public async delete(params?: unknown, mutation?: string | DocumentNode) {
+    const resolvedRequest = this.resolveRequest(mutation, this.deleteMutation);
+
+    // Marks as not exists and returns a mutation result
+    const forget = result => this.markNotExists() && result;
+
+    // istanbul ignore else
+    if (config().graphql) {
+      return this.mutate(resolvedRequest, params || {
+        uuid: this.uuid,
+      }).then(forget);
+    }
+
+    return this.mutate(resolvedRequest, params || {
       id: this.id,
-    }, 'delete');
+    }, 'delete').then(forget);
   }
 
   // METHODS
@@ -184,7 +218,8 @@ export default abstract class Model extends EventEmitter {
     if (config().graphql) {
       return this.beforeMutate()
         .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params, null))
-        .finally(this.afterMutate.bind(this));
+        .finally(this.afterMutate.bind(this))
+        .finally(this.markExists.bind(this));
     }
 
     const resolvedUrl = await getUrl({ method, url: mutationOrUrl, params });
@@ -192,18 +227,53 @@ export default abstract class Model extends EventEmitter {
 
     return this.beforeMutate()
       .then(this.performSafeRequestREST.bind(this, resolvedUrl, params, resolvedMethod || method, null))
-      .finally(this.afterMutate.bind(this));
+      .finally(this.afterMutate.bind(this))
+      .finally(this.markExists.bind(this));
   }
 
   public clone() {
-    return clone(this);
+    return clone(this).markNotExists();
+  }
+
+  public markExists() {
+    this._exists = true;
+
+    return this;
+  }
+
+  public markNotExists() {
+    this._exists = false;
+
+    return this;
   }
 
   protected async beforeMutate() {
     this.loading = true;
+
+    return this;
   }
 
   protected afterMutate() {
     this.loading = false;
+
+    return this;
+  }
+
+  protected resolveRequest(request: string | DocumentNode, defaultRequest: string | Function | DocumentNode): string | DocumentNode {
+    if (request) return request;
+
+    return typeof defaultRequest === 'function' ? defaultRequest() : defaultRequest;
+  }
+
+  protected resolveParams(params: Object): Object {
+    if (config().graphql) {
+      const model = this.getUpdateVariables();
+
+      return {
+        [to.camel(this.className)]: model,
+      };
+    }
+
+    return params;
   }
 }

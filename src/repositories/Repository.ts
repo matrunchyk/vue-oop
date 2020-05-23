@@ -1,12 +1,14 @@
-import {GraphQLError, DocumentNode} from 'graphql';
+import { GraphQLError, DocumentNode } from 'graphql';
 import InvalidArgumentException from '../models/Exceptions/InvalidArgumentException';
 import Collection from '../models/Collection';
-import {getUrl, config, performSafeRequestREST, performSafeRequestGraphql} from '../utils';
+// noinspection ES6PreferShortImport
+import { getUrl, config, performSafeRequestREST, performSafeRequestGraphql } from '../utils';
 import UnexpectedException from '../models/Exceptions/UnexpectedException';
 import ValidationException from '../models/Exceptions/ValidationException';
 import UnauthorizedException from '../models/Exceptions/UnauthorizedException';
 import Model from '../models/Model';
 import EventEmitter from '../EventEmitter';
+// noinspection ES6PreferShortImport
 import {
   GraphQLErrorBag,
   KeyValueString,
@@ -110,6 +112,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     return this.constructor.name;
   }
 
+  // noinspection JSUnusedGlobalSymbols
   get displayClassName() {
     return this.className.toLowerCase();
   }
@@ -122,14 +125,36 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     return this._exists;
   }
 
-  //@ts-ignore
+  // @ts-ignore
+  // noinspection JSUnusedLocalSymbols
   public getMethod(opts: ResolvingRESTOptions): string {
     return null;
   }
 
   public fromArray(array: unknown[], skipEmpty = true) {
-    //@ts-ignore
-    return new Collection(array.filter(i => i || !skipEmpty).map(i => new this.model(i)));
+    // return new Collection(array.filter(i => i || !skipEmpty).map(i => (<typeof M>(new this.model(i))).markExists()));
+    const filtered = array.filter(i => i || !skipEmpty);
+    const mapped = filtered.map((i) => {
+      let model = this.model;
+
+      if (typeof this.model === 'function') {
+        model = this.model(i);
+      }
+
+      // @ts-ignore
+      const m = new model(i);
+
+      m.markExists();
+
+      return m;
+    }) as M[];
+
+    return new Collection<M>(mapped);
+  }
+
+  public static fromArray(array: unknown[], skipEmpty = true) {
+    // @ts-ignore
+    return (<typeof Repository>(new this.constructor())).fromArray(array, skipEmpty);
   }
 
   /**
@@ -145,7 +170,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     // istanbul ignore else
     if (config().graphql && (e instanceof GraphQLError)) {
       const {
-        graphQLErrors: [{extensions: {errorCode, message}}] = [
+        graphQLErrors: [{ extensions: { errorCode, message } }] = [
           {
             extensions: {
               errorCode: 500,
@@ -197,8 +222,8 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
 
     this.method = method;
 
-    const resolvedUrl = await getUrl({method, url: queryOrUrl as string, params});
-    const resolvedMethod = await this.getMethod({method, url: resolvedUrl, params});
+    const resolvedUrl = await getUrl({ method, url: queryOrUrl as string, params });
+    const resolvedMethod = await this.getMethod({ method, url: resolvedUrl, params });
 
     return this.beforeQuery()
       .then(this.performSafeRequestREST.bind(this, resolvedUrl, params || this.queryParams, resolvedMethod || method, null))
@@ -246,7 +271,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    * @returns {Promise<Model>}
    */
   public async one(id) {
-    const params = config().graphql ? {uuid: id} : {id};
+    const params = config().graphql ? { uuid: id } : { id };
     const data = await this.query(this.fetchOneQuery, params);
     //@ts-ignore
     let ModelFactory = this.model;
