@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "0.7.0-beta.2",
+  "version": "0.7.0",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -40,7 +40,7 @@
     "publish-github": "npm publish --registry https://npm.pkg.github.com/@matrunchyk",
     "release": "release-it",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "exit 0 || npm run snyk-protect"
   },
   "dependencies": {
     "collect.js": "^4.25.0",

@@ -8,7 +8,8 @@ import Model from './models/Model';
 import Repository from './repositories/Repository';
 import Registry from './Registry';
 import * as Utils from './utils';
-import { DocumentNode, buildClientSchema } from "graphql";
+import { DocumentNode, buildClientSchema, printSchema } from 'graphql';
+import { parse } from 'graphql/language/parser';
 import { fetchIntrospectionSchema } from './utils';
 
 const registry = Registry.getInstance();
@@ -73,9 +74,10 @@ async function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions):
   } as IVueOOPOptions;
 
   if (config.schemaUrl && config.debug) {
-    const test = await fetchIntrospectionSchema(config.schemaUrl).then(buildClientSchema.bind(null));
-    console.log(test);
-    console.log(config.schema);
+    config.schema = await fetchIntrospectionSchema(config.schemaUrl)
+      .then(buildClientSchema.bind(null))
+      .then(printSchema.bind(null))
+      .then(parse.bind(null));
   }
 
   registry.set('Config', config);
