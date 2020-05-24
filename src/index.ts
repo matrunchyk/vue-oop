@@ -23,7 +23,7 @@ export interface IVueOOPOptions {
   schema?: DocumentNode;
   schemaUrl?: string;
   debug?: boolean;
-  createProvider?: Function;
+  createProvider?: () => unknown;
 }
 
 // istanbul ignore next
@@ -63,7 +63,7 @@ export class VueOOPOptions implements IVueOOPOptions {
    */
   debug = false;
 
-  createProvider?: Function;
+  createProvider?: () => unknown;
 }
 
 async function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): Promise<void> {
@@ -82,10 +82,6 @@ async function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions):
       .then(buildClientSchema.bind(null))
       .then(printSchema.bind(null))
       .then(parse.bind(null));
-  }
-
-  if (config.graphql) {
-    // Vue.use(VueApollo);
   }
 
   registry.set('Config', config);

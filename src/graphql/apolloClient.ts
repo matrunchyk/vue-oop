@@ -1,4 +1,6 @@
-import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory';
+import { ApolloLink } from 'apollo-link';
+import { defaultDataIdFromObject } from 'apollo-cache-inmemory';
+import { InStorageCache, PersistLink } from 'apollo-cache-instorage';
 import { persistCache } from 'apollo-cache-persist';
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 import Pusher from 'pusher-js';
@@ -27,11 +29,20 @@ const pusherLink = new PusherLink({
   }),
 });
 
-const cache = new InMemoryCache({
+const persistLink = new PersistLink();
+
+function shouldPersist(_, dataId, data) {
+  console.log(_, dataId, data);
+  return dataId === 'ROOT_QUERY' || (!data || !!data.__persist)
+}
+
+const cache = new InStorageCache({
   // @ts-ignore
   dataIdFromObject: result => (result.__typename && result.uuid ? `${result.__typename}:${result.uuid}` : defaultDataIdFromObject(result)),
   fragmentMatcher: new CustomHeuristicFragmentMatcher(),
-});
+  addPersistField: true,
+  shouldPersist,
+})
 
 // noinspection JSIgnoredPromiseFromCall
 persistCache({
@@ -41,10 +52,15 @@ persistCache({
   debug: true,
 });
 
+const link = ApolloLink.from([
+  persistLink,
+  pusherLink,
+])
+
 const { apolloClient, wsClient } = createApolloClient({
   httpEndpoint,
   tokenName: AUTH_TOKEN,
-  link: pusherLink,
+  link,
   connectToDevTools: process.env.NODE_ENV !== 'production',
   cache,
 });

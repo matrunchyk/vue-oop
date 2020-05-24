@@ -649,29 +649,25 @@
         "version": "17dc30aff0c3204553d8ca2f81f5322913a1aff727caef619de0690cae5ce259",
         "signature": "75417f389f83607e23c512dc4bc8ee6a8afe13c4922f6ecba75a70450a15ec15"
       },
-      "./node_modules/apollo-cache-inmemory/lib/fixpolyfills.d.ts": {
-        "version": "551fda105b8f6e51e0bd95dbfed2622653a74053ecb1aa6bc56a71b3da5ea4c6",
-        "signature": "551fda105b8f6e51e0bd95dbfed2622653a74053ecb1aa6bc56a71b3da5ea4c6"
+      "./node_modules/zen-observable-ts/lib/types.d.ts": {
+        "version": "9d1173ca99ea5a9eed630087b01b81adf82862613e44589aa1448eda53d00f2e",
+        "signature": "9d1173ca99ea5a9eed630087b01b81adf82862613e44589aa1448eda53d00f2e"
       },
-      "./node_modules/apollo-cache/lib/types/dataproxy.d.ts": {
-        "version": "a15be8a5b38e92da9339a176d1487fd14f899d5210cac0fb66ba7386f6c4ac9e",
-        "signature": "a15be8a5b38e92da9339a176d1487fd14f899d5210cac0fb66ba7386f6c4ac9e"
+      "./node_modules/zen-observable-ts/lib/zenobservable.d.ts": {
+        "version": "115cf5247e2af5f6c01d97e30ae8d45fabc0c8bb166db1b37c4191e776168a1a",
+        "signature": "115cf5247e2af5f6c01d97e30ae8d45fabc0c8bb166db1b37c4191e776168a1a"
       },
-      "./node_modules/apollo-cache/lib/types/cache.d.ts": {
-        "version": "db54a1666e4b7d85fa0e8e858c9d79d20b682dfce6fb61f8077c9a6304a6e1a9",
-        "signature": "db54a1666e4b7d85fa0e8e858c9d79d20b682dfce6fb61f8077c9a6304a6e1a9"
+      "./node_modules/zen-observable-ts/lib/index.d.ts": {
+        "version": "dae5f7abcc861625d9523303303269c14e0f71e724fea66af753f5e1ac6c356e",
+        "signature": "dae5f7abcc861625d9523303303269c14e0f71e724fea66af753f5e1ac6c356e"
       },
-      "./node_modules/apollo-cache/lib/types/index.d.ts": {
-        "version": "03b86a53d70add06dea24f05586b4317f8a11beb71c58678484840c3ca72840b",
-        "signature": "03b86a53d70add06dea24f05586b4317f8a11beb71c58678484840c3ca72840b"
+      "./node_modules/apollo-link/lib/types.d.ts": {
+        "version": "96739007c6c64720ec411f543470e2ac5923730653f7661520a81799204f946d",
+        "signature": "96739007c6c64720ec411f543470e2ac5923730653f7661520a81799204f946d"
       },
-      "./node_modules/apollo-cache/lib/cache.d.ts": {
-        "version": "d38ca11a1e136478f7006393cb99db700fe223f13bd29de9189375ffd41bb433",
-        "signature": "d38ca11a1e136478f7006393cb99db700fe223f13bd29de9189375ffd41bb433"
-      },
-      "./node_modules/apollo-cache/lib/index.d.ts": {
-        "version": "fbc6d7781ba905af672e0df2d1ff9d77183d2d269fe7d65e92127a65eb2c0859",
-        "signature": "fbc6d7781ba905af672e0df2d1ff9d77183d2d269fe7d65e92127a65eb2c0859"
+      "./node_modules/apollo-link/lib/link.d.ts": {
+        "version": "96712c27a8f7eed7c0aa50c953db15eee88077b784e8978d05bc081a736311c9",
+        "signature": "96712c27a8f7eed7c0aa50c953db15eee88077b784e8978d05bc081a736311c9"
       },
       "./node_modules/apollo-utilities/lib/directives.d.ts": {
         "version": "f55b706b4ee79d5d1fd73fe99992926fb803abea80df80af0ecd1b788c7ce0ee",
@@ -740,6 +736,38 @@
       "./node_modules/apollo-utilities/lib/index.d.ts": {
         "version": "1e9bf6131e758695042d5a8989235c94bea7daea95c47df04fe37db74a18432f",
         "signature": "1e9bf6131e758695042d5a8989235c94bea7daea95c47df04fe37db74a18432f"
+      },
+      "./node_modules/apollo-link/lib/linkutils.d.ts": {
+        "version": "e31d5dd4c4cbadc410172ec2df10af5d6617bb7f658812398e66ab273ca6f203",
+        "signature": "e31d5dd4c4cbadc410172ec2df10af5d6617bb7f658812398e66ab273ca6f203"
+      },
+      "./node_modules/apollo-link/lib/index.d.ts": {
+        "version": "d9c2bb8fd44ee04be183030dd187a6248f43abf40210746b01bb80307cd5766a",
+        "signature": "d9c2bb8fd44ee04be183030dd187a6248f43abf40210746b01bb80307cd5766a"
+      },
+      "./node_modules/apollo-cache-inmemory/lib/fixpolyfills.d.ts": {
+        "version": "551fda105b8f6e51e0bd95dbfed2622653a74053ecb1aa6bc56a71b3da5ea4c6",
+        "signature": "551fda105b8f6e51e0bd95dbfed2622653a74053ecb1aa6bc56a71b3da5ea4c6"
+      },
+      "./node_modules/apollo-cache/lib/types/dataproxy.d.ts": {
+        "version": "a15be8a5b38e92da9339a176d1487fd14f899d5210cac0fb66ba7386f6c4ac9e",
+        "signature": "a15be8a5b38e92da9339a176d1487fd14f899d5210cac0fb66ba7386f6c4ac9e"
+      },
+      "./node_modules/apollo-cache/lib/types/cache.d.ts": {
+        "version": "db54a1666e4b7d85fa0e8e858c9d79d20b682dfce6fb61f8077c9a6304a6e1a9",
+        "signature": "db54a1666e4b7d85fa0e8e858c9d79d20b682dfce6fb61f8077c9a6304a6e1a9"
+      },
+      "./node_modules/apollo-cache/lib/types/index.d.ts": {
+        "version": "03b86a53d70add06dea24f05586b4317f8a11beb71c58678484840c3ca72840b",
+        "signature": "03b86a53d70add06dea24f05586b4317f8a11beb71c58678484840c3ca72840b"
+      },
+      "./node_modules/apollo-cache/lib/cache.d.ts": {
+        "version": "d38ca11a1e136478f7006393cb99db700fe223f13bd29de9189375ffd41bb433",
+        "signature": "d38ca11a1e136478f7006393cb99db700fe223f13bd29de9189375ffd41bb433"
+      },
+      "./node_modules/apollo-cache/lib/index.d.ts": {
+        "version": "fbc6d7781ba905af672e0df2d1ff9d77183d2d269fe7d65e92127a65eb2c0859",
+        "signature": "fbc6d7781ba905af672e0df2d1ff9d77183d2d269fe7d65e92127a65eb2c0859"
       },
       "./node_modules/optimism/lib/key-trie.d.ts": {
         "version": "310476fae679aaff0b41dc974b0831cb6350d36460009c12254a889afcd3a9e6",
@@ -1245,40 +1273,12 @@
         "version": "7c6cab4c3cdf295b572175fc8d75e041c98bbac9a8cce508c2c5c339db8664c7",
         "signature": "48edb7ec5d433c5f7002ce3094b2ff499e344047cc531887844728a6461a1355"
       },
-      "./node_modules/zen-observable-ts/lib/types.d.ts": {
-        "version": "9d1173ca99ea5a9eed630087b01b81adf82862613e44589aa1448eda53d00f2e",
-        "signature": "9d1173ca99ea5a9eed630087b01b81adf82862613e44589aa1448eda53d00f2e"
-      },
-      "./node_modules/zen-observable-ts/lib/zenobservable.d.ts": {
-        "version": "115cf5247e2af5f6c01d97e30ae8d45fabc0c8bb166db1b37c4191e776168a1a",
-        "signature": "115cf5247e2af5f6c01d97e30ae8d45fabc0c8bb166db1b37c4191e776168a1a"
-      },
-      "./node_modules/zen-observable-ts/lib/index.d.ts": {
-        "version": "dae5f7abcc861625d9523303303269c14e0f71e724fea66af753f5e1ac6c356e",
-        "signature": "dae5f7abcc861625d9523303303269c14e0f71e724fea66af753f5e1ac6c356e"
-      },
-      "./node_modules/apollo-link/lib/types.d.ts": {
-        "version": "96739007c6c64720ec411f543470e2ac5923730653f7661520a81799204f946d",
-        "signature": "96739007c6c64720ec411f543470e2ac5923730653f7661520a81799204f946d"
-      },
-      "./node_modules/apollo-link/lib/link.d.ts": {
-        "version": "96712c27a8f7eed7c0aa50c953db15eee88077b784e8978d05bc081a736311c9",
-        "signature": "96712c27a8f7eed7c0aa50c953db15eee88077b784e8978d05bc081a736311c9"
-      },
-      "./node_modules/apollo-link/lib/linkutils.d.ts": {
-        "version": "e31d5dd4c4cbadc410172ec2df10af5d6617bb7f658812398e66ab273ca6f203",
-        "signature": "e31d5dd4c4cbadc410172ec2df10af5d6617bb7f658812398e66ab273ca6f203"
-      },
-      "./node_modules/apollo-link/lib/index.d.ts": {
-        "version": "d9c2bb8fd44ee04be183030dd187a6248f43abf40210746b01bb80307cd5766a",
-        "signature": "d9c2bb8fd44ee04be183030dd187a6248f43abf40210746b01bb80307cd5766a"
-      },
       "./src/graphql/pusherlink.ts": {
         "version": "1145cbac5d42120696ae41a7fd7436a1b0d6f3e867842605a953d2e497396aa2",
         "signature": "b2bc6d75bad32e43046865913804d41f0f88f98338aace443f450b3cbe1778a1"
       },
       "./src/graphql/apolloclient.ts": {
-        "version": "eb5cb2db2f81ae535913caa3aea5efe616bec9408a5d2d13e09fd26e7b733626",
+        "version": "672fa95e10769db272efa2f5a69eac5f2d84f46faf76faca53c6710f7f0cabea",
         "signature": "ffe0dd32785560587f5fcbe42f0e75e40a5373294a95559fb7bf3fdcfc42400a"
       },
       "./node_modules/@types/zen-observable/index.d.ts": {
@@ -1370,12 +1370,12 @@
         "signature": "41519445441125a284455dc4264b392c4d2b4c266f3d05aa79a3628cbc5ba9ff"
       },
       "./src/repositories/repository.ts": {
-        "version": "d1290c7e252d64d623a882d38547e6591408fb15d35615edee801b9ddb472fc8",
-        "signature": "d45ef79622e4adac82b492d9517c2ec6f2b4d2890d3f5dfe88f3aa7f52784846"
+        "version": "8438a148ddea4d0148df196dd84f2a8e7aae3964dc1f70c167cdede19376bd8b",
+        "signature": "baa30ff3a63897e8d56de459b18aff9a9d4b21d5ec3f47f3a84f9d0a584c71b2"
       },
       "./src/index.ts": {
-        "version": "72f2743e06a541db9057a2f1fb4f584f6acc26a9b63ba6435e39483c06559609",
-        "signature": "71a5aaad30d3a3d2b3d337545058aca0d36682492042be90f40853b4fbaec120"
+        "version": "8a59bfba2d09eedc82f5db5ff8a42d48d19562b83140f6939abde98f374b09c8",
+        "signature": "6ca1f2730bcb80d14e75d7f1afb293d64c7d049c2b9eaa907e0bdb79f1de25e5"
       },
       "./node_modules/jest-diff/build/cleanupsemantic.d.ts": {
         "version": "e222104af6cb9415238ad358488b74d76eceeff238c1268ec6e85655b05341da",
@@ -2893,45 +2893,38 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/apollo-cache-inmemory/lib/fixpolyfills.d.ts": [
+      "./node_modules/zen-observable-ts/lib/types.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/apollo-cache/lib/types/dataproxy.d.ts": [
+      "./node_modules/zen-observable-ts/lib/zenobservable.d.ts": [
+        "./node_modules/zen-observable-ts/lib/types.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/zen-observable-ts/lib/index.d.ts": [
+        "./node_modules/zen-observable-ts/lib/zenobservable.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-link/lib/types.d.ts": [
+        "./node_modules/zen-observable-ts/lib/index.d.ts",
+        "./node_modules/graphql/language/ast.d.ts",
         "./node_modules/graphql/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/apollo-cache/lib/types/cache.d.ts": [
-        "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache/lib/types/index.d.ts": [
-        "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
-        "./node_modules/apollo-cache/lib/types/cache.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache/lib/cache.d.ts": [
-        "./node_modules/graphql/index.d.ts",
-        "./node_modules/apollo-cache/lib/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache/lib/index.d.ts": [
-        "./node_modules/apollo-cache/lib/cache.d.ts",
-        "./node_modules/apollo-cache/lib/types/index.d.ts",
+      "./node_modules/apollo-link/lib/link.d.ts": [
+        "./node_modules/zen-observable-ts/lib/index.d.ts",
+        "./node_modules/apollo-link/lib/types.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -3057,6 +3050,70 @@
         "./node_modules/apollo-utilities/lib/util/mergedeep.d.ts",
         "./node_modules/apollo-utilities/lib/util/warnonce.d.ts",
         "./node_modules/apollo-utilities/lib/util/stripsymbols.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-link/lib/linkutils.d.ts": [
+        "./node_modules/zen-observable-ts/lib/index.d.ts",
+        "./node_modules/apollo-link/lib/types.d.ts",
+        "./node_modules/apollo-link/lib/link.d.ts",
+        "./node_modules/apollo-utilities/lib/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-link/lib/index.d.ts": [
+        "./node_modules/apollo-link/lib/link.d.ts",
+        "./node_modules/apollo-link/lib/linkutils.d.ts",
+        "./node_modules/apollo-link/lib/types.d.ts",
+        "./node_modules/zen-observable-ts/lib/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache-inmemory/lib/fixpolyfills.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/types/dataproxy.d.ts": [
+        "./node_modules/graphql/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/types/cache.d.ts": [
+        "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/types/index.d.ts": [
+        "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
+        "./node_modules/apollo-cache/lib/types/cache.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/cache.d.ts": [
+        "./node_modules/graphql/index.d.ts",
+        "./node_modules/apollo-cache/lib/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/index.d.ts": [
+        "./node_modules/apollo-cache/lib/cache.d.ts",
+        "./node_modules/apollo-cache/lib/types/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -4078,63 +4135,6 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/zen-observable-ts/lib/types.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/zen-observable-ts/lib/zenobservable.d.ts": [
-        "./node_modules/zen-observable-ts/lib/types.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/zen-observable-ts/lib/index.d.ts": [
-        "./node_modules/zen-observable-ts/lib/zenobservable.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-link/lib/types.d.ts": [
-        "./node_modules/zen-observable-ts/lib/index.d.ts",
-        "./node_modules/graphql/language/ast.d.ts",
-        "./node_modules/graphql/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-link/lib/link.d.ts": [
-        "./node_modules/zen-observable-ts/lib/index.d.ts",
-        "./node_modules/apollo-link/lib/types.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-link/lib/linkutils.d.ts": [
-        "./node_modules/zen-observable-ts/lib/index.d.ts",
-        "./node_modules/apollo-link/lib/types.d.ts",
-        "./node_modules/apollo-link/lib/link.d.ts",
-        "./node_modules/apollo-utilities/lib/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-link/lib/index.d.ts": [
-        "./node_modules/apollo-link/lib/link.d.ts",
-        "./node_modules/apollo-link/lib/linkutils.d.ts",
-        "./node_modules/apollo-link/lib/types.d.ts",
-        "./node_modules/zen-observable-ts/lib/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./src/graphql/pusherlink.ts": [
         "./node_modules/apollo-link/lib/index.d.ts",
         "./node_modules/pusher-js/index.d.ts",
@@ -4144,6 +4144,7 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/graphql/apolloclient.ts": [
+        "./node_modules/apollo-link/lib/index.d.ts",
         "./node_modules/apollo-cache-inmemory/lib/index.d.ts",
         "./node_modules/apollo-cache-persist/index.d.ts",
         "./node_modules/pusher-js/index.d.ts",
@@ -5873,45 +5874,38 @@
       "./src/models/exceptions/unexpectedexception.ts": [
         "./src/models/exceptions/baseexception.ts"
       ],
-      "./node_modules/apollo-cache-inmemory/lib/fixpolyfills.d.ts": [
+      "./node_modules/zen-observable-ts/lib/types.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/apollo-cache/lib/types/dataproxy.d.ts": [
+      "./node_modules/zen-observable-ts/lib/zenobservable.d.ts": [
+        "./node_modules/zen-observable-ts/lib/types.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/zen-observable-ts/lib/index.d.ts": [
+        "./node_modules/zen-observable-ts/lib/zenobservable.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-link/lib/types.d.ts": [
+        "./node_modules/zen-observable-ts/lib/index.d.ts",
+        "./node_modules/graphql/language/ast.d.ts",
         "./node_modules/graphql/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/apollo-cache/lib/types/cache.d.ts": [
-        "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache/lib/types/index.d.ts": [
-        "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
-        "./node_modules/apollo-cache/lib/types/cache.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache/lib/cache.d.ts": [
-        "./node_modules/graphql/index.d.ts",
-        "./node_modules/apollo-cache/lib/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache/lib/index.d.ts": [
-        "./node_modules/apollo-cache/lib/cache.d.ts",
-        "./node_modules/apollo-cache/lib/types/index.d.ts",
+      "./node_modules/apollo-link/lib/link.d.ts": [
+        "./node_modules/zen-observable-ts/lib/index.d.ts",
+        "./node_modules/apollo-link/lib/types.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -6037,6 +6031,70 @@
         "./node_modules/apollo-utilities/lib/util/mergedeep.d.ts",
         "./node_modules/apollo-utilities/lib/util/warnonce.d.ts",
         "./node_modules/apollo-utilities/lib/util/stripsymbols.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-link/lib/linkutils.d.ts": [
+        "./node_modules/zen-observable-ts/lib/index.d.ts",
+        "./node_modules/apollo-link/lib/types.d.ts",
+        "./node_modules/apollo-link/lib/link.d.ts",
+        "./node_modules/apollo-utilities/lib/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-link/lib/index.d.ts": [
+        "./node_modules/apollo-link/lib/link.d.ts",
+        "./node_modules/apollo-link/lib/linkutils.d.ts",
+        "./node_modules/apollo-link/lib/types.d.ts",
+        "./node_modules/zen-observable-ts/lib/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache-inmemory/lib/fixpolyfills.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/types/dataproxy.d.ts": [
+        "./node_modules/graphql/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/types/cache.d.ts": [
+        "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/types/index.d.ts": [
+        "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
+        "./node_modules/apollo-cache/lib/types/cache.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/cache.d.ts": [
+        "./node_modules/graphql/index.d.ts",
+        "./node_modules/apollo-cache/lib/types/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "./node_modules/apollo-cache/lib/index.d.ts": [
+        "./node_modules/apollo-cache/lib/cache.d.ts",
+        "./node_modules/apollo-cache/lib/types/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/util.d.ts",
@@ -7054,63 +7112,6 @@
       "./src/graphql/customheuristicfragmentmatcher.ts": [
         "./node_modules/apollo-cache-inmemory/lib/index.d.ts"
       ],
-      "./node_modules/zen-observable-ts/lib/types.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/zen-observable-ts/lib/zenobservable.d.ts": [
-        "./node_modules/zen-observable-ts/lib/types.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/zen-observable-ts/lib/index.d.ts": [
-        "./node_modules/zen-observable-ts/lib/zenobservable.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-link/lib/types.d.ts": [
-        "./node_modules/zen-observable-ts/lib/index.d.ts",
-        "./node_modules/graphql/language/ast.d.ts",
-        "./node_modules/graphql/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-link/lib/link.d.ts": [
-        "./node_modules/zen-observable-ts/lib/index.d.ts",
-        "./node_modules/apollo-link/lib/types.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-link/lib/linkutils.d.ts": [
-        "./node_modules/zen-observable-ts/lib/index.d.ts",
-        "./node_modules/apollo-link/lib/types.d.ts",
-        "./node_modules/apollo-link/lib/link.d.ts",
-        "./node_modules/apollo-utilities/lib/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-link/lib/index.d.ts": [
-        "./node_modules/apollo-link/lib/link.d.ts",
-        "./node_modules/apollo-link/lib/linkutils.d.ts",
-        "./node_modules/apollo-link/lib/types.d.ts",
-        "./node_modules/zen-observable-ts/lib/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./src/graphql/pusherlink.ts": [
         "./node_modules/apollo-link/lib/index.d.ts"
       ],
@@ -7542,12 +7543,11 @@
       "./node_modules/@types/lodash.clonedeep/index.d.ts",
       "./src/models/exceptions/baseexception.ts",
       "./src/models/exceptions/unexpectedexception.ts",
-      "./node_modules/apollo-cache-inmemory/lib/fixpolyfills.d.ts",
-      "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
-      "./node_modules/apollo-cache/lib/types/cache.d.ts",
-      "./node_modules/apollo-cache/lib/types/index.d.ts",
-      "./node_modules/apollo-cache/lib/cache.d.ts",
-      "./node_modules/apollo-cache/lib/index.d.ts",
+      "./node_modules/zen-observable-ts/lib/types.d.ts",
+      "./node_modules/zen-observable-ts/lib/zenobservable.d.ts",
+      "./node_modules/zen-observable-ts/lib/index.d.ts",
+      "./node_modules/apollo-link/lib/types.d.ts",
+      "./node_modules/apollo-link/lib/link.d.ts",
       "./node_modules/apollo-utilities/lib/directives.d.ts",
       "./node_modules/apollo-utilities/lib/fragments.d.ts",
       "./node_modules/apollo-utilities/lib/storeutils.d.ts",
@@ -7565,6 +7565,14 @@
       "./node_modules/apollo-utilities/lib/util/warnonce.d.ts",
       "./node_modules/apollo-utilities/lib/util/stripsymbols.d.ts",
       "./node_modules/apollo-utilities/lib/index.d.ts",
+      "./node_modules/apollo-link/lib/linkutils.d.ts",
+      "./node_modules/apollo-link/lib/index.d.ts",
+      "./node_modules/apollo-cache-inmemory/lib/fixpolyfills.d.ts",
+      "./node_modules/apollo-cache/lib/types/dataproxy.d.ts",
+      "./node_modules/apollo-cache/lib/types/cache.d.ts",
+      "./node_modules/apollo-cache/lib/types/index.d.ts",
+      "./node_modules/apollo-cache/lib/cache.d.ts",
+      "./node_modules/apollo-cache/lib/index.d.ts",
       "./node_modules/optimism/lib/key-trie.d.ts",
       "./node_modules/@types/node/globals.d.ts",
       "./node_modules/@types/node/async_hooks.d.ts",
@@ -7691,15 +7699,7 @@
       "./node_modules/pusher-js/types/src/core/channels/presence_channel.d.ts",
       "./node_modules/pusher-js/index.d.ts",
       "./src/graphql/customheuristicfragmentmatcher.ts",
-      "./node_modules/zen-observable-ts/lib/types.d.ts",
-      "./node_modules/zen-observable-ts/lib/zenobservable.d.ts",
-      "./node_modules/zen-observable-ts/lib/index.d.ts",
-      "./node_modules/apollo-link/lib/types.d.ts",
-      "./node_modules/apollo-link/lib/link.d.ts",
-      "./node_modules/apollo-link/lib/linkutils.d.ts",
-      "./node_modules/apollo-link/lib/index.d.ts",
       "./src/graphql/pusherlink.ts",
-      "./src/graphql/apolloclient.ts",
       "./node_modules/@types/zen-observable/index.d.ts",
       "./node_modules/apollo-client/util/observable.d.ts",
       "./node_modules/apollo-client/core/networkstatus.d.ts",
@@ -7713,6 +7713,7 @@
       "./node_modules/apollo-client/data/store.d.ts",
       "./node_modules/apollo-client/data/mutations.d.ts",
       "./node_modules/apollo-client/core/querymanager.d.ts",
+      "./src/utils.ts",
       "./node_modules/collect.js/index.d.ts",
       "./src/models/collection.ts",
       "./node_modules/@types/uuid/interfaces.d.ts",
@@ -7721,8 +7722,6 @@
       "./src/models/exceptions/invalidargumentexception.ts",
       "./src/models/exceptions/validationexception.ts",
       "./src/models/exceptions/unauthorizedexception.ts",
-      "./src/repositories/repository.ts",
-      "./src/index.ts",
       "./node_modules/jest-diff/build/cleanupsemantic.d.ts",
       "./node_modules/jest-diff/build/types.d.ts",
       "./node_modules/jest-diff/build/difflines.d.ts",
@@ -7732,7 +7731,9 @@
       "./node_modules/pretty-format/build/index.d.ts",
       "./node_modules/@types/jest/index.d.ts",
       "./node_modules/@types/jest/ts3.2/index.d.ts",
-      "./src/utils.ts"
+      "./src/graphql/apolloclient.ts",
+      "./src/repositories/repository.ts",
+      "./src/index.ts"
     ]
   },
   "version": "3.8.3"

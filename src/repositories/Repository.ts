@@ -97,7 +97,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    *
    * @param {object|array|Collection} array
    */
-  protected constructor(array: Collection<M> | M[] = null) {
+  public constructor(array: Collection<M> | M[] = null) {
     super();
     if (array instanceof Collection) {
       this.dataset = array;
