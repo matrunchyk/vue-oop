@@ -109,7 +109,7 @@
       "publish": true
     },
     "git": {
-      "addUntrackedFiles": true
+      "addUntrackedFiles": false
     },
     "plugins": {
       "@release-it/conventional-changelog": {
