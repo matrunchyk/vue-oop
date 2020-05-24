@@ -1334,8 +1334,8 @@
         "signature": "41519445441125a284455dc4264b392c4d2b4c266f3d05aa79a3628cbc5ba9ff"
       },
       "./src/repositories/repository.ts": {
-        "version": "7bcb606d8ffff0598aab4e9f04a8c32e602a4a4e22dfd1efdb173f656bc92d84",
-        "signature": "64eeb22ac816a6e64bcb0693e4228ef716eb34ae0586f987837affedd10693b6"
+        "version": "9beb84aef335abe8577ff99bf9416fc407a699b7f5da5463337f2f59fdd7c4b2",
+        "signature": "a06a4f73ff00478ce86a682f962db141f0258130e0a723805627401c458222cd"
       },
       "./src/index.ts": {
         "version": "8a59bfba2d09eedc82f5db5ff8a42d48d19562b83140f6939abde98f374b09c8",
@@ -7502,6 +7502,7 @@
       "./node_modules/pusher-js/index.d.ts",
       "./src/graphql/customheuristicfragmentmatcher.ts",
       "./src/graphql/pusherlink.ts",
+      "./src/graphql/apolloclient.ts",
       "./node_modules/@types/zen-observable/index.d.ts",
       "./node_modules/apollo-client/util/observable.d.ts",
       "./node_modules/apollo-client/core/networkstatus.d.ts",
@@ -7524,8 +7525,6 @@
       "./src/models/exceptions/invalidargumentexception.ts",
       "./src/models/exceptions/validationexception.ts",
       "./src/models/exceptions/unauthorizedexception.ts",
-      "./src/repositories/repository.ts",
-      "./src/index.ts",
       "./node_modules/jest-diff/build/cleanupsemantic.d.ts",
       "./node_modules/jest-diff/build/types.d.ts",
       "./node_modules/jest-diff/build/difflines.d.ts",
@@ -7535,7 +7534,8 @@
       "./node_modules/pretty-format/build/index.d.ts",
       "./node_modules/@types/jest/index.d.ts",
       "./node_modules/@types/jest/ts3.2/index.d.ts",
-      "./src/graphql/apolloclient.ts"
+      "./src/repositories/repository.ts",
+      "./src/index.ts"
     ]
   },
   "version": "3.8.3"
