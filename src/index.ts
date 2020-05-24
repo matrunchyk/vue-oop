@@ -23,6 +23,7 @@ export interface IVueOOPOptions {
   schema?: DocumentNode;
   schemaUrl?: string;
   debug?: boolean;
+  createProvider?: Function;
 }
 
 // istanbul ignore next
@@ -61,6 +62,8 @@ export class VueOOPOptions implements IVueOOPOptions {
    * @type {boolean}
    */
   debug = false;
+
+  createProvider?: Function;
 }
 
 async function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions): Promise<void> {
@@ -70,6 +73,7 @@ async function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions):
     schema: null,
     schemaUrl: null,
     debug: false,
+    createProvider: null,
     ...options,
   } as IVueOOPOptions;
 
@@ -80,18 +84,29 @@ async function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions):
       .then(parse.bind(null));
   }
 
-  registry.set('Config', config);
+  if (config.graphql) {
+    // Vue.use(VueApollo);
+  }
 
-  Vue.prototype.$registry = registry;
+  registry.set('Config', config);
 
   Vue.mixin({
     beforeCreate() {
       // istanbul ignore else
-      // If a non-root component, or there's already the Vue instance set in Registry,
+      // If there's already the Vue instance set in Registry,
       // return, as we do need a Vue instance with $apollo in it.
-      if (this.$parent || registry.has('Vue')) return;
+      if (registry.has('Vue')) return;
 
-      registry.set('Vue', this);
+      Object.defineProperty(Vue.prototype, '$registry', {
+        get() {
+          if (!this.$_registry) {
+            this.$_registry = registry;
+          }
+          return this.$_registry;
+        },
+      });
+
+      registry.set('Vue', this.$root);
     },
   });
 }

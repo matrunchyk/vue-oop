@@ -19,13 +19,13 @@ export default abstract class EventEmitter {
 
   private _firedEvents: EventType[] = [];
 
-  public emit(type: string, payload?: unknown) {
+  public emit(type: string, payload?: unknown): boolean {
     const event = this.createEvent(type, payload);
 
     this._firedEvents[type] = event;
 
     if (!(event.type in this._eventListeners)) {
-      return true;
+      return false;
     }
     const subscribers = this._eventListeners[event.type].slice();
 
@@ -35,9 +35,9 @@ export default abstract class EventEmitter {
       subscriber.callback.call(this, event);
     }
     return true;
-  };
+  }
 
-  on(type, callback: (event: EventType) => void, config = {immediate: false}) {
+  public on(type: string, callback: (event: EventType) => void, config = { immediate: false }): void {
     if (!(type in this._eventListeners)) {
       this._eventListeners[type] = [];
     }
@@ -58,18 +58,6 @@ export default abstract class EventEmitter {
       .filter(subscriber => subscriber.fired && subscriber.immediate)
       .forEach((subscriber) => subscriber.callback(event))
     ;
-  }
-
-  /**
-   * @todo Implement the ideas below from https://basarat.gitbooks.io/typescript/content/docs/tips/typed-event.html
-   */
-  once(): void {
-  }
-
-  off(): void {
-  }
-
-  pipe() {
   }
 
   private createEvent(type, payload?): EventType {

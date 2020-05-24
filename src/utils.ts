@@ -1,17 +1,18 @@
-import { ObjectTypeDefinitionNode, DocumentNode, IntrospectionQuery } from 'graphql';
+import { ObjectTypeDefinitionNode, DocumentNode, IntrospectionQuery, OperationDefinitionNode } from 'graphql';
 import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
-import { Vue } from 'vue/types/vue';
 import { getIntrospectionQuery } from 'graphql';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
+import { apolloClient } from './graphql/apolloClient';
+import { QueryManager } from 'apollo-client/core/QueryManager';
 
 export const defaultRESTHeaders = {
   'Accept': 'application/json',
   'Content-Type': 'application/json;charset=UTF-8',
 };
 
-export function getApollo() {
-  return (Registry.getInstance().get('Vue') as Vue).$apollo;
+export function getApolloManager(): QueryManager<unknown> {
+  return apolloClient.queryManager;
 }
 
 export function camelToKebab(input: string): string {
@@ -76,19 +77,13 @@ export async function performSafeRequestREST(url, params = {}, method = 'get', o
  *
  * @param {object} query
  * @param {object} variables
- * @param {string} queryName
- * @param {array} subscribeToMore
  * @returns {Promise<any>}
  */
-export function performGqlQuery(query, variables, queryName, subscribeToMore?) {
-  return new Promise((result, error) => getApollo().addSmartQuery(queryName, {
-    manual: true,
+export function performGqlQuery(query, variables) {
+  return getApolloManager().query({
     query,
-    subscribeToMore,
     variables,
-    result,
-    error,
-  }));
+  });
 }
 
 /**
@@ -99,15 +94,10 @@ export function performGqlQuery(query, variables, queryName, subscribeToMore?) {
  * @returns {Promise<any>}
  */
 export function performGqlMutation(mutation, variables) {
-  return new Promise((resolve, reject) => getApollo().mutate({
-    update(_cache, result) {
-      return resolve(result);
-    },
-    // optimisticResponse: {],
-    // refetchQueries: [{}],
+  return getApolloManager().mutate({
     mutation,
     variables,
-  }).catch(reject));
+  });
 }
 
 /**
@@ -122,27 +112,24 @@ export function stripTypename(obj) {
  *
  * @param {object} query
  * @param {object} variables
- * @param subscriptions
  * @returns {Promise<*>}
  */
-export async function performSafeRequestGraphql(query: DocumentNode, variables = {}, subscriptions: unknown[] = []) {
-  //@ts-ignore
-  const queryName: string = query.definitions.map(def => def.name).find(def => def.kind === 'Name').value;
-  //@ts-ignore
-  const operation = query.definitions.find(def => def.kind === 'OperationDefinition').operation === 'query'
-    ? performGqlQuery.bind(null, query, stripTypename(variables), queryName, subscriptions)
+export async function performSafeRequestGraphql(query: DocumentNode, variables = {}) {
+  const queryName = query.definitions.map(def => (<OperationDefinitionNode>def).name).find(def => def.kind === 'Name').value;
+  const operation = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'query'
+    ? performGqlQuery.bind(null, query, stripTypename(variables))
     : performGqlMutation.bind(null, query, stripTypename(variables));
 
-  //@ts-ignore
+  // @ts-ignore
   return operation().then(({ data }) => data[queryName]);
 }
 
-export function registryGet(key: string) {
+export function registryGet(key: string): unknown {
   return Registry.getInstance().get(key);
 }
 
-export function config() {
-  return registryGet('Config') as Config;
+export function config(): Config {
+  return registryGet('Config');
 }
 
 export function getParsedSchema(): DocumentNode {
@@ -155,7 +142,7 @@ export function getParsedSchema(): DocumentNode {
   return schema;
 }
 
-export function getSchemaTypeFields(typeName) {
+export function getSchemaTypeFields(typeName): string[] {
   return (getParsedSchema()
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === typeName)
@@ -168,7 +155,7 @@ export function getSchemaMutation(mutationName) {
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === 'Mutation')
     .fields
-    .find(def => (def.name || {}).value === mutationName);
+    .find(def => (def.name || {}).value === mutationName)
 }
 
 export function getSchemaQuery(queryName) {

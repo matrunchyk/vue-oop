@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "0.7.7",
+  "version": "0.8.0",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -34,24 +34,29 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc -w",
+    "lint": "eslint '*/**/*.{ts,tsx}' --fix",
     "test": "jest --config jest.config.json",
     "test:watch": "jest -w",
     "danger": "danger",
     "publish-github": "npm publish --registry https://npm.pkg.github.com/@matrunchyk",
     "release": "release-it",
     "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepare": "exit 0 || npm run snyk-protect"
   },
   "dependencies": {
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-cache-persist": "^0.1.1",
     "collect.js": "^4.25.0",
     "get-graphql-schema": "^2.1.2",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.2",
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
+    "pusher-js": "^6.0.3",
     "snyk": "^1.323.2",
     "to-case": "^2.0.0",
-    "uuid": "^8.1.0"
+    "uuid": "^8.1.0",
+    "vue-cli-plugin-apollo": "^0.21.3"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -63,6 +68,8 @@
     "@types/node": "^12.12.41",
     "@types/uuid": "^8.0.0",
     "@types/vue": "^2.0.0",
+    "@typescript-eslint/eslint-plugin": "^3.0.0",
+    "@typescript-eslint/parser": "^3.0.0",
     "apollo-client": "^2.6.10",
     "apollo-link-http-common": "^0.2.16",
     "codecov": "^3.7.0",
@@ -71,15 +78,15 @@
     "cz-conventional-changelog": "^3.2.0",
     "cz-gitmoji": "^0.0.7",
     "danger": "^10.2.0",
+    "eslint": "^7.1.0",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "release-it": "^13.6.1",
     "ts-jest": "^26.0.0",
     "ts-node": "^8.10.1",
+    "tslib": "^2.0.0",
     "typescript": "^3.9.3",
-    "vue": "^2.6.11",
-    "vue-apollo": "^3.0.3",
-    "tslib": "^2.0.0"
+    "vue": "^2.6.11"
   },
   "peerDependencies": {
     "apollo-client": "^2.6.10",

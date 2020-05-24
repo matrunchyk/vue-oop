@@ -150,7 +150,7 @@ describe('Given instances of BaseException', () => {
 
   describe('when I pass the response-like payload to InvalidArgumentException', () => {
     it('should return a message in the object', () => {
-      let payload = {
+      const payload = {
         data: {
           message: 'This is a message from the server',
         },
