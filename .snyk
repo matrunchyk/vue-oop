@@ -2444,3 +2444,51 @@ patch:
         patched: '2020-05-22T01:30:28.378Z'
     - jest > jest-cli > @jest/core > jest-runner > jest-jasmine2 > jest-runtime > jest-config > babel-jest > @jest/transform > babel-plugin-istanbul > istanbul-lib-instrument > @babel/core > @babel/helper-module-transforms > @babel/helper-replace-supers > @babel/traverse > @babel/helper-function-name > @babel/template > @babel/types > lodash:
         patched: '2020-05-22T01:30:28.378Z'
+    - eslint > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - eslint > inquirer > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - '@typescript-eslint/parser > @typescript-eslint/typescript-estree > lodash':
+        patched: '2020-05-24T01:31:40.964Z'
+    - eslint > table > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - '@typescript-eslint/parser > @typescript-eslint/experimental-utils > @typescript-eslint/typescript-estree > lodash':
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > table > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > cli-ux > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > @oclif/plugin-not-found > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-core > @babel/generator > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-flow > @babel/generator > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-typescript > @babel/generator > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > @oclif/plugin-not-found > cli-ux > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > gaze > globule > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-core > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-flow > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-typescript > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-flow > apollo-codegen-core > @babel/generator > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-scala > apollo-codegen-core > @babel/generator > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-swift > apollo-codegen-core > @babel/generator > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-typescript > apollo-codegen-core > @babel/generator > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-flow > apollo-codegen-core > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-scala > apollo-codegen-core > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-swift > apollo-codegen-core > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
+    - vue-cli-plugin-apollo > apollo > apollo-codegen-typescript > apollo-codegen-core > @babel/generator > @babel/types > lodash:
+        patched: '2020-05-24T01:31:40.964Z'
