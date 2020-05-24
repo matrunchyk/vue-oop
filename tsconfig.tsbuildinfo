@@ -1009,42 +1009,6 @@
         "version": "95afb98c2bb5c9bc0dc33cbea5cc595ee6eb455c0df76f34e21260d7bd15b756",
         "signature": "95afb98c2bb5c9bc0dc33cbea5cc595ee6eb455c0df76f34e21260d7bd15b756"
       },
-      "./node_modules/apollo-cache-persist/types/index.d.ts": {
-        "version": "2eb898553eca61441a6dcee6c62d69f6be935d0aa662df2364718a4f2291ace8",
-        "signature": "2eb898553eca61441a6dcee6c62d69f6be935d0aa662df2364718a4f2291ace8"
-      },
-      "./node_modules/apollo-cache-persist/log.d.ts": {
-        "version": "3731f15b407d75cca5ad30095e3d0374daa05e903daef61d9fc6eb99bca25685",
-        "signature": "3731f15b407d75cca5ad30095e3d0374daa05e903daef61d9fc6eb99bca25685"
-      },
-      "./node_modules/apollo-cache-persist/cache.d.ts": {
-        "version": "7a4eb4e78ab57cdb15c00377bd777d82e9bf149728d262b0751870f143bcc2aa",
-        "signature": "7a4eb4e78ab57cdb15c00377bd777d82e9bf149728d262b0751870f143bcc2aa"
-      },
-      "./node_modules/apollo-cache-persist/storage.d.ts": {
-        "version": "7e513a95e90d86d22c9d567397ee7e014326eb048c990af5e0bd83fff716f0d3",
-        "signature": "7e513a95e90d86d22c9d567397ee7e014326eb048c990af5e0bd83fff716f0d3"
-      },
-      "./node_modules/apollo-cache-persist/persistor.d.ts": {
-        "version": "7a26840ed5c512ee3172f584913934aceaeba0d9297bd955b8cc7b4368002980",
-        "signature": "7a26840ed5c512ee3172f584913934aceaeba0d9297bd955b8cc7b4368002980"
-      },
-      "./node_modules/apollo-cache-persist/trigger.d.ts": {
-        "version": "54647691ed9a94fda3290eda85f724ec27e8b6540c4ef48723867220398783f9",
-        "signature": "54647691ed9a94fda3290eda85f724ec27e8b6540c4ef48723867220398783f9"
-      },
-      "./node_modules/apollo-cache-persist/cachepersistor.d.ts": {
-        "version": "1805b3a72826ec2a25300a4b5847914a58c9e8e67d378c45c7bfb354b479c9d7",
-        "signature": "1805b3a72826ec2a25300a4b5847914a58c9e8e67d378c45c7bfb354b479c9d7"
-      },
-      "./node_modules/apollo-cache-persist/persistcache.d.ts": {
-        "version": "dc6e89df29cd95ac3683711eb8b4a01078f83e03ca89188b703ead340cbe14be",
-        "signature": "dc6e89df29cd95ac3683711eb8b4a01078f83e03ca89188b703ead340cbe14be"
-      },
-      "./node_modules/apollo-cache-persist/index.d.ts": {
-        "version": "ff77b416664e8ef4f1f3a4a09cd0c34fd4ee5fa534313e89517c494664c48eb6",
-        "signature": "ff77b416664e8ef4f1f3a4a09cd0c34fd4ee5fa534313e89517c494664c48eb6"
-      },
       "./node_modules/pusher-js/types/src/core/channels/metadata.d.ts": {
         "version": "4ad9db67e5dca7eaea61601bdf94fb9bcfae6c1262653c87ec7b0fed65570c47",
         "signature": "4ad9db67e5dca7eaea61601bdf94fb9bcfae6c1262653c87ec7b0fed65570c47"
@@ -1278,7 +1242,7 @@
         "signature": "b2bc6d75bad32e43046865913804d41f0f88f98338aace443f450b3cbe1778a1"
       },
       "./src/graphql/apolloclient.ts": {
-        "version": "672fa95e10769db272efa2f5a69eac5f2d84f46faf76faca53c6710f7f0cabea",
+        "version": "aed9d04af681fe96471485293be57adc70cecae7607546aab781e7d5c0517e9d",
         "signature": "ffe0dd32785560587f5fcbe42f0e75e40a5373294a95559fb7bf3fdcfc42400a"
       },
       "./node_modules/@types/zen-observable/index.d.ts": {
@@ -1370,8 +1334,8 @@
         "signature": "41519445441125a284455dc4264b392c4d2b4c266f3d05aa79a3628cbc5ba9ff"
       },
       "./src/repositories/repository.ts": {
-        "version": "8438a148ddea4d0148df196dd84f2a8e7aae3964dc1f70c167cdede19376bd8b",
-        "signature": "baa30ff3a63897e8d56de459b18aff9a9d4b21d5ec3f47f3a84f9d0a584c71b2"
+        "version": "7bcb606d8ffff0598aab4e9f04a8c32e602a4a4e22dfd1efdb173f656bc92d84",
+        "signature": "64eeb22ac816a6e64bcb0693e4228ef716eb34ae0586f987837affedd10693b6"
       },
       "./src/index.ts": {
         "version": "8a59bfba2d09eedc82f5db5ff8a42d48d19562b83140f6939abde98f374b09c8",
@@ -3601,82 +3565,6 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/apollo-cache-persist/types/index.d.ts": [
-        "./node_modules/apollo-cache/lib/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/log.d.ts": [
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/cache.d.ts": [
-        "./node_modules/apollo-cache/lib/index.d.ts",
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/storage.d.ts": [
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/persistor.d.ts": [
-        "./node_modules/apollo-cache-persist/log.d.ts",
-        "./node_modules/apollo-cache-persist/storage.d.ts",
-        "./node_modules/apollo-cache-persist/cache.d.ts",
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/trigger.d.ts": [
-        "./node_modules/apollo-cache-persist/log.d.ts",
-        "./node_modules/apollo-cache-persist/persistor.d.ts",
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/ts3.7/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/cachepersistor.d.ts": [
-        "./node_modules/apollo-cache-persist/log.d.ts",
-        "./node_modules/apollo-cache-persist/cache.d.ts",
-        "./node_modules/apollo-cache-persist/storage.d.ts",
-        "./node_modules/apollo-cache-persist/persistor.d.ts",
-        "./node_modules/apollo-cache-persist/trigger.d.ts",
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/persistcache.d.ts": [
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/index.d.ts": [
-        "./node_modules/apollo-cache-persist/cachepersistor.d.ts",
-        "./node_modules/apollo-cache-persist/persistcache.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./node_modules/pusher-js/types/src/core/channels/metadata.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -4146,7 +4034,6 @@
       "./src/graphql/apolloclient.ts": [
         "./node_modules/apollo-link/lib/index.d.ts",
         "./node_modules/apollo-cache-inmemory/lib/index.d.ts",
-        "./node_modules/apollo-cache-persist/index.d.ts",
         "./node_modules/pusher-js/index.d.ts",
         "./src/graphql/customheuristicfragmentmatcher.ts",
         "./src/graphql/pusherlink.ts",
@@ -6582,82 +6469,6 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "./node_modules/apollo-cache-persist/types/index.d.ts": [
-        "./node_modules/apollo-cache/lib/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/log.d.ts": [
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/cache.d.ts": [
-        "./node_modules/apollo-cache/lib/index.d.ts",
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/storage.d.ts": [
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/persistor.d.ts": [
-        "./node_modules/apollo-cache-persist/log.d.ts",
-        "./node_modules/apollo-cache-persist/storage.d.ts",
-        "./node_modules/apollo-cache-persist/cache.d.ts",
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/trigger.d.ts": [
-        "./node_modules/apollo-cache-persist/log.d.ts",
-        "./node_modules/apollo-cache-persist/persistor.d.ts",
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/ts3.7/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/cachepersistor.d.ts": [
-        "./node_modules/apollo-cache-persist/log.d.ts",
-        "./node_modules/apollo-cache-persist/cache.d.ts",
-        "./node_modules/apollo-cache-persist/storage.d.ts",
-        "./node_modules/apollo-cache-persist/persistor.d.ts",
-        "./node_modules/apollo-cache-persist/trigger.d.ts",
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/persistcache.d.ts": [
-        "./node_modules/apollo-cache-persist/types/index.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "./node_modules/apollo-cache-persist/index.d.ts": [
-        "./node_modules/apollo-cache-persist/cachepersistor.d.ts",
-        "./node_modules/apollo-cache-persist/persistcache.d.ts",
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "./node_modules/pusher-js/types/src/core/channels/metadata.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -7633,15 +7444,6 @@
       "./node_modules/apollo-cache-inmemory/lib/writetostore.d.ts",
       "./node_modules/apollo-cache-inmemory/lib/fragmentmatcher.d.ts",
       "./node_modules/apollo-cache-inmemory/lib/index.d.ts",
-      "./node_modules/apollo-cache-persist/types/index.d.ts",
-      "./node_modules/apollo-cache-persist/log.d.ts",
-      "./node_modules/apollo-cache-persist/cache.d.ts",
-      "./node_modules/apollo-cache-persist/storage.d.ts",
-      "./node_modules/apollo-cache-persist/persistor.d.ts",
-      "./node_modules/apollo-cache-persist/trigger.d.ts",
-      "./node_modules/apollo-cache-persist/cachepersistor.d.ts",
-      "./node_modules/apollo-cache-persist/persistcache.d.ts",
-      "./node_modules/apollo-cache-persist/index.d.ts",
       "./node_modules/pusher-js/types/src/core/channels/metadata.d.ts",
       "./node_modules/pusher-js/types/src/core/events/callback.d.ts",
       "./node_modules/pusher-js/types/src/core/events/callback_table.d.ts",
@@ -7722,6 +7524,8 @@
       "./src/models/exceptions/invalidargumentexception.ts",
       "./src/models/exceptions/validationexception.ts",
       "./src/models/exceptions/unauthorizedexception.ts",
+      "./src/repositories/repository.ts",
+      "./src/index.ts",
       "./node_modules/jest-diff/build/cleanupsemantic.d.ts",
       "./node_modules/jest-diff/build/types.d.ts",
       "./node_modules/jest-diff/build/difflines.d.ts",
@@ -7731,9 +7535,7 @@
       "./node_modules/pretty-format/build/index.d.ts",
       "./node_modules/@types/jest/index.d.ts",
       "./node_modules/@types/jest/ts3.2/index.d.ts",
-      "./src/graphql/apolloclient.ts",
-      "./src/repositories/repository.ts",
-      "./src/index.ts"
+      "./src/graphql/apolloclient.ts"
     ]
   },
   "version": "3.8.3"

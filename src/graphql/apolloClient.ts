@@ -1,7 +1,6 @@
 import { ApolloLink } from 'apollo-link';
 import { defaultDataIdFromObject } from 'apollo-cache-inmemory';
 import { InStorageCache, PersistLink } from 'apollo-cache-instorage';
-import { persistCache } from 'apollo-cache-persist';
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 import Pusher from 'pusher-js';
 import CustomHeuristicFragmentMatcher from './CustomHeuristicFragmentMatcher';
@@ -37,20 +36,12 @@ function shouldPersist(_, dataId, data) {
 }
 
 const cache = new InStorageCache({
-  // @ts-ignore
   dataIdFromObject: result => (result.__typename && result.uuid ? `${result.__typename}:${result.uuid}` : defaultDataIdFromObject(result)),
   fragmentMatcher: new CustomHeuristicFragmentMatcher(),
   addPersistField: true,
+  storage: window.localStorage,
   shouldPersist,
 })
-
-// noinspection JSIgnoredPromiseFromCall
-persistCache({
-  cache,
-  // @ts-ignore
-  storage: window.localStorage,
-  debug: true,
-});
 
 const link = ApolloLink.from([
   persistLink,

@@ -11,7 +11,6 @@ import EventEmitter from '../EventEmitter';
 // noinspection ES6PreferShortImport
 import {
   GraphQLErrorBag,
-  KeyValueString,
   PropertyFunction,
   ResolvingRESTOptions,
   UrlResolver,
@@ -203,7 +202,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    * @param {string} method
    * @returns {Promise<Collection|Model>}
    */
-  public async query(queryOrUrl: string | UrlResolver | DocumentNode, params: KeyValueString = {}, collection = false, method: HttpMethod = this.defaultMethod) {
+  public async query(queryOrUrl: string | UrlResolver | DocumentNode, params: unknown = {}, collection = false, method: HttpMethod = this.defaultMethod) {
     // istanbul ignore else
     if (config().graphql) {
       let doc = queryOrUrl as unknown as DocumentNode;
@@ -267,10 +266,10 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
   /**
    * Fetches a single model
    *
-   * @param {number|string} id
+   * @param {any} id
    * @returns {Promise<Model>}
    */
-  public async one(id) {
+  public async one(id?: unknown) {
     const params = config().graphql ? { uuid: id } : { id };
     const data = await this.query(this.fetchOneQuery, params);
     //@ts-ignore
@@ -285,7 +284,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     return new ModelFactory(data);
   }
 
-  public static one(params) {
+  public static one(params?: unknown) {
     return Reflect.construct(this, []).one(params);
   }
 }
