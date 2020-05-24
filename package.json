@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "0.8.0",
+  "version": "0.8.2",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -41,7 +41,7 @@
     "publish-github": "npm publish --registry https://npm.pkg.github.com/@matrunchyk",
     "release": "release-it",
     "snyk-protect": "snyk protect",
-    "prepare": "exit 0 || npm run snyk-protect"
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.6.6",
@@ -56,7 +56,12 @@
     "snyk": "^1.323.2",
     "to-case": "^2.0.0",
     "uuid": "^8.1.0",
-    "vue-cli-plugin-apollo": "^0.21.3"
+    "vue-cli-plugin-apollo": "^0.21.3",
+    "apollo-boost": "^0.4.9",
+    "apollo-client": "^2.6.10",
+    "apollo-link": "^1.2.14",
+    "apollo-link-context": "^1.0.20",
+    "apollo-link-http": "^1.5.17"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
