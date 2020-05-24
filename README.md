@@ -21,9 +21,9 @@ _Note. If you looking for v1 of this library, switch to a [relevant branch](http
 * Supports events & hooks for customization.
 
 ###### Internally:  
-* TypeScript 3.6.
+* TypeScript 3.9.
 * Collect.JS.
-* Vue-Apollo (if GraphQL activated).
+* Apollo (if GraphQL activated).
 
 ## Installation
 
@@ -39,13 +39,10 @@ or
 // Import the library itself
 import VueOOP from 'vue-oop';
 
-// Import your schema.graphql file (OPTIONAL, used for smart resolution of Input Types properties)
-import schema from 'raw-loader!@/../schema.graphql';
-
 // Install the plugin
 Vue.use(VueOOP, {
   graphql: true,
-  schema,
+  schemaUrl: 'http://127.0.0.1:3000/graphql',
 });
 ```
 
@@ -97,11 +94,11 @@ export default class ClientRepository extends Repository {
 ```
 <template>
    <ul>
-     <li v-if="repository.loading">Loading...</li>
-     <li v-else-if="repository.error">Loading Failed! Reason: {{ repository.lastError.message }}</li>
-     <li v-else v-for="(item, index) in repository.dataset.all()" :key="index">
-       <p>Name: {{ item.name }}</p>
-       <p>Email: {{ item.email }}</p>
+     <li v-if="clients.loading">Loading...</li>
+     <li v-else-if="clients.error">Loading Failed! Reason: {{ clients.lastError.message }}</li>
+     <li v-else v-for="(client, index) in clients.dataset.all()" :key="index">
+       <p>Name: {{ client.name }}</p>
+       <p>Email: {{ client.email }}</p>
      </li>
   </ul>
 </template>
@@ -111,11 +108,11 @@ import ClientRepository from '@/repositories/ClientRepository';
 
 export default {
   data: () => ({
-    repository: new ClientRepository(),
+    clients: new ClientRepository(),
   }),
 
   created() {
-    this.repository.many();
+    this.clients.many();
   },
 }
 </script>
@@ -125,11 +122,11 @@ export default {
 ```
 <template>
    <ul>
-     <li v-if="repository.loading">Loading...</li>
-     <li v-else-if="repository.error">Loading Failed! Reason: {{ repository.lastError.message }}</li>
-     <li v-else v-for="(item, index) in repository.dataset.all()" :key="index">
-       <p>Name: {{ item.name }}</p>
-       <p>Email: {{ item.email }}</p>
+     <li v-if="clients.loading">Loading...</li>
+     <li v-else-if="clients.error">Loading Failed! Reason: {{ clients.lastError.message }}</li>
+     <li v-else v-for="(client, index) in clients.dataset.all()" :key="index">
+       <p>Name: {{ client.name }}</p>
+       <p>Email: {{ client.email }}</p>
      </li>
   </ul>
 </template>
@@ -141,28 +138,14 @@ import ClientRepository from '@/repositories/ClientRepository';
 
 @Component
 export default class ClientsPage extends Vue {
-  repository = new ClientRepository(),
+  clients = new ClientRepository(),
 
   created() {
-    this.repository.many();
+    this.clients.many();
   }
 }
 </script>
 ```
-
-
-#### Notes for GraphQL
-In order to generate schema use [fetch-graphql-schema](https://github.com/yoctol/fetch-graphql-schema#fetch-graphql-schema) package with the following command `npx fetch-graphql-schema http://your.api.server/graphql -o schema.graphql -r` 
-
-If your're using Laravel Lighthouse, use the following command `php artisan lighthouse:print-schema > schema.graphql`.
-
-Then put your `schema.graphql` file inside of the root folder of your frontend project.
-
-
-This file is also needed if you use GraphQL plugins for your IDE (such as [JS GraphQL](https://plugins.jetbrains.com/plugin/8097-js-graphql)).
-
-In future, the library will be automatically fetching the schema from your backend (optionally) for convenience.
-
 
 ### Advanced Usage
 
@@ -194,17 +177,17 @@ watch: {
 </script>
 ```
 
-Now when the `userId` variable is changed, the `queryParams` are also updated and ready to be called.
+Now when the `userId` variable changed, the `queryParams` are also updated and ready to be called.
 
 
 ## Contribution
 
 Feel free to submit your pull-requests, ideas, proposals and bug reports!
  
-### TODOs:
-- Add optional dynamic .graphql document generation based on model attributes and schema
-- Add optional IntrospectionQuery execution so that you don't need to specify `schema.graphql` manually.
+### Coming in next releases:
+- Add Vue3 support
 - Add `@Inject` and `@Provide`
 - Add subscriptions & events example
 - Write more tests & coverage support
-- Add a configurable operation confirmation when performing some risky operations. For example, automatically display a delete confirmation component when executing `.delete()` method.
+- Add scaffolding support
+- Publishing as monorepo with `vue-oop-table`
