@@ -2,6 +2,7 @@ import { ApolloLink } from 'apollo-link';
 import { defaultDataIdFromObject } from 'apollo-cache-inmemory';
 import { InStorageCache, PersistLink } from 'apollo-cache-instorage';
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
+import { IdValue } from 'apollo-utilities'
 import Pusher from 'pusher-js';
 import CustomHeuristicFragmentMatcher from './CustomHeuristicFragmentMatcher';
 import PusherLink from './PusherLink';
@@ -30,8 +31,9 @@ const pusherLink = new PusherLink({
 
 const persistLink = new PersistLink();
 
-function shouldPersist(_, dataId, data) {
-  console.log(_, dataId, data);
+function shouldPersist(_, dataId, data?: { __persist: boolean } & IdValue) {
+  if (data && data.id.includes('password')) return false;
+
   return dataId === 'ROOT_QUERY' || (!data || !!data.__persist)
 }
 
@@ -40,6 +42,7 @@ const cache = new InStorageCache({
   fragmentMatcher: new CustomHeuristicFragmentMatcher(),
   // addPersistField: true,
   storage: window.localStorage,
+  prefix: 'vue-oop-apollo',
   shouldPersist,
 })
 

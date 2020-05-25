@@ -1242,7 +1242,7 @@
         "signature": "b2bc6d75bad32e43046865913804d41f0f88f98338aace443f450b3cbe1778a1"
       },
       "./src/graphql/apolloclient.ts": {
-        "version": "2bdf76e19a946cb25b7d7fcae2d03841abad3186a899428178ae895178393229",
+        "version": "540ee321fff43eedc9d08d6a7912b27f0b024d5da75f9f16ce610818d97380ca",
         "signature": "ffe0dd32785560587f5fcbe42f0e75e40a5373294a95559fb7bf3fdcfc42400a"
       },
       "./node_modules/@types/zen-observable/index.d.ts": {
@@ -4034,6 +4034,7 @@
       "./src/graphql/apolloclient.ts": [
         "./node_modules/apollo-link/lib/index.d.ts",
         "./node_modules/apollo-cache-inmemory/lib/index.d.ts",
+        "./node_modules/apollo-utilities/lib/index.d.ts",
         "./node_modules/pusher-js/index.d.ts",
         "./src/graphql/customheuristicfragmentmatcher.ts",
         "./src/graphql/pusherlink.ts",
