@@ -38,7 +38,7 @@ function shouldPersist(_, dataId, data) {
 const cache = new InStorageCache({
   dataIdFromObject: result => (result.__typename && result.uuid ? `${result.__typename}:${result.uuid}` : defaultDataIdFromObject(result)),
   fragmentMatcher: new CustomHeuristicFragmentMatcher(),
-  addPersistField: true,
+  // addPersistField: true,
   storage: window.localStorage,
   shouldPersist,
 })
