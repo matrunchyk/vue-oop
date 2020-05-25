@@ -1257,8 +1257,8 @@
         "affectsGlobalScope": false
       },
       "./src/utils.ts": {
-        "version": "fef6b0a4c07b64c48df3ff3b01dd485d0e66db738f51ef04d3684d014bbd7cd5",
-        "signature": "6f3e13a2842e761f331abd036ba2fa7ae2ae6bd7b150a6c8941d3732acb81954",
+        "version": "f74ca835e4aeb527ae03d4f5a022b2623fbeb92ecf0a5a7bd6baeeb1d3d242b9",
+        "signature": "7a028338d53439831635555afca4d373ee6c5fd071784267dd4087e29890eaf9",
         "affectsGlobalScope": false
       },
       "./src/models/exceptions/invalidargumentexception.ts": {
@@ -1352,8 +1352,8 @@
         "affectsGlobalScope": false
       },
       "./src/models/model.ts": {
-        "version": "f3fda724890ec3ed31d3591f7c02a319b6c539162301bb7a2144005b410b2f5a",
-        "signature": "6a740806560eac75ddfc8df904abcd5a9bb7f3088d336c7256b94cf1eb0a3ba0",
+        "version": "e32b59d99b901e40552904d650adbc9d6669f12ef4c2c57fedf9813b6e465cf2",
+        "signature": "564b8ef0af6ce279ab347f189ba78494e8fadbde55de9cdc4e609fb5e9932e21",
         "affectsGlobalScope": false
       },
       "./src/models/collection.ts": {
@@ -1372,7 +1372,7 @@
         "affectsGlobalScope": false
       },
       "./src/repositories/repository.ts": {
-        "version": "0de2903719241cdde3b42dbf13f5358b090b3c8bfae054e22ef6879de36fec7a",
+        "version": "39753a93888396628e05b12cde3c0014cce846bf4fda0e98a436a541c0956a69",
         "signature": "fe983ab1b350f3104bb0db62fb820f32f478834e52492118bf1d73024dec0077",
         "affectsGlobalScope": false
       },
@@ -1763,11 +1763,6 @@
       "noFallthroughCasesInSwitch": true,
       "moduleResolution": 2,
       "baseUrl": "./",
-      "paths": {
-        "@/*": [
-          "src/*"
-        ]
-      },
       "types": [
         "node",
         "jest"

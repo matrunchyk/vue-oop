@@ -2,7 +2,7 @@ import { GraphQLError, DocumentNode } from 'graphql';
 import InvalidArgumentException from '../models/Exceptions/InvalidArgumentException';
 import Collection from '../models/Collection';
 // noinspection ES6PreferShortImport
-import { getUrl, config, performSafeRequestREST, performSafeRequestGraphql } from '../utils';
+import { getUrl, config, performSafeRequestREST, performSafeRequestGraphql, isClass } from '../utils';
 import UnexpectedException from '../models/Exceptions/UnexpectedException';
 import ValidationException from '../models/Exceptions/ValidationException';
 import UnauthorizedException from '../models/Exceptions/UnauthorizedException';
@@ -136,7 +136,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     const mapped = filtered.map((i) => {
       let model = this.model;
 
-      if (typeof this.model === 'function') {
+      if (typeof this.model === 'function' && !isClass(this.model as CallableFunction)) {
         model = this.model(i);
       }
 

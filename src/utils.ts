@@ -121,24 +121,11 @@ export async function performSafeRequestGraphql(query: DocumentNode, variables =
   const isQuery = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'query';
   if (isQuery) {
     return performGqlQuery(query, stripTypename(variables))
-      .then((value: ApolloQueryResult<unknown>) => {
-        console.log(value);
-        return value.data[queryName];
-      });
+      .then((value: ApolloQueryResult<unknown>) => value.data[queryName]);
   }
 
   return performGqlMutation(query, stripTypename(variables))
-    .then((value: FetchResult<unknown>) => {
-      console.log(value);
-      return value.data[queryName];
-    });
-
-  // @ts-ignore
-  return operation().then((result: ApolloQueryResult<T>) => {
-    console.log(result);
-
-    return result.data[queryName];
-  });
+    .then((value: FetchResult<unknown>) => value.data[queryName]);
 }
 
 export function registryGet(key: string): unknown {
@@ -224,3 +211,5 @@ export function fetchIntrospectionSchema(url: string): Promise<IntrospectionQuer
     .then(res => res.json())
     .then(res => res.data);
 }
+
+export const isClass = (fn: CallableFunction): boolean => /^\s*class/.test(fn.toString());

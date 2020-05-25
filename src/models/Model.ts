@@ -21,13 +21,11 @@ export default abstract class Model extends EventEmitter {
 
   public loading = false;
 
-  public children: unknown;
+  public createMutation?: string | CallableFunction | DocumentNode;
 
-  public createMutation?: string | Function | DocumentNode;
+  public updateMutation?: string | CallableFunction | DocumentNode;
 
-  public updateMutation?: string | Function | DocumentNode;
-
-  public deleteMutation?: string | Function | DocumentNode;
+  public deleteMutation?: string | CallableFunction | DocumentNode;
 
   protected submittableProps = [];
 
@@ -213,7 +211,7 @@ export default abstract class Model extends EventEmitter {
    * @param {string} method
    * @returns {*|Promise<Array<any>>|void}
    */
-  public async mutate(mutationOrUrl, params, method = this.defaultMethod) {
+  public async mutate(mutationOrUrl, params, method = this.defaultMethod): Promise<unknown> {
     // istanbul ignore else
     if (config().graphql) {
       return this.beforeMutate()
@@ -231,35 +229,35 @@ export default abstract class Model extends EventEmitter {
       .finally(this.markExists.bind(this));
   }
 
-  public clone() {
+  public clone(): this {
     return clone(this).markNotExists();
   }
 
-  public markExists() {
+  public markExists(): this {
     this._exists = true;
 
     return this;
   }
 
-  public markNotExists() {
+  public markNotExists(): this {
     this._exists = false;
 
     return this;
   }
 
-  protected async beforeMutate() {
+  protected async beforeMutate(): Promise<this> {
     this.loading = true;
 
     return this;
   }
 
-  protected afterMutate() {
+  protected afterMutate(): this {
     this.loading = false;
 
     return this;
   }
 
-  protected resolveRequest(request: string | DocumentNode, defaultRequest: string | Function | DocumentNode): string | DocumentNode {
+  protected resolveRequest(request: string | DocumentNode, defaultRequest: string | CallableFunction | DocumentNode): string | DocumentNode {
     if (request) return request;
 
     return typeof defaultRequest === 'function' ? defaultRequest() : defaultRequest;
