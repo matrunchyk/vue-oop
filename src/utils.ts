@@ -1,3 +1,5 @@
+import { ApolloQueryResult } from 'apollo-client';
+import { FetchResult } from 'apollo-link';
 import { ObjectTypeDefinitionNode, DocumentNode, IntrospectionQuery, OperationDefinitionNode } from 'graphql';
 import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
 import { getIntrospectionQuery } from 'graphql';
@@ -116,12 +118,27 @@ export function stripTypename(obj) {
  */
 export async function performSafeRequestGraphql(query: DocumentNode, variables = {}) {
   const queryName = query.definitions.map(def => (<OperationDefinitionNode>def).name).find(def => def.kind === 'Name').value;
-  const operation = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'query'
-    ? performGqlQuery.bind(null, query, stripTypename(variables))
-    : performGqlMutation.bind(null, query, stripTypename(variables));
+  const isQuery = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'query';
+  if (isQuery) {
+    return performGqlQuery(query, stripTypename(variables))
+      .then((value: ApolloQueryResult<unknown>) => {
+        console.log(value);
+        return value.data[queryName];
+      });
+  }
+
+  return performGqlMutation(query, stripTypename(variables))
+    .then((value: FetchResult<unknown>) => {
+      console.log(value);
+      return value.data[queryName];
+    });
 
   // @ts-ignore
-  return operation().then(({ data }) => data[queryName]);
+  return operation().then((result: ApolloQueryResult<T>) => {
+    console.log(result);
+
+    return result.data[queryName];
+  });
 }
 
 export function registryGet(key: string): unknown {
@@ -132,8 +149,8 @@ export function config(): Config {
   return registryGet('Config');
 }
 
-export function getParsedSchema(): DocumentNode {
-  const schema = config().schema;
+export async function getParsedSchema(): Promise<DocumentNode> {
+  const schema = await config().schema;
 
   if (!schema) {
     throw new UnexpectedException('Configuration error: \'schema\' must be passed as a config key, e.g\n\nimport schema from \'raw-loader!@/../schema.graphql\';\n\n//...\n\nVue.use(VueOOP, {\n  //...,\n  schema,\n})\n\n;');
@@ -142,24 +159,24 @@ export function getParsedSchema(): DocumentNode {
   return schema;
 }
 
-export function getSchemaTypeFields(typeName): string[] {
-  return (getParsedSchema()
+export async function getSchemaTypeFields(typeName): Promise<string[]> {
+  return ((await getParsedSchema())
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === typeName)
     .fields
     .map(f => f.name.value);
 }
 
-export function getSchemaMutation(mutationName) {
-  return (getParsedSchema()
+export async function getSchemaMutation(mutationName) {
+  return ((await getParsedSchema())
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === 'Mutation')
     .fields
     .find(def => (def.name || {}).value === mutationName)
 }
 
-export function getSchemaQuery(queryName) {
-  return (getParsedSchema()
+export async function getSchemaQuery(queryName) {
+  return ((await getParsedSchema())
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === 'Query')
     .fields

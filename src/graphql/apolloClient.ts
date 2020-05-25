@@ -1,10 +1,7 @@
 import { ApolloLink } from 'apollo-link';
-import { defaultDataIdFromObject } from 'apollo-cache-inmemory';
-import { InStorageCache, PersistLink } from 'apollo-cache-instorage';
+import { PersistLink } from 'apollo-cache-instorage';
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
-import { IdValue } from 'apollo-utilities'
 import Pusher from 'pusher-js';
-import CustomHeuristicFragmentMatcher from './CustomHeuristicFragmentMatcher';
 import PusherLink from './PusherLink';
 
 Pusher.logToConsole = process.env.NODE_ENV !== 'production';
@@ -31,20 +28,20 @@ const pusherLink = new PusherLink({
 
 const persistLink = new PersistLink();
 
-function shouldPersist(_, dataId, data?: { __persist: boolean } & IdValue) {
-  if (data && data.id.includes('password')) return false;
+// function shouldPersist(_, dataId, data?: { __persist: boolean } & IdValue) {
+//   if (data?.id?.includes?.('password')) return false;
+//
+//   return dataId === 'ROOT_QUERY' || (!data || !!data.__persist)
+// }
 
-  return dataId === 'ROOT_QUERY' || (!data || !!data.__persist)
-}
-
-const cache = new InStorageCache({
-  dataIdFromObject: result => (result.__typename && result.uuid ? `${result.__typename}:${result.uuid}` : defaultDataIdFromObject(result)),
-  fragmentMatcher: new CustomHeuristicFragmentMatcher(),
-  // addPersistField: true,
-  storage: window.localStorage,
-  prefix: 'vue-oop-apollo',
-  shouldPersist,
-})
+// const cache = new InStorageCache({
+//   dataIdFromObject: result => (result.__typename && result.uuid ? `${result.__typename}:${result.uuid}` : defaultDataIdFromObject(result)),
+//   fragmentMatcher: new CustomHeuristicFragmentMatcher(),
+//   // addPersistField: true,
+//   storage: window.localStorage,
+//   prefix: 'vue-oop-apollo',
+//   shouldPersist,
+// });
 
 const link = ApolloLink.from([
   persistLink,
@@ -56,7 +53,7 @@ const { apolloClient, wsClient } = createApolloClient({
   tokenName: AUTH_TOKEN,
   link,
   connectToDevTools: process.env.NODE_ENV !== 'production',
-  cache,
+  // cache,
 });
 
 export {

@@ -115,16 +115,16 @@ export default abstract class Model extends EventEmitter {
     return this.constructor.name;
   }
 
-  protected getInputFields() {
+  protected async getInputFields() {
     return getSchemaTypeFields(`${this.getClassName()}Input`);
   }
 
-  public getUpdateVariables() {
+  public async getUpdateVariables(): Promise<unknown> {
     return stripObject(this.toCollection()
-      .only(this.getInputFields())
+      .only(await this.getInputFields())
       .map(field => {
         if (Array.isArray(field)) {
-          return field.map(model => ((model instanceof Model) ? model.getUpdateVariables() : model));
+          return Promise.all(field.map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : model)));
         }
         if (field instanceof Model) {
           return field.getUpdateVariables();
@@ -156,7 +156,7 @@ export default abstract class Model extends EventEmitter {
 
   public async create(params?: unknown, mutation?: string | DocumentNode) {
     const resolvedRequest = this.resolveRequest(mutation, this.createMutation);
-    const resolvedParams = this.resolveParams(params);
+    const resolvedParams = await this.resolveParams(params);
 
     // istanbul ignore else
     if (config().graphql) {
@@ -172,7 +172,7 @@ export default abstract class Model extends EventEmitter {
 
   public async update(params?: unknown, mutation?: string | DocumentNode) {
     const resolvedRequest = this.resolveRequest(mutation, this.updateMutation);
-    const resolvedParams = this.resolveParams(params);
+    const resolvedParams = await this.resolveParams(params);
 
     // istanbul ignore else
     if (config().graphql) {
@@ -265,9 +265,9 @@ export default abstract class Model extends EventEmitter {
     return typeof defaultRequest === 'function' ? defaultRequest() : defaultRequest;
   }
 
-  protected resolveParams(params: Object): Object {
+  protected async resolveParams(params: unknown): Promise<unknown> {
     if (config().graphql) {
-      const model = this.getUpdateVariables();
+      const model = await this.getUpdateVariables();
 
       return {
         [to.camel(this.className)]: model,
