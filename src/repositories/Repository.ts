@@ -153,7 +153,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
 
   public static fromArray<T, R extends Repository>(array: T[], skipEmpty = true): R {
     // @ts-ignore
-    return (<typeof Repository>(new this.constructor())).fromArray(array, skipEmpty);
+    return (<typeof Repository>(new this)).fromArray(array, skipEmpty);
   }
 
   /**
