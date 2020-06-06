@@ -78,7 +78,7 @@ export default abstract class Model extends EventEmitter {
   }
 
   public exists(): boolean {
-    return this._exists;
+    return this._exists || Boolean(this.__typename) || Boolean(this.id);
   }
 
   protected defaults(): KeyValueUnknown {
@@ -146,6 +146,24 @@ export default abstract class Model extends EventEmitter {
     if (Array.isArray(props) && !props.length) return [];
 
     return this.toCollection().only(props).all();
+  }
+
+  /**
+   * Returns an FormData of properties to be submitted based on `submittableProps`
+   *
+   * @param {array<string>} props
+   * @return {FormData}
+   */
+  toSubmittableFormData(props = this.submittableProps): FormData {
+    const fd = new FormData();
+
+    if (!props || (Array.isArray(props) && !props.length)) return fd;
+
+    this.toCollection().only(props).each((item: any, index: string) => {
+      fd.append(index, item);
+    });
+
+    return fd;
   }
 
   public async save() {

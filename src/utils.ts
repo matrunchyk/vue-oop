@@ -1,6 +1,13 @@
 import { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
-import { ObjectTypeDefinitionNode, DocumentNode, IntrospectionQuery, OperationDefinitionNode } from 'graphql';
+import {
+  ObjectTypeDefinitionNode,
+  DocumentNode,
+  IntrospectionQuery,
+  OperationDefinitionNode,
+  buildClientSchema, printSchema
+} from 'graphql';
+import { parse } from 'graphql/language/parser';
 import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
 import { getIntrospectionQuery } from 'graphql';
 import Registry from './Registry';
@@ -137,7 +144,20 @@ export function config(): Config {
 }
 
 export async function getParsedSchema(): Promise<DocumentNode> {
-  const schema = await config().schema;
+  const configSchema = config().schema;
+  const configSchemaUrl = config().schemaUrl;
+  let schema = Registry.getInstance().get('schema') as DocumentNode | null;
+
+  if (!schema && configSchema) {
+    schema = configSchema;
+  } else if (!schema && configSchemaUrl) {
+    schema = await fetchIntrospectionSchema(configSchemaUrl)
+      .then(buildClientSchema.bind(null))
+      .then(printSchema.bind(null))
+      .then(parse.bind(null));
+
+    Registry.getInstance().set('schema', schema);
+  }
 
   if (!schema) {
     throw new UnexpectedException('Configuration error: \'schema\' must be passed as a config key, e.g\n\nimport schema from \'raw-loader!@/../schema.graphql\';\n\n//...\n\nVue.use(VueOOP, {\n  //...,\n  schema,\n})\n\n;');

@@ -6,9 +6,7 @@
 import _Vue from 'vue';
 import Registry from './Registry';
 import * as Utils from './utils';
-import { DocumentNode, buildClientSchema, printSchema } from 'graphql';
-import { parse } from 'graphql/language/parser';
-import { fetchIntrospectionSchema } from './utils';
+import { DocumentNode } from 'graphql';
 
 export interface IVueOOPOptions {
   rest?: boolean;
@@ -72,29 +70,6 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions) {
 
   const registry = Registry.getInstance();
   registry.set('Config', config);
-
-  Object.defineProperty(config, 'schema', {
-    async get() {
-      if (this._schema) {
-        return this._schema;
-      }
-
-      let { schema } = this;
-
-      if (this.schemaUrl) {
-        schema = await fetchIntrospectionSchema(config.schemaUrl)
-          .then(buildClientSchema.bind(null))
-          .then(printSchema.bind(null))
-          .then(parse.bind(null));
-      }
-
-      this._schema = schema;
-    }
-  });
-
-  // @ts-ignore
-  console.log(registry.entries)
-
 
   Vue.mixin({
     beforeCreate() {

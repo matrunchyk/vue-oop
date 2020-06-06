@@ -3,7 +3,9 @@ import { DocumentNode } from "graphql";
 export type Config = {
   graphql?: boolean;
   rest?: boolean;
+  debug?: boolean;
   schema?: DocumentNode;
+  schemaUrl?: string;
 }
 
 export type KeyValueString = { [key: string]: string };

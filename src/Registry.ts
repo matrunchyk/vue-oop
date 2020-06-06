@@ -1,3 +1,5 @@
+import { config } from './utils';
+
 type Entry = {
   [key: string]: unknown;
 }
@@ -75,7 +77,9 @@ export default class Registry {
    */
   public get(key: string): unknown {
     if (!Registry.instance.entries.has(key)) {
-      console.warn(`Registry Error: ${key} is not available in the registry.`);
+      if (config().debug) {
+        console.warn(`Registry Error: ${key} is not available in the registry.`);
+      }
       return null;
     }
     return Registry.instance.entries.get(key);

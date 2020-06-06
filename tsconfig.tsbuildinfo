@@ -692,53 +692,8 @@
         "affectsGlobalScope": false
       },
       "./src/typings.ts": {
-        "version": "c28f455ccaef2ed6bc999a048149fc4538755d77087cb8089e7bce94619e5d03",
-        "signature": "e3b80f2907dfeb259b360e58afe93f65608135a75504342130614dd214a64b38",
-        "affectsGlobalScope": false
-      },
-      "./src/registry.ts": {
-        "version": "88ed13a2682ad49b76719752813fc92daa0095de5303ffd58f3ec63eb8393f75",
-        "signature": "6a703be8cf8d9708d749adf9100a5450030af958e42eef08e5a4f4006c8dd822",
-        "affectsGlobalScope": false
-      },
-      "./src/vue.d.ts": {
-        "version": "10373625f0042a27a7d85315d169b2898c77584bd3cf41a130cdf1bfb9648cf1",
-        "signature": "10373625f0042a27a7d85315d169b2898c77584bd3cf41a130cdf1bfb9648cf1",
-        "affectsGlobalScope": false
-      },
-      "./src/eventemitter.ts": {
-        "version": "e7b587651679b076f92d23f90ee4cdb2abc10836d644f94429236cad69c5c43e",
-        "signature": "25e75831d267dec8d0d5b30e4454e204e888e87d6da001e6b8f8e12d6464b4e6",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/vue/types/vnode.d.ts": {
-        "version": "336721337da7deac683208a3089786c32cd834fd7e992cc2a9de5abd6100d8aa",
-        "signature": "336721337da7deac683208a3089786c32cd834fd7e992cc2a9de5abd6100d8aa",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/vue/types/options.d.ts": {
-        "version": "83e2325a245cc898ca63a68dcc0477efd47e97a3343c96547b26545d86a60cfb",
-        "signature": "83e2325a245cc898ca63a68dcc0477efd47e97a3343c96547b26545d86a60cfb",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/vue/types/plugin.d.ts": {
-        "version": "e8cc0280272ae461f8dc6eef59712323d9eea7abfd455a8d4861601f3c5a9a6f",
-        "signature": "e8cc0280272ae461f8dc6eef59712323d9eea7abfd455a8d4861601f3c5a9a6f",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/vue/types/vue.d.ts": {
-        "version": "c483036e3c3aea2c4b7d435120543bea042a68aa38e56b91344678384357eb27",
-        "signature": "c483036e3c3aea2c4b7d435120543bea042a68aa38e56b91344678384357eb27",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/vue/types/umd.d.ts": {
-        "version": "fe4441713df34868b3883ae9532d1390de8456e65534a26c019051bf170a3a93",
-        "signature": "fe4441713df34868b3883ae9532d1390de8456e65534a26c019051bf170a3a93",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/vue/types/index.d.ts": {
-        "version": "4a75e4b3cb109dcf5e977cb8ab1c8f9804073b37fa7f094785ee8014efdeabf4",
-        "signature": "4a75e4b3cb109dcf5e977cb8ab1c8f9804073b37fa7f094785ee8014efdeabf4",
+        "version": "5fc047b885f49ae1e48a2e3a02d03c644d77f687cf997e0ee4824039dd405537",
+        "signature": "16693bccf65a3e636e602a024c3b01f33541d1e1746ec981866d44f822e5809b",
         "affectsGlobalScope": false
       },
       "./node_modules/apollo-client/core/networkstatus.d.ts": {
@@ -1257,8 +1212,53 @@
         "affectsGlobalScope": false
       },
       "./src/utils.ts": {
-        "version": "f74ca835e4aeb527ae03d4f5a022b2623fbeb92ecf0a5a7bd6baeeb1d3d242b9",
+        "version": "f81bfb1042288964136f692ac8c43f017cc1d36b8ace43330235046aba565b23",
         "signature": "7a028338d53439831635555afca4d373ee6c5fd071784267dd4087e29890eaf9",
+        "affectsGlobalScope": false
+      },
+      "./src/registry.ts": {
+        "version": "36ccb5876dabcba580d952e6ad0ee759db07569d2e0e812aad2aff1f8064a75e",
+        "signature": "6a703be8cf8d9708d749adf9100a5450030af958e42eef08e5a4f4006c8dd822",
+        "affectsGlobalScope": false
+      },
+      "./src/vue.d.ts": {
+        "version": "10373625f0042a27a7d85315d169b2898c77584bd3cf41a130cdf1bfb9648cf1",
+        "signature": "10373625f0042a27a7d85315d169b2898c77584bd3cf41a130cdf1bfb9648cf1",
+        "affectsGlobalScope": false
+      },
+      "./src/eventemitter.ts": {
+        "version": "e7b587651679b076f92d23f90ee4cdb2abc10836d644f94429236cad69c5c43e",
+        "signature": "25e75831d267dec8d0d5b30e4454e204e888e87d6da001e6b8f8e12d6464b4e6",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/vue/types/vnode.d.ts": {
+        "version": "336721337da7deac683208a3089786c32cd834fd7e992cc2a9de5abd6100d8aa",
+        "signature": "336721337da7deac683208a3089786c32cd834fd7e992cc2a9de5abd6100d8aa",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/vue/types/options.d.ts": {
+        "version": "83e2325a245cc898ca63a68dcc0477efd47e97a3343c96547b26545d86a60cfb",
+        "signature": "83e2325a245cc898ca63a68dcc0477efd47e97a3343c96547b26545d86a60cfb",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/vue/types/plugin.d.ts": {
+        "version": "e8cc0280272ae461f8dc6eef59712323d9eea7abfd455a8d4861601f3c5a9a6f",
+        "signature": "e8cc0280272ae461f8dc6eef59712323d9eea7abfd455a8d4861601f3c5a9a6f",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/vue/types/vue.d.ts": {
+        "version": "c483036e3c3aea2c4b7d435120543bea042a68aa38e56b91344678384357eb27",
+        "signature": "c483036e3c3aea2c4b7d435120543bea042a68aa38e56b91344678384357eb27",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/vue/types/umd.d.ts": {
+        "version": "fe4441713df34868b3883ae9532d1390de8456e65534a26c019051bf170a3a93",
+        "signature": "fe4441713df34868b3883ae9532d1390de8456e65534a26c019051bf170a3a93",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/vue/types/index.d.ts": {
+        "version": "4a75e4b3cb109dcf5e977cb8ab1c8f9804073b37fa7f094785ee8014efdeabf4",
+        "signature": "4a75e4b3cb109dcf5e977cb8ab1c8f9804073b37fa7f094785ee8014efdeabf4",
         "affectsGlobalScope": false
       },
       "./src/models/exceptions/invalidargumentexception.ts": {
@@ -1352,13 +1352,13 @@
         "affectsGlobalScope": false
       },
       "./src/models/model.ts": {
-        "version": "e32b59d99b901e40552904d650adbc9d6669f12ef4c2c57fedf9813b6e465cf2",
-        "signature": "564b8ef0af6ce279ab347f189ba78494e8fadbde55de9cdc4e609fb5e9932e21",
+        "version": "0f2666c9619c61aa7644fae4f44ebf4a17af19f519c5456271d2a3045cbafc65",
+        "signature": "bdc7d31ac7f4b2125e3af9485981d8537b54c20f9c1b74db5fc35deef1a46a44",
         "affectsGlobalScope": false
       },
       "./src/models/collection.ts": {
-        "version": "7b8ee651d1b5ff0aafa35c370eb3534f78718439a3bd2467def8b5486d9529bb",
-        "signature": "32797ccbefcd5f9c69fe7632a672099f9ea964f8de86d782c15599f1da77f666",
+        "version": "0de5dd8e904b583052fb049b297d845cbbf67c1ce3cb652e3084ddc4a5377f15",
+        "signature": "d7d50b0cdd871f0b891ab4989035f51f6449e6b1df013bb0f6db3bacbeeebfde",
         "affectsGlobalScope": false
       },
       "./src/models/exceptions/validationexception.ts": {
@@ -1372,12 +1372,12 @@
         "affectsGlobalScope": false
       },
       "./src/repositories/repository.ts": {
-        "version": "f5981dd5393d5801d618bd9dc7381251a81024748fa7e0b9bf52fab9980364fe",
-        "signature": "fe983ab1b350f3104bb0db62fb820f32f478834e52492118bf1d73024dec0077",
+        "version": "637dad4a24265a97773950c805b751d47673d8b287c3b3b17bf0a0161eecdd61",
+        "signature": "27ceb599b2b692c27237aa7f549f87ee4f4f481141f6bd03093add7e245e64e0",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "c5eb545e18b67b41eaf54e0b2b9b7cb62af1ae429479bcb64121c058ef675720",
+        "version": "82fbcaba3962e3849a64a5d1645f872c735ac4ccf1557eff900e73e464499cd7",
         "signature": "46c4bf875e3c40e11441874d25ff624a5d437bbf37c875ce27c7bb6b05231bdb",
         "affectsGlobalScope": false
       },
@@ -4608,7 +4608,6 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/graphql/index.d.ts",
-        "./node_modules/graphql/language/parser.d.ts",
         "./node_modules/vue/types/index.d.ts",
         "./src/models/collection.ts",
         "./src/models/exceptions/baseexception.ts",
@@ -4680,7 +4679,8 @@
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
+        "./node_modules/@types/node/util.d.ts",
+        "./src/utils.ts"
       ],
       "./src/repositories/repository.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -4714,6 +4714,7 @@
         "./node_modules/apollo-client/index.d.ts",
         "./node_modules/apollo-link/lib/index.d.ts",
         "./node_modules/graphql/index.d.ts",
+        "./node_modules/graphql/language/parser.d.ts",
         "./src/graphql/apolloclient.ts",
         "./src/models/exceptions/unexpectedexception.ts",
         "./src/registry.ts",

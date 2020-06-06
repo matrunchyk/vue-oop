@@ -141,11 +141,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       }
 
       // @ts-ignore
-      const m = new model(i);
-
-      m.markExists();
-
-      return m;
+      return new model(i);
     }) as M[];
 
     return new Collection<M>(mapped);
