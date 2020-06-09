@@ -69,7 +69,7 @@
     "snyk": "^1.324.0",
     "to-case": "^2.0.0",
     "uuid": "^8.1.0",
-    "vue-cli-plugin-apollo": "^0.21.3"
+    "vue-cli-plugin-apollo": "^0.22.0"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
