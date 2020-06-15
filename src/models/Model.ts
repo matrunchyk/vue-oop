@@ -118,19 +118,23 @@ export default abstract class Model extends EventEmitter {
   }
 
   public async getUpdateVariables(): Promise<unknown> {
-    return stripObject(this.toCollection()
-      .only(await this.getInputFields())
-      .map(field => {
-        if (Array.isArray(field)) {
-          return Promise.all(field.map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : model)));
-        }
-        if (field instanceof Model) {
-          return field.getUpdateVariables();
-        }
+    const keys = await this.getInputFields();
+    const result = {};
 
-        return field;
-      })
-      .all());
+    for (const key of keys) {
+      if (Array.isArray(this[key])) {
+        result[key] = Promise.all(this[key].map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : await model)));
+        continue;
+      }
+      if (this[key] instanceof Model) {
+        result[key] = await this[key].getUpdateVariables();
+        continue;
+      }
+
+      result[key] = await this[key];
+    }
+
+    return result;
   }
 
   /**
