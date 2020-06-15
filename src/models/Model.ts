@@ -123,7 +123,7 @@ export default abstract class Model extends EventEmitter {
 
     for (const key of keys) {
       if (Array.isArray(this[key])) {
-        result[key] = Promise.all(this[key].map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : model)));
+        result[key] = Promise.all(this[key].map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : await model)));
         continue;
       }
       if (this[key] instanceof Model) {
@@ -131,7 +131,7 @@ export default abstract class Model extends EventEmitter {
         continue;
       }
 
-      result[key] = this[key];
+      result[key] = await this[key];
     }
 
     return result;
