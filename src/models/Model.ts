@@ -6,7 +6,6 @@ import {
   performSafeRequestGraphql,
   config,
   getSchemaTypeFields,
-  stripObject
 } from '../utils';
 import Collection from './Collection';
 import { KeyValueUnknown, ResolvingRESTOptions } from '../typings';
@@ -123,7 +122,7 @@ export default abstract class Model extends EventEmitter {
 
     for (const key of keys) {
       if (Array.isArray(this[key])) {
-        result[key] = Promise.all(this[key].map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : await model)));
+        result[key] = await Promise.all(this[key].map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : await model)));
         continue;
       }
       if (this[key] instanceof Model) {
