@@ -1352,7 +1352,7 @@
         "affectsGlobalScope": false
       },
       "./src/models/model.ts": {
-        "version": "0f2666c9619c61aa7644fae4f44ebf4a17af19f519c5456271d2a3045cbafc65",
+        "version": "e5f3b445ce8fcfea717bd7232d98f65469c30eea8cce173fdcacfe1767bd0d1a",
         "signature": "bdc7d31ac7f4b2125e3af9485981d8537b54c20f9c1b74db5fc35deef1a46a44",
         "affectsGlobalScope": false
       },
