@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "1.1.9",
+  "version": "1.1.11-beta.20",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -66,7 +66,6 @@
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
     "pusher-js": "^6.0.3",
-    "snyk": "^1.324.0",
     "to-case": "^2.0.0",
     "uuid": "^8.1.0",
     "vue-cli-plugin-apollo": "^0.22.0"
@@ -121,6 +120,5 @@
         "infile": "CHANGELOG.md"
       }
     }
-  },
-  "snyk": true
+  }
 }
