@@ -1739,7 +1739,7 @@
     },
     "options": {
       "incremental": true,
-      "target": 6,
+      "target": 99,
       "module": 1,
       "lib": [
         "lib.esnext.d.ts",
