@@ -1,4 +1,4 @@
-import { ApolloQueryResult } from 'apollo-client';
+import ApolloClient, { ApolloQueryResult } from 'apollo-client';
 import { FetchResult } from 'apollo-link';
 import {
   ObjectTypeDefinitionNode,
@@ -13,15 +13,14 @@ import { getIntrospectionQuery } from 'graphql';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
 import { apolloClient } from './graphql/apolloClient';
-import { QueryManager } from 'apollo-client/core/QueryManager';
 
 export const defaultRESTHeaders = {
   'Accept': 'application/json',
   'Content-Type': 'application/json;charset=UTF-8',
 };
 
-export function getApolloManager(): QueryManager<unknown> {
-  return apolloClient.queryManager;
+export function getApolloClient(): ApolloClient<unknown> {
+  return apolloClient;
 }
 
 export function camelToKebab(input: string): string {
@@ -89,7 +88,7 @@ export async function performSafeRequestREST(url, params = {}, method = 'get', o
  * @returns {Promise<any>}
  */
 export function performGqlQuery(query, variables) {
-  return getApolloManager().query({
+  return getApolloClient().query({
     query,
     variables,
   });
@@ -103,7 +102,7 @@ export function performGqlQuery(query, variables) {
  * @returns {Promise<any>}
  */
 export function performGqlMutation(mutation, variables) {
-  return getApolloManager().mutate({
+  return getApolloClient().mutate({
     mutation,
     variables,
   });
