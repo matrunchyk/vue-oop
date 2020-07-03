@@ -53,6 +53,18 @@ const { apolloClient, wsClient } = createApolloClient({
   tokenName: AUTH_TOKEN,
   link,
   connectToDevTools: process.env.NODE_ENV !== 'production',
+  apollo: {
+    defaultOptions: {
+      watchQuery: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'ignore',
+      },
+      query: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'all',
+      },
+    }
+  }
   // cache,
 });
 
