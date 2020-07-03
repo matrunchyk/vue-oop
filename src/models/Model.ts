@@ -205,7 +205,7 @@ export default abstract class Model extends EventEmitter {
     );
   }
 
-  public async delete(params?: unknown, mutation?: string | DocumentNode) {
+  public async delete(mutation?: string | DocumentNode, params?: unknown) {
     const resolvedRequest = this.resolveRequest(mutation, this.deleteMutation);
 
     // Marks as not exists and returns a mutation result

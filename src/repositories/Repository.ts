@@ -1,8 +1,8 @@
-import { GraphQLError, DocumentNode } from 'graphql';
+import { GraphQLError, DocumentNode, OperationDefinitionNode } from 'graphql';
 import InvalidArgumentException from '../models/Exceptions/InvalidArgumentException';
 import Collection from '../models/Collection';
 // noinspection ES6PreferShortImport
-import { getUrl, config, performSafeRequestREST, performSafeRequestGraphql, isClass } from '../utils';
+import {getUrl, config, performSafeRequestREST, performSafeRequestGraphql, isClass, isSubscription} from '../utils';
 import UnexpectedException from '../models/Exceptions/UnexpectedException';
 import ValidationException from '../models/Exceptions/ValidationException';
 import UnauthorizedException from '../models/Exceptions/UnauthorizedException';
@@ -17,6 +17,9 @@ import {
   HttpMethod,
   KeyValueUnknown,
 } from '../typings';
+import { Observable } from 'apollo-client/util/Observable';
+import to from 'to-case';
+// import to from 'to-case';
 
 export default abstract class Repository<M = unknown> extends EventEmitter {
   /**
@@ -209,8 +212,10 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       }
 
       return this.beforeQuery()
-        .then(this.performSafeRequestGraphql.bind(this, doc, params, this.subscriptions()))
-        .then(this.processResponse.bind(this, collection))
+        .then(this.performSafeRequestGraphql.bind(this, doc, params))
+        .then((data) => (
+          isSubscription(data) ? this.processSubscription(data, doc) : this.processResponse(collection, data)
+        ))
         .catch(this.onError.bind(this))
         .finally(this.afterQuery.bind(this));
     }
@@ -225,6 +230,19 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       .then(this.processResponse.bind(this, collection))
       .catch(this.onError.bind(this))
       .finally(this.afterQuery.bind(this));
+  }
+
+  public processSubscription(observer: Observable<unknown>, doc: DocumentNode) {
+    const queryName = doc.definitions.map(def => (<OperationDefinitionNode>def).name).find(def => def.kind === 'Name').value;
+
+    const that = this;
+    observer.subscribe({
+      next({ data }) {
+        that[`on${to.pascal(queryName)}`](data[queryName]);
+      },
+
+      error(err) { console.error('err', err); },
+    });
   }
 
   public async beforeQuery() {
@@ -278,6 +296,18 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
 
     //@ts-ignore
     return new ModelFactory(data);
+  }
+
+  public async subscribeToMore(params = null) {
+    if (!this.subscriptions()) {
+      throw new InvalidArgumentException('There are no subscriptions specified for this repository.')
+    }
+
+    for (const subscription of this.subscriptions()) {
+      // @ts-ignore
+      await this.query(subscription, params);
+    }
+
   }
 
   public static one(params?: unknown) {
