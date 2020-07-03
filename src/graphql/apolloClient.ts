@@ -12,6 +12,8 @@ const AUTH_TOKEN = 'accessToken';
 // Http endpoint
 const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP || 'http://127.0.0.1:3000/graphql';
 
+const wsEndpoint = process.env.VUE_APP_GRAPHQL_WS || 'ws://localhost:3000/graphql';
+
 const pusherLink = new PusherLink({
   pusher: new Pusher(process.env.VUE_APP_PUSHER_KEY, {
     cluster: process.env.VUE_APP_PUSHER_CLUSTER,
@@ -50,6 +52,8 @@ const link = ApolloLink.from([
 
 const { apolloClient, wsClient } = createApolloClient({
   httpEndpoint,
+  wsEndpoint,
+  websocketsOnly: false,
   tokenName: AUTH_TOKEN,
   link,
   connectToDevTools: process.env.NODE_ENV !== 'production',
@@ -67,6 +71,8 @@ const { apolloClient, wsClient } = createApolloClient({
   }
   // cache,
 });
+
+apolloClient.wsClient = wsClient;
 
 export {
   apolloClient,

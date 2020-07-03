@@ -109,6 +109,20 @@ export function performGqlMutation(mutation, variables) {
 }
 
 /**
+ * Perform GQL subscription request
+ *
+ * @param {object} subscription
+ * @param {object} variables
+ * @returns {Promise<any>}
+ */
+export async function performGqlSubscription(subscription, variables) {
+  return getApolloClient().subscribe({
+    query: subscription,
+    variables,
+  });
+}
+
+/**
  * Removes __typename from object recursively
  */
 export function stripTypename(obj) {
@@ -128,6 +142,12 @@ export async function performSafeRequestGraphql(query: DocumentNode, variables =
   if (isQuery) {
     return performGqlQuery(query, stripTypename(variables))
       .then((value: ApolloQueryResult<unknown>) => value.data[queryName]);
+  }
+
+  const isSubscription = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'subscription';
+  if (isSubscription) {
+    return performGqlSubscription(query, stripTypename(variables));
+      // .then((value: ApolloQueryResult<unknown>) => value.data[queryName]);
   }
 
   return performGqlMutation(query, stripTypename(variables))
@@ -214,7 +234,6 @@ export async function getUrl(_opts: ResolvingRESTOptions) {
 
   return resolvedUrl;
 }
-
 export function stripObject(obj) {
   return JSON.parse(JSON.stringify(obj, (k, v) => (k === 'loading' ? undefined : v)));
 }
@@ -232,3 +251,5 @@ export function fetchIntrospectionSchema(url: string): Promise<IntrospectionQuer
 }
 
 export const isClass = (fn: CallableFunction): boolean => /^\s*class/.test(fn.toString());
+
+export const isSubscription = (data) => data._subscriber;
