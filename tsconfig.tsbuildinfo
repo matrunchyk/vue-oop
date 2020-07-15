@@ -1271,6 +1271,21 @@
         "signature": "431ea1ae36b88eba2a7aef1db9d0be9465124d6eb17f149cda7ef8932f01b639",
         "affectsGlobalScope": true
       },
+      "./src/models/collection.ts": {
+        "version": "d89adbc0c6c07ac19b54c3897be0437a87fed75d569e245bce76c87fd7c7c4ae",
+        "signature": "14300632799075681534c8aa0302388b7fbb583a0dc144234601292482d8c2fe",
+        "affectsGlobalScope": false
+      },
+      "./src/models/exceptions/validationexception.ts": {
+        "version": "988d55626846330cc554aa546d5ca7aa5e3716acd3c66b6e2f3f6c49ed2f489e",
+        "signature": "e8b757144732676128bd96d49bbf8fe7c418ee1f01bf8ee863cfba9fa99fb088",
+        "affectsGlobalScope": false
+      },
+      "./src/models/exceptions/unauthorizedexception.ts": {
+        "version": "a4094e8e80f8121349b6837909c93588b012fe61f9c86e43c1e04cac2a1e2a58",
+        "signature": "41519445441125a284455dc4264b392c4d2b4c266f3d05aa79a3628cbc5ba9ff",
+        "affectsGlobalScope": false
+      },
       "./node_modules/@types/lodash/ts3.1/common/common.d.ts": {
         "version": "4025cf62742c5bb3d383c8a62342481622c87e3397ea5e7b7baab18b9efd5798",
         "signature": "4025cf62742c5bb3d383c8a62342481622c87e3397ea5e7b7baab18b9efd5798",
@@ -1352,28 +1367,13 @@
         "affectsGlobalScope": false
       },
       "./src/models/model.ts": {
-        "version": "8080698685373a163de50eff2b037f19c5ceafff222120cc86e92d94c0910082",
-        "signature": "cb877c9e4edfbe030a9380521c88814adddacdbefd97b6a43cce2f673028cb50",
-        "affectsGlobalScope": false
-      },
-      "./src/models/collection.ts": {
-        "version": "0de5dd8e904b583052fb049b297d845cbbf67c1ce3cb652e3084ddc4a5377f15",
-        "signature": "d7d50b0cdd871f0b891ab4989035f51f6449e6b1df013bb0f6db3bacbeeebfde",
-        "affectsGlobalScope": false
-      },
-      "./src/models/exceptions/validationexception.ts": {
-        "version": "988d55626846330cc554aa546d5ca7aa5e3716acd3c66b6e2f3f6c49ed2f489e",
-        "signature": "e8b757144732676128bd96d49bbf8fe7c418ee1f01bf8ee863cfba9fa99fb088",
-        "affectsGlobalScope": false
-      },
-      "./src/models/exceptions/unauthorizedexception.ts": {
-        "version": "a4094e8e80f8121349b6837909c93588b012fe61f9c86e43c1e04cac2a1e2a58",
-        "signature": "41519445441125a284455dc4264b392c4d2b4c266f3d05aa79a3628cbc5ba9ff",
+        "version": "f0424b02ac58c4f3efd8c49b3876e086c15e7c117d2e9d273c1ede040aaa17ee",
+        "signature": "4e57b03e33322037428734ef4c3371c691359b1f4681e968b3ae11af5b23791b",
         "affectsGlobalScope": false
       },
       "./src/repositories/repository.ts": {
         "version": "eada2ad0abe310002a4312ac14500991216a59ead79ce4cbb04f94d7d41483a7",
-        "signature": "6adacef55768c996115ca8c96c708d10ea5bf715f31c436308533cf61871920c",
+        "signature": "6c9e68dec7e293e124df2b4efe6500ede5f76039dc1962ec16cf6749a9a9ab5a",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -4625,8 +4625,7 @@
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
-        "./node_modules/collect.js/index.d.ts",
-        "./src/models/model.ts"
+        "./node_modules/collect.js/index.d.ts"
       ],
       "./src/models/exceptions/baseexception.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -7549,7 +7548,7 @@
         "./src/utils.ts"
       ],
       "./src/models/collection.ts": [
-        "./src/models/model.ts"
+        "./node_modules/collect.js/index.d.ts"
       ],
       "./src/models/exceptions/invalidargumentexception.ts": [
         "./src/models/exceptions/baseexception.ts"
@@ -7564,9 +7563,9 @@
         "./src/models/exceptions/baseexception.ts"
       ],
       "./src/models/model.ts": [
+        "./node_modules/collect.js/index.d.ts",
         "./node_modules/graphql/index.d.ts",
         "./src/eventemitter.ts",
-        "./src/models/collection.ts",
         "./src/typings.ts",
         "./src/utils.ts"
       ],
