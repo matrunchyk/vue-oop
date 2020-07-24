@@ -1267,8 +1267,8 @@
         "affectsGlobalScope": false
       },
       "./node_modules/collect.js/index.d.ts": {
-        "version": "431ea1ae36b88eba2a7aef1db9d0be9465124d6eb17f149cda7ef8932f01b639",
-        "signature": "431ea1ae36b88eba2a7aef1db9d0be9465124d6eb17f149cda7ef8932f01b639",
+        "version": "17664e7f368a23aae1f226ad38f12ceb656fd22c1925711f0284ab8b9d4127b0",
+        "signature": "17664e7f368a23aae1f226ad38f12ceb656fd22c1925711f0284ab8b9d4127b0",
         "affectsGlobalScope": true
       },
       "./src/models/collection.ts": {
