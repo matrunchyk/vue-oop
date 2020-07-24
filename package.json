@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -61,7 +61,7 @@
     "apollo-link": "^1.2.14",
     "apollo-link-context": "^1.0.20",
     "apollo-link-http": "^1.5.17",
-    "collect.js": "^4.25.0",
+    "collect.js": "^4.28.1",
     "get-graphql-schema": "^2.1.2",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.2",
