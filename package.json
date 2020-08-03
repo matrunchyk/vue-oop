@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -71,7 +71,7 @@
     "snyk": "^1.337.0",
     "to-case": "^2.0.0",
     "uuid": "^8.1.0",
-    "vue-cli-plugin-apollo": "^0.22.0"
+    "vue-cli-plugin-apollo": "^0.21.3"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
