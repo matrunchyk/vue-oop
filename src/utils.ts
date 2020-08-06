@@ -20,7 +20,7 @@ export const defaultRESTHeaders = {
 };
 
 export function getApolloClient(): ApolloClient<unknown> {
-  return apolloClient;
+  return config().apolloClient || apolloClient;
 }
 
 export function camelToKebab(input: string): string {

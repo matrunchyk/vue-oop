@@ -1,4 +1,5 @@
 import { DocumentNode } from "graphql";
+import { ApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 
 export type Config = {
   graphql?: boolean;
@@ -6,6 +7,7 @@ export type Config = {
   debug?: boolean;
   schema?: DocumentNode;
   schemaUrl?: string;
+  apolloClient?: ApolloClient;
 }
 
 export type KeyValueString = { [key: string]: string };
