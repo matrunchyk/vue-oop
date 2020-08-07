@@ -121,16 +121,23 @@ export default abstract class Model extends EventEmitter {
     const result = {};
 
     for (const key of keys) {
-      if (Array.isArray(this[key])) {
-        result[key] = await Promise.all(this[key].map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : await model)));
-        continue;
+      let value = this[key];
+
+      if (value instanceof Collection) {
+        value = value.all();
       }
-      if (this[key] instanceof Model) {
-        result[key] = await this[key].getUpdateVariables();
+
+      if (Array.isArray(value)) {
+        result[key] = await Promise.all(value.map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : await model)));
         continue;
       }
 
-      result[key] = await this[key];
+      if (value instanceof Model) {
+        result[key] = await value.getUpdateVariables();
+        continue;
+      }
+
+      result[key] = await value;
     }
 
     return result;
@@ -162,6 +169,7 @@ export default abstract class Model extends EventEmitter {
 
     if (!props || (Array.isArray(props) && !props.length)) return fd;
 
+    // @ts-ignore
     this.toCollection().only(props).each((item: any, index: string) => {
       fd.append(index, item);
     });
@@ -205,7 +213,7 @@ export default abstract class Model extends EventEmitter {
     );
   }
 
-  public async delete(params?: unknown, mutation?: string | DocumentNode) {
+  public async delete(mutation?: string | DocumentNode, params?: unknown) {
     const resolvedRequest = this.resolveRequest(mutation, this.deleteMutation);
 
     // Marks as not exists and returns a mutation result

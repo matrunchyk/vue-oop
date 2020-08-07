@@ -692,8 +692,8 @@
         "affectsGlobalScope": false
       },
       "./src/typings.ts": {
-        "version": "5fc047b885f49ae1e48a2e3a02d03c644d77f687cf997e0ee4824039dd405537",
-        "signature": "16693bccf65a3e636e602a024c3b01f33541d1e1746ec981866d44f822e5809b",
+        "version": "2472a64426d6b2242b77bdeb9a7c2b26f0583cdbacd3353e329efe78d2291cf4",
+        "signature": "b27204204cc01159aab149d999407e3adece39df9175b89bfbe33b7980fc96b7",
         "affectsGlobalScope": false
       },
       "./node_modules/apollo-client/core/networkstatus.d.ts": {
@@ -1207,13 +1207,13 @@
         "affectsGlobalScope": false
       },
       "./src/graphql/apolloclient.ts": {
-        "version": "0c001dc95957f8a8a51dcad8fb048dc73512fd0872c1ae87c3e08b507addc409",
+        "version": "9d1d26ccfeede0cbccf08b3dde95c8eac49a8983429859ef965a86abeb66a070",
         "signature": "ffe0dd32785560587f5fcbe42f0e75e40a5373294a95559fb7bf3fdcfc42400a",
         "affectsGlobalScope": false
       },
       "./src/utils.ts": {
-        "version": "f81bfb1042288964136f692ac8c43f017cc1d36b8ace43330235046aba565b23",
-        "signature": "7a028338d53439831635555afca4d373ee6c5fd071784267dd4087e29890eaf9",
+        "version": "4655a2e9859b7550f592c3aa4d3ef2866b5d916ff9806355389e8714d9770009",
+        "signature": "b105242dd3cf8b2fca51536a1267b93b20c4a08f7c997f7790d1d7efe7219cbd",
         "affectsGlobalScope": false
       },
       "./src/registry.ts": {
@@ -1267,9 +1267,24 @@
         "affectsGlobalScope": false
       },
       "./node_modules/collect.js/index.d.ts": {
-        "version": "431ea1ae36b88eba2a7aef1db9d0be9465124d6eb17f149cda7ef8932f01b639",
-        "signature": "431ea1ae36b88eba2a7aef1db9d0be9465124d6eb17f149cda7ef8932f01b639",
+        "version": "17664e7f368a23aae1f226ad38f12ceb656fd22c1925711f0284ab8b9d4127b0",
+        "signature": "17664e7f368a23aae1f226ad38f12ceb656fd22c1925711f0284ab8b9d4127b0",
         "affectsGlobalScope": true
+      },
+      "./src/models/collection.ts": {
+        "version": "d89adbc0c6c07ac19b54c3897be0437a87fed75d569e245bce76c87fd7c7c4ae",
+        "signature": "14300632799075681534c8aa0302388b7fbb583a0dc144234601292482d8c2fe",
+        "affectsGlobalScope": false
+      },
+      "./src/models/exceptions/validationexception.ts": {
+        "version": "988d55626846330cc554aa546d5ca7aa5e3716acd3c66b6e2f3f6c49ed2f489e",
+        "signature": "e8b757144732676128bd96d49bbf8fe7c418ee1f01bf8ee863cfba9fa99fb088",
+        "affectsGlobalScope": false
+      },
+      "./src/models/exceptions/unauthorizedexception.ts": {
+        "version": "a4094e8e80f8121349b6837909c93588b012fe61f9c86e43c1e04cac2a1e2a58",
+        "signature": "41519445441125a284455dc4264b392c4d2b4c266f3d05aa79a3628cbc5ba9ff",
+        "affectsGlobalScope": false
       },
       "./node_modules/@types/lodash/ts3.1/common/common.d.ts": {
         "version": "4025cf62742c5bb3d383c8a62342481622c87e3397ea5e7b7baab18b9efd5798",
@@ -1352,28 +1367,13 @@
         "affectsGlobalScope": false
       },
       "./src/models/model.ts": {
-        "version": "e5f3b445ce8fcfea717bd7232d98f65469c30eea8cce173fdcacfe1767bd0d1a",
-        "signature": "bdc7d31ac7f4b2125e3af9485981d8537b54c20f9c1b74db5fc35deef1a46a44",
-        "affectsGlobalScope": false
-      },
-      "./src/models/collection.ts": {
-        "version": "0de5dd8e904b583052fb049b297d845cbbf67c1ce3cb652e3084ddc4a5377f15",
-        "signature": "d7d50b0cdd871f0b891ab4989035f51f6449e6b1df013bb0f6db3bacbeeebfde",
-        "affectsGlobalScope": false
-      },
-      "./src/models/exceptions/validationexception.ts": {
-        "version": "988d55626846330cc554aa546d5ca7aa5e3716acd3c66b6e2f3f6c49ed2f489e",
-        "signature": "e8b757144732676128bd96d49bbf8fe7c418ee1f01bf8ee863cfba9fa99fb088",
-        "affectsGlobalScope": false
-      },
-      "./src/models/exceptions/unauthorizedexception.ts": {
-        "version": "a4094e8e80f8121349b6837909c93588b012fe61f9c86e43c1e04cac2a1e2a58",
-        "signature": "41519445441125a284455dc4264b392c4d2b4c266f3d05aa79a3628cbc5ba9ff",
+        "version": "f0424b02ac58c4f3efd8c49b3876e086c15e7c117d2e9d273c1ede040aaa17ee",
+        "signature": "4e57b03e33322037428734ef4c3371c691359b1f4681e968b3ae11af5b23791b",
         "affectsGlobalScope": false
       },
       "./src/repositories/repository.ts": {
-        "version": "637dad4a24265a97773950c805b751d47673d8b287c3b3b17bf0a0161eecdd61",
-        "signature": "27ceb599b2b692c27237aa7f549f87ee4f4f481141f6bd03093add7e245e64e0",
+        "version": "4379792a68b400be53cad054d4edbddef5ac621637a2ff2c852b81b911471cb9",
+        "signature": "6c9e68dec7e293e124df2b4efe6500ede5f76039dc1962ec16cf6749a9a9ab5a",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -4625,8 +4625,7 @@
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
-        "./node_modules/collect.js/index.d.ts",
-        "./src/models/model.ts"
+        "./node_modules/collect.js/index.d.ts"
       ],
       "./src/models/exceptions/baseexception.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -4687,6 +4686,7 @@
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
+        "./node_modules/apollo-client/util/observable.d.ts",
         "./node_modules/graphql/index.d.ts",
         "./src/eventemitter.ts",
         "./src/models/collection.ts",
@@ -4710,7 +4710,6 @@
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
-        "./node_modules/apollo-client/core/querymanager.d.ts",
         "./node_modules/apollo-client/index.d.ts",
         "./node_modules/apollo-link/lib/index.d.ts",
         "./node_modules/graphql/index.d.ts",
@@ -7549,7 +7548,7 @@
         "./src/utils.ts"
       ],
       "./src/models/collection.ts": [
-        "./src/models/model.ts"
+        "./node_modules/collect.js/index.d.ts"
       ],
       "./src/models/exceptions/invalidargumentexception.ts": [
         "./src/models/exceptions/baseexception.ts"
@@ -7564,13 +7563,14 @@
         "./src/models/exceptions/baseexception.ts"
       ],
       "./src/models/model.ts": [
+        "./node_modules/collect.js/index.d.ts",
         "./node_modules/graphql/index.d.ts",
         "./src/eventemitter.ts",
-        "./src/models/collection.ts",
         "./src/typings.ts",
         "./src/utils.ts"
       ],
       "./src/repositories/repository.ts": [
+        "./node_modules/apollo-client/util/observable.d.ts",
         "./node_modules/graphql/index.d.ts",
         "./src/eventemitter.ts",
         "./src/models/collection.ts",
@@ -7581,8 +7581,8 @@
         "./node_modules/graphql/index.d.ts"
       ],
       "./src/utils.ts": [
-        "./node_modules/apollo-client/core/querymanager.d.ts",
         "./node_modules/apollo-client/index.d.ts",
+        "./node_modules/apollo-client/util/observable.d.ts",
         "./node_modules/apollo-link/lib/index.d.ts",
         "./node_modules/graphql/index.d.ts",
         "./src/typings.ts"

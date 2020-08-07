@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "1.1.11-beta.18",
+  "version": "1.2.6",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -48,6 +48,11 @@
     "snyk-protect": "snyk protect",
     "prepare": "npm run snyk-protect"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg1": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "dependencies": {
     "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",
@@ -56,7 +61,7 @@
     "apollo-link": "^1.2.14",
     "apollo-link-context": "^1.0.20",
     "apollo-link-http": "^1.5.17",
-    "collect.js": "^4.25.0",
+    "collect.js": "^4.28.1",
     "get-graphql-schema": "^2.1.2",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.2",
@@ -66,7 +71,7 @@
     "snyk": "^1.337.0",
     "to-case": "^2.0.0",
     "uuid": "^8.1.0",
-    "vue-cli-plugin-apollo": "^0.22.0"
+    "vue-cli-plugin-apollo": "^0.21.3"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -84,7 +89,7 @@
     "apollo-link-http-common": "^0.2.16",
     "codecov": "^3.7.0",
     "commitizen": "^4.1.2",
-    "commitlint": "^8.3.5",
+    "commitlint": "^9.0.1",
     "cz-conventional-changelog": "^3.2.0",
     "cz-gitmoji": "^0.0.7",
     "danger": "^10.2.0",
