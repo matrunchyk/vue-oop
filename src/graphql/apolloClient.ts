@@ -2,7 +2,6 @@ import { ApolloLink } from 'apollo-link';
 import { PersistLink } from 'apollo-cache-instorage';
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 import Pusher from 'pusher-js';
-import PusherLink from './PusherLink';
 
 Pusher.logToConsole = process.env.NODE_ENV !== 'production';
 
@@ -11,20 +10,6 @@ const AUTH_TOKEN = 'accessToken';
 
 // Http endpoint
 const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP || 'http://127.0.0.1:3000/graphql';
-
-const pusherLink = new PusherLink({
-  pusher: new Pusher(process.env.VUE_APP_PUSHER_KEY, {
-    cluster: process.env.VUE_APP_PUSHER_CLUSTER,
-    forceTLS: true,
-    authEndpoint: `${process.env.VUE_APP_HTTP_ENDPOINT}/graphql/subscriptions/auth`,
-    auth: {
-      params: null,
-      headers: {
-        authorization: `Bearer ${localStorage.getItem(AUTH_TOKEN)}`,
-      },
-    },
-  }),
-});
 
 const persistLink = new PersistLink();
 
@@ -45,7 +30,6 @@ const persistLink = new PersistLink();
 
 const link = ApolloLink.from([
   persistLink,
-  pusherLink,
 ])
 
 const { apolloClient, wsClient } = createApolloClient({
