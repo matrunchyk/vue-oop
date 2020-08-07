@@ -37,27 +37,6 @@ export function queryParams(params, camelToKebabActive = true) {
   return str.join('&');
 }
 
-export function status(res) {
-  const response = res.hasOwnProperty('status') ? res : res.response;
-  if (response.status && response.status >= 200 && response.status < 300) {
-    return Promise.resolve(response);
-  } else {
-    if (response.data && response.data.errors) {
-      const errors = (response.data.errors || []).map((err) => err.defaultMessage).join(', ');
-      return Promise.reject(new Error(errors));
-    }
-    return Promise.reject(new Error(response.data.message));
-  }
-}
-
-export function json(response) {
-  if (response && response.data) {
-    return response.data;
-  } else {
-    return null;
-  }
-}
-
 export async function performSafeRequestREST(url, params = {}, method = 'get', opts: KeyValueUnknown = {}) {
   let fullUrl = url;
   let body = {};
@@ -77,7 +56,7 @@ export async function performSafeRequestREST(url, params = {}, method = 'get', o
     headers: defaultRESTHeaders,
     body: JSON.stringify(body),
     ...opts,
-  }).then(status).then(json);
+  }).then(response => response.json());
 }
 
 /**
