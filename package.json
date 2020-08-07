@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -44,9 +44,7 @@
     "release": "release-it",
     "test": "jest --config jest.config.json",
     "test:watch": "jest -w",
-    "prepublishOnly": "npm run build",
-    "snyk-protect": "snyk protect",
-    "prepare": "npm run snyk-protect"
+    "prepublishOnly": "npm run build"
   },
   "husky": {
     "hooks": {
@@ -67,11 +65,9 @@
     "graphql-tag": "^2.10.2",
     "lodash.camelcase": "^4.3.0",
     "lodash.clonedeep": "^4.5.0",
-    "pusher-js": "^6.0.3",
-    "snyk": "^1.337.0",
     "to-case": "^2.0.0",
     "uuid": "^8.1.0",
-    "vue-cli-plugin-apollo": "^0.21.3"
+    "vue-cli-plugin-apollo": "0.21.3"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
@@ -123,6 +119,5 @@
         "infile": "CHANGELOG.md"
       }
     }
-  },
-  "snyk": true
+  }
 }
