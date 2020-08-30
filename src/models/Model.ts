@@ -112,12 +112,12 @@ export default abstract class Model extends EventEmitter {
     return this.constructor.name;
   }
 
-  protected async getInputFields() {
-    return getSchemaTypeFields(`${this.getClassName()}Input`);
+  protected async getInputFields(inputTypeName = `${this.getClassName()}Input`) {
+    return getSchemaTypeFields(inputTypeName);
   }
 
-  public async getUpdateVariables(): Promise<unknown> {
-    const keys = await this.getInputFields();
+  public async getUpdateVariables(inputTypeName?: string): Promise<unknown> {
+    const keys = await this.getInputFields(inputTypeName);
     const result = {};
 
     for (const key of keys) {
