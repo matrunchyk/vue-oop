@@ -76,6 +76,10 @@ export default abstract class Model extends EventEmitter {
     return 'post';
   }
 
+  get identifier(): string {
+    return config().graphql ? 'uuid' : 'id';
+  }
+
   public exists(): boolean {
     return this._exists || Boolean(this.__typename) || Boolean(this.id);
   }
