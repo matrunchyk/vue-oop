@@ -1,3 +1,32 @@
+# [1.4.0](https://github.com/matrunchyk/vue-oop/compare/1.0.0...1.4.0) (2020-09-25)
+
+
+### Bug Fixes
+
+* package.json & package-lock.json to reduce vulnerabilities ([326ac71](https://github.com/matrunchyk/vue-oop/commit/326ac71b2f1ffbdcba69442182c4ce98a10d98f3))
+* package.json & package-lock.json to reduce vulnerabilities ([bbbcfd3](https://github.com/matrunchyk/vue-oop/commit/bbbcfd3b9f69ade3935a282e6d15fb279d0fba3e))
+* package.json & package-lock.json to reduce vulnerabilities ([803af22](https://github.com/matrunchyk/vue-oop/commit/803af22905cc4c1c96ab99369dd6a537643f6b31))
+* package.json & package-lock.json to reduce vulnerabilities ([1d2f40e](https://github.com/matrunchyk/vue-oop/commit/1d2f40e10c8a4b4e95782b8740f4a9f2fce059f4))
+* package.json & package-lock.json to reduce vulnerabilities ([8b9fd4a](https://github.com/matrunchyk/vue-oop/commit/8b9fd4adada7513567811749b9ca2016a8b62017))
+* package.json & package-lock.json to reduce vulnerabilities ([332ce6b](https://github.com/matrunchyk/vue-oop/commit/332ce6ba821278a32570452057e34d943966b068))
+* package.json & package-lock.json to reduce vulnerabilities ([feccdc4](https://github.com/matrunchyk/vue-oop/commit/feccdc48f8341da81580646c2ada39ff3f90e626))
+* package.json & package-lock.json to reduce vulnerabilities ([d4c7fea](https://github.com/matrunchyk/vue-oop/commit/d4c7feae40df1ca856fdb99e510d0c96c11b6bed))
+* package.json, package-lock.json & .snyk to reduce vulnerabilities ([eef59fc](https://github.com/matrunchyk/vue-oop/commit/eef59fcc3723c13d2a3f73f89228c3c12a4ee8b1))
+* **cache:** fix InStorage cache; Make .one method to have 0 arguments ([45d7bec](https://github.com/matrunchyk/vue-oop/commit/45d7bec8b070caaf4cbb92abced4917a0fedf18b))
+* **graphql:** add apollo-cache password filtering ([fe83010](https://github.com/matrunchyk/vue-oop/commit/fe83010b23ca172b204b010dba262cad61713e89))
+* **graphql:** fix persisting options ([4602033](https://github.com/matrunchyk/vue-oop/commit/4602033077334032adaf2701da78766469d78bb5))
+* **repository:** fix fromArray method ([52d027f](https://github.com/matrunchyk/vue-oop/commit/52d027f28d88cf47fbb4c1bb1694c09b05f278fe))
+* **repository:** fix model instantiation in fromArray call ([1aeccd7](https://github.com/matrunchyk/vue-oop/commit/1aeccd7ab67603e33b2ab07abcd3825b8ab71980))
+* **schema, model:** fix schema fetching, model.exists() method ([b89c2fc](https://github.com/matrunchyk/vue-oop/commit/b89c2fc5bcb51941eb1d0e715adc27ecd4565de4))
+* package.json, package-lock.json & .snyk to reduce vulnerabilities ([08e0132](https://github.com/matrunchyk/vue-oop/commit/08e0132322880eb240efc04fb66997e8cf3864d6))
+* package.json, package-lock.json & .snyk to reduce vulnerabilities ([bbfa769](https://github.com/matrunchyk/vue-oop/commit/bbfa769bd7325644ca56a70053e2a39f6aba817e))
+* package.json, package-lock.json & .snyk to reduce vulnerabilities ([f08ce7f](https://github.com/matrunchyk/vue-oop/commit/f08ce7fb57f20fe2d894ca21257e8d481db89f5e))
+
+
+### Features
+
+* **graphql:** enhance persisting options ([7a21876](https://github.com/matrunchyk/vue-oop/commit/7a21876f523dc3857c562c9731e407328e17d2ee))
+
 # [1.0.0](https://github.com/matrunchyk/vue-oop/compare/0.6.3...1.0.0) (2020-05-24)
 
 
