@@ -110,6 +110,9 @@
     "npm": {
       "publish": true
     },
+    "github": {
+      "release": true
+    },
     "git": {
       "addUntrackedFiles": false
     },
