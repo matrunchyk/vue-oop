@@ -1,3 +1,5 @@
+## [1.4.1](https://github.com/matrunchyk/vue-oop/compare/1.4.0...1.4.1) (2020-09-25)
+
 # [1.4.0](https://github.com/matrunchyk/vue-oop/compare/1.0.0...1.4.0) (2020-09-25)
 
 
