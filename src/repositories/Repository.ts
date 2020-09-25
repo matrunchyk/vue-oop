@@ -284,8 +284,12 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    * @returns {Promise<Model>}
    */
   public async one(id?: unknown) {
-    const params = config().graphql ? { uuid: id } : { id };
+    // @ts-ignore
+    const identifier = (new this.model()).identifier;
+
+    const params = { [identifier]: id };
     const data = await this.query(this.fetchOneQuery, params);
+
     //@ts-ignore
     let ModelFactory = this.model;
     // Check if ModelFactory is NOT inherit Model
