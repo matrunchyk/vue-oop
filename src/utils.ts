@@ -104,7 +104,14 @@ export async function performGqlSubscription(subscription, variables) {
 /**
  * Removes __typename from object recursively
  */
-export function stripTypename(obj) {
+export function stripTypename<T>(obj: T) {
+  return config().stripTypename ? config().stripTypename(obj) : stripTypenameDefault(obj);
+}
+
+/**
+ * Removes __typename from object recursively
+ */
+export function stripTypenameDefault<T>(obj: T): Omit<T, "__typename"> {
   return JSON.parse(JSON.stringify(obj, (k, v) => (k === '__typename' ? undefined : v)));
 }
 
