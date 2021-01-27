@@ -185,7 +185,6 @@ Now when the `userId` variable changed, the `queryParams` are also updated and r
 Feel free to submit your pull-requests, ideas, proposals and bug reports!
  
 ### Coming in next releases:
-- Add Vue3 support
 - Add `@Inject` and `@Provide`
 - Add subscriptions & events example
 - Write more tests & coverage support

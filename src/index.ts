@@ -78,15 +78,6 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions) {
       // return, as we do need a Vue instance with $apollo in it.
       if (registry.has('Vue')) return;
 
-      Object.defineProperty(Vue.prototype, '$registry', {
-        get() {
-          if (!this.$_registry) {
-            this.$_registry = registry;
-          }
-          return this.$_registry;
-        },
-      });
-
       registry.set('Vue', this.$root);
     },
   });
