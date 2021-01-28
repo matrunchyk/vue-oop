@@ -692,8 +692,8 @@
         "affectsGlobalScope": false
       },
       "./src/typings.ts": {
-        "version": "2472a64426d6b2242b77bdeb9a7c2b26f0583cdbacd3353e329efe78d2291cf4",
-        "signature": "b27204204cc01159aab149d999407e3adece39df9175b89bfbe33b7980fc96b7",
+        "version": "cb1317f448474782fdceb72a4442533d2c3796d2e41b50d8a42a0b79fe99ace7",
+        "signature": "9c045974c5b25ac7edec04f304a5f9db4ad5b07d542716834dfd54113b14857e",
         "affectsGlobalScope": false
       },
       "./node_modules/apollo-client/core/networkstatus.d.ts": {
@@ -927,8 +927,8 @@
         "affectsGlobalScope": false
       },
       "./src/utils.ts": {
-        "version": "3d72667ca53e2f59308f22d98f88c392ac57bdea19a7a5c53d82e07a21865a6c",
-        "signature": "cb448559b77ee5533956eb1f9325c109c24737579837ccaa2ef7ded758c2525c",
+        "version": "5ffbfb8107019948d9d711ec78176c71192e404712180154cbd2cafc56a7af37",
+        "signature": "3a88a6e66a5b4b75ff1076d43722a10f4ebe58442e4cb847d8a5a3d6e8c1fc58",
         "affectsGlobalScope": false
       },
       "./src/registry.ts": {
