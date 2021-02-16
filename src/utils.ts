@@ -10,6 +10,7 @@ import {
 import { parse } from 'graphql/language/parser';
 import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
 import { getIntrospectionQuery } from 'graphql';
+import omitDeep from 'omit-deep-lodash';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
 
@@ -106,8 +107,15 @@ export async function performGqlSubscription(subscription, variables) {
 /**
  * Removes __typename from object recursively
  */
-export function stripTypename(obj) {
-  return JSON.parse(JSON.stringify(obj, (k, v) => (k === '__typename' ? undefined : v)));
+export function stripTypename<T>(obj: T) {
+  return config().stripTypename ? config().stripTypename(obj) : stripTypenameDefault(obj);
+}
+
+/**
+ * Removes __typename from object recursively
+ */
+export function stripTypenameDefault<T>(obj: T): Omit<T, "__typename"> {
+  return omitDeep(obj, '__typename');
 }
 
 /**
@@ -216,7 +224,7 @@ export async function getUrl(_opts: ResolvingRESTOptions) {
   return resolvedUrl;
 }
 export function stripObject(obj) {
-  return JSON.parse(JSON.stringify(obj, (k, v) => (k === 'loading' ? undefined : v)));
+  return omitDeep(obj, 'loading');
 }
 
 export function fetchIntrospectionSchema(url: string): Promise<IntrospectionQuery> {
