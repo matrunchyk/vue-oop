@@ -13,6 +13,8 @@ export interface IVueOOPOptions {
   graphql?: boolean;
   schema?: DocumentNode;
   schemaUrl?: string;
+  httpEndpoint?: string;
+  wsEndpoint?: string;
   debug?: boolean;
   createProvider?: () => unknown;
 }
@@ -48,6 +50,20 @@ export class VueOOPOptions implements IVueOOPOptions {
   schemaUrl: string = null;
 
   /**
+   * URL http endpoint.
+   *
+   * @type {null|string}
+   */
+  httpEndpoint: string = null;
+
+  /**
+   * URL ws endpoint.
+   *
+   * @type {null|string}
+   */
+  wsEndpoint: string = null;
+
+  /**
    * Debug mode
    *
    * @type {boolean}
@@ -63,6 +79,8 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions) {
     graphql: false,
     schema: null,
     schemaUrl: null,
+    httpEndpoint: null,
+    wsEndpoint: null,
     debug: false,
     createProvider: null,
     ...options,

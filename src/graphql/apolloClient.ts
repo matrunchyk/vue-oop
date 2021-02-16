@@ -1,8 +1,9 @@
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
+import { config } from '../utils';
 
 const AUTH_TOKEN = 'accessToken';
-const httpEndpoint = process.env.VUE_APP_GRAPHQL_HTTP;
-const wsEndpoint = process.env.VUE_APP_GRAPHQL_WS;
+const httpEndpoint = config().httpEndpoint || process.env.VUE_APP_GRAPHQL_HTTP;
+const wsEndpoint = config().wsEndpoint || process.env.VUE_APP_GRAPHQL_WS;
 let apolloClient;
 let wsClient;
 

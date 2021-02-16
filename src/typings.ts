@@ -5,6 +5,8 @@ export type Config = {
   graphql?: boolean;
   rest?: boolean;
   debug?: boolean;
+  httpEndpoint?: string;
+  wsEndpoint?: string;
   schema?: DocumentNode;
   schemaUrl?: string;
   apolloClient?: ApolloClient;
