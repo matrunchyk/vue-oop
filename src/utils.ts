@@ -13,7 +13,6 @@ import { getIntrospectionQuery } from 'graphql';
 import omitDeep from 'omit-deep-lodash';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
-import { apolloClient } from './graphql/apolloClient';
 
 export const defaultRESTHeaders = {
   'Accept': 'application/json',
@@ -21,6 +20,9 @@ export const defaultRESTHeaders = {
 };
 
 export function getApolloClient(): ApolloClient<unknown> {
+  // eslint-disable-next-line
+  const { apolloClient } = require('./graphql/apolloClient');
+
   return config().apolloClient || apolloClient;
 }
 
