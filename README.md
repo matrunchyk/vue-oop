@@ -184,9 +184,14 @@ Now when the `userId` variable changed, the `queryParams` are also updated and r
 
 Feel free to submit your pull-requests, ideas, proposals and bug reports!
  
-### Coming in next releases:
-- Add `@Inject` and `@Provide`
+### Coming in a next major releases:
+- Add dynamic query builder & fields
+  - Add default fields to fetch with an ability to customize
+- Add decorators
+  - `@OneToMany`, `@ManyToMany`, `@ManyToOne`, `@OneToOne` relations between models
+  - `@Field` with `castTo`, `castFrom`, `nullable` options
 - Add subscriptions & events example
+- Add cursor-based pagination
 - Write more tests & coverage support
 - Add scaffolding support
 - Publishing as monorepo with `vue-oop-table`
