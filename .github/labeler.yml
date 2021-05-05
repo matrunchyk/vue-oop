@@ -1,0 +1,50 @@
+documentation:
+  - src/docs/*
+
+graphql:
+  - src/graphql/**/*
+
+models:
+  - src/models/**/*
+
+repositories:
+  - src/repositories/**/*
+
+core:
+  - src/*.ts
+
+test:
+  - test/**/*
+
+repo:
+  - .browserslistrc
+  - .czrc
+  - .editorconfig
+  - .eslint*
+  - .gitignore
+  - .graphqlconfig
+  - .npmrc
+  - .snyk
+  - .travis.yml
+  - _config.yml
+  - FUNDING.yml
+  - CHANGELOG.md
+  - commitlint.config.js
+  - conventionalcommit.json
+  - jest.config.json
+  - dangerfile.ts
+  - LICENSE
+  - SECURITY.md
+  - README.md
+  - babel.config.js
+  - nodemon.json
+  - tsconfig.json
+  - tsconfig.tsbuildinfo
+  - .github/**/*
+
+deps:
+  - package.json
+  - package-lock.json
+
+#test:
+#  - src/**/*.spec.js

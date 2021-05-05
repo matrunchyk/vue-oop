@@ -135,14 +135,12 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     return this._exists;
   }
 
-  // @ts-ignore
   // noinspection JSUnusedLocalSymbols
-  public getMethod(opts: ResolvingRESTOptions): string {
+  public getMethod(_opts: ResolvingRESTOptions): string { // eslint-disable-line @typescript-eslint/no-unused-vars
     return null;
   }
 
   public fromArray(array: unknown[], skipEmpty = true) {
-    // return new Collection(array.filter(i => i || !skipEmpty).map(i => (<typeof M>(new this.model(i))).markExists()));
     const filtered = array.filter(i => i || !skipEmpty);
     const mapped = filtered.map((i) => {
       let model = this.model;
@@ -152,7 +150,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       }
 
       // @ts-ignore
-      return new model(i);
+      return new model(i); // NOSONAR
     }) as M[];
 
     return new Collection<M>(mapped);
@@ -221,7 +219,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
 
       // istanbul ignore else
       if (typeof queryOrUrl === 'function') {
-        doc = await queryOrUrl() as unknown as DocumentNode;
+        doc = await queryOrUrl() as unknown as DocumentNode; // NOSONAR
       }
 
       return this.beforeQuery()
@@ -236,7 +234,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     this.method = method;
 
     const resolvedUrl = await getUrl({ method, url: queryOrUrl as string, params });
-    const resolvedMethod = await this.getMethod({ method, url: resolvedUrl, params });
+    const resolvedMethod = await this.getMethod({ method, url: resolvedUrl, params }); // NOSONAR
 
     return this.beforeQuery()
       .then(this.performSafeRequestREST.bind(this, resolvedUrl, params || this.queryParams, resolvedMethod || method, null))
@@ -248,7 +246,8 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
   public processSubscription(observer: Observable<unknown>, doc: DocumentNode) {
     const queryName = doc.definitions.map(def => (<OperationDefinitionNode>def).name).find(def => def.kind === 'Name').value;
 
-    const that = this;
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const that = this; // NOSONAR
     observer.subscribe({
       next({ data }) {
         that[`on${to.pascal(queryName)}`](data[queryName]);
@@ -318,7 +317,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    */
   public async one(id?: unknown) {
     // @ts-ignore
-    const identifier = (new this.model()).identifier;
+    const identifier = (new this.model()).identifier; // NOSONAR
 
     const params = { [identifier]: id };
     const data = await this.query(this.fetchOneQuery, params);
@@ -332,7 +331,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     }
 
     //@ts-ignore
-    return new ModelFactory(data);
+    return new ModelFactory(data); // NOSONAR
   }
 
   public async subscribeToMore(params = null) {
