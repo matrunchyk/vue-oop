@@ -20,7 +20,7 @@ export default abstract class Model extends EventEmitter {
 
   public loading = false;
 
-  public createMutation?: string | CallableFunction | DocumentNode;
+  public createMutation?: string | CallableFunction | DocumentNode; // NOSONAR
 
   public updateMutation?: string | CallableFunction | DocumentNode;
 
@@ -100,6 +100,7 @@ export default abstract class Model extends EventEmitter {
     return new this.constructor(item);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   protected getMethod(_opts: ResolvingRESTOptions) {
     return null;
   }
@@ -132,7 +133,7 @@ export default abstract class Model extends EventEmitter {
       }
 
       if (Array.isArray(value)) {
-        result[key] = await Promise.all(value.map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : await model)));
+        result[key] = await Promise.all(value.map(async model => ((model instanceof Model) ? await model.getUpdateVariables() : await model))); // NOSONAR
         continue;
       }
 
