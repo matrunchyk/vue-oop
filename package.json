@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -41,10 +41,8 @@
     "dev": "tsc -w",
     "lint": "eslint '*/**/*.{ts,tsx}' --fix",
     "publish-github": "npm publish --registry https://npm.pkg.github.com/@matrunchyk",
-    "release": "release-it",
     "test": "jest --config jest.config.json",
-    "test:watch": "jest -w",
-    "prepublishOnly": "npm run build"
+    "test:watch": "jest -w"
   },
   "husky": {
     "hooks": {
@@ -93,7 +91,6 @@
     "eslint": "^7.1.0",
     "husky": "^5.0.0",
     "jest": "^26.0.1",
-    "release-it": "^13.6.8",
     "ts-jest": "^26.0.0",
     "ts-node": "^8.10.1",
     "tslib": "^2.0.0",
@@ -102,26 +99,14 @@
   },
   "peerDependencies": {
     "apollo-client": "^2.6.10",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11 || >=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "apollo-client": {
+      "optional": true
+    }
   },
   "publishConfig": {
     "access": "public"
-  },
-  "release-it": {
-    "npm": {
-      "publish": true
-    },
-    "github": {
-      "release": true
-    },
-    "git": {
-      "addUntrackedFiles": false
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular",
-        "infile": "CHANGELOG.md"
-      }
-    }
   }
 }
