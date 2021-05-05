@@ -74,3 +74,14 @@ export type EventListeners = {
   [key: string]: EventSubscriber[];
 }
 
+export type ResponseType = 'collection' | 'connection';
+
+export type PaginationInfo = {
+  pageInfo?: {
+    endCursor?: string,
+    hasNextPage?: boolean,
+    hasPreviousPage?: boolean,
+    startCursor?: string,
+  },
+  totalCount?: number,
+};

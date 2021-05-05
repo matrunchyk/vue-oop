@@ -16,10 +16,11 @@ import {
   UrlResolver,
   HttpMethod,
   KeyValueUnknown,
+  ResponseType,
+  PaginationInfo,
 } from '../typings';
 import { Observable } from 'apollo-client/util/Observable';
 import to from 'to-case';
-// import to from 'to-case';
 
 export default abstract class Repository<M = unknown> extends EventEmitter {
   /**
@@ -56,6 +57,13 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    * @type {Collection}
    */
   public dataset: Collection<M> = new Collection();
+
+  /**
+   * Hold the paginationInfo of the items retrieved from the backend
+   *
+   * @type {object}
+   */
+  public paginationInfo: PaginationInfo = {};
 
   /**
    * Hold query parameters to be used by .many() call
@@ -197,11 +205,16 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    *
    * @param {string|function} queryOrUrl
    * @param {object} params
-   * @param {boolean} collection
+   * @param {string} responseType
    * @param {string} method
    * @returns {Promise<Collection|Model>}
    */
-  public async query(queryOrUrl: string | UrlResolver | DocumentNode, params: unknown = {}, collection = false, method: HttpMethod = this.defaultMethod) {
+  public async query(
+    queryOrUrl: string | UrlResolver | DocumentNode,
+    params: unknown = {},
+    responseType?: ResponseType,
+    method: HttpMethod = this.defaultMethod
+  ) {
     // istanbul ignore else
     if (config().graphql) {
       let doc = queryOrUrl as unknown as DocumentNode;
@@ -214,7 +227,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       return this.beforeQuery()
         .then(this.performSafeRequestGraphql.bind(this, doc, params))
         .then((data) => (
-          isSubscription(data) ? this.processSubscription(data, doc) : this.processResponse(collection, data)
+          isSubscription(data) ? this.processSubscription(data, doc) : this.processResponse(responseType, data)
         ))
         .catch(this.onError.bind(this))
         .finally(this.afterQuery.bind(this));
@@ -227,7 +240,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
 
     return this.beforeQuery()
       .then(this.performSafeRequestREST.bind(this, resolvedUrl, params || this.queryParams, resolvedMethod || method, null))
-      .then(this.processResponse.bind(this, collection))
+      .then(this.processResponse.bind(this, responseType))
       .catch(this.onError.bind(this))
       .finally(this.afterQuery.bind(this));
   }
@@ -251,8 +264,24 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     this.emit('beforeQuery');
   }
 
-  public async processResponse(collection, data) {
-    return collection ? this.fromArray(data) : data;
+  public async processResponse(
+    responseType: ResponseType,
+    data
+  ) {
+    let response = data;
+
+    if (responseType === 'collection') response = this.fromArray(data);
+    if (responseType === 'connection') {
+      if (data.nodes) {
+        response = this.fromArray(data.nodes);
+      } else if (data.edges) {
+        response = this.fromArray(data.edges.map(edge => edge.node));
+      }
+      this.paginationInfo.pageInfo = data.pageInfo;
+      this.paginationInfo.totalCount = data.totalCount;
+    }
+
+    return response;
   }
 
   public async afterQuery() {
@@ -265,14 +294,18 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    * Fetches multiple models
    *
    * @param params
+   * @param responseType
    * @returns {Promise<Collection>}
    */
-  public async many(params = null) {
+  public async many(
+    params = null,
+    responseType: ResponseType = 'collection'
+  ) {
     // istanbul ignore else
     if (!this.fetchManyQuery) {
       throw new InvalidArgumentException('fetchAllQuery is not set for this repository.');
     }
-    this.dataset = await this.query(this.fetchManyQuery, params || this.queryParams, true);
+    this.dataset = await this.query(this.fetchManyQuery, params || this.queryParams, responseType);
     this._exists = true;
     return this.dataset;
   }
