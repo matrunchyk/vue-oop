@@ -23,7 +23,7 @@ export const defaultRESTHeaders = {
 
 export function getApolloClient(providerName = 'default'): ApolloClient<unknown> {
   // eslint-disable-next-line
-  const makeApolloClients = require('./graphql/apolloClient');
+  const makeApolloClients = require('./graphql/makeApolloClients');
 
   return config(providerName).apolloClient || makeApolloClients(providerName);
 }
