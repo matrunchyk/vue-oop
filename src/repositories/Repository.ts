@@ -23,7 +23,7 @@ import { Observable } from 'apollo-client/util/Observable';
 import to from 'to-case';
 
 export default abstract class Repository<M = unknown> extends EventEmitter {
-  public providerName = 'default';
+  protected providerName = 'default';
 
   /**
    * Existing/Loading flag
