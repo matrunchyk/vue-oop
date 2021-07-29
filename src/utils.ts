@@ -5,25 +5,25 @@ import {
   DocumentNode,
   IntrospectionQuery,
   OperationDefinitionNode,
-  buildClientSchema, printSchema
+  buildClientSchema,
+  printSchema,
+  getIntrospectionQuery
 } from 'graphql';
 import { parse } from 'graphql/language/parser';
+import { IVueOOPOptions } from './index';
 import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
-import { getIntrospectionQuery } from 'graphql';
 import omitDeep from 'omit-deep-lodash';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
+import makeApolloClients from './graphql/makeApolloClients';
 
 export const defaultRESTHeaders = {
   'Accept': 'application/json',
   'Content-Type': 'application/json;charset=UTF-8',
 };
 
-export function getApolloClient(): ApolloClient<unknown> {
-  // eslint-disable-next-line
-  const { apolloClient } = require('./graphql/apolloClient');
-
-  return config().apolloClient || apolloClient;
+export function getApolloClient(providerName = 'default'): ApolloClient<unknown> {
+  return config(providerName).apolloClient || makeApolloClients(providerName);
 }
 
 export function camelToKebab(input: string): string {
@@ -67,10 +67,11 @@ export async function performSafeRequestREST(url, params = {}, method = 'get', o
  *
  * @param {object} query
  * @param {object} variables
+ * @param {string} providerName
  * @returns {Promise<any>}
  */
-export function performGqlQuery(query, variables) {
-  return getApolloClient().query({
+export function performGqlQuery(query, variables, providerName = 'default') {
+  return getApolloClient(providerName).query({
     query,
     variables,
   });
@@ -81,10 +82,11 @@ export function performGqlQuery(query, variables) {
  *
  * @param {object} mutation
  * @param {object} variables
+ * @param {string} providerName
  * @returns {Promise<any>}
  */
-export function performGqlMutation(mutation, variables) {
-  return getApolloClient().mutate({
+export function performGqlMutation(mutation, variables, providerName = 'default') {
+  return getApolloClient(providerName).mutate({
     mutation,
     variables,
   });
@@ -95,10 +97,11 @@ export function performGqlMutation(mutation, variables) {
  *
  * @param {object} subscription
  * @param {object} variables
+ * @param {string} providerName
  * @returns {Promise<any>}
  */
-export async function performGqlSubscription(subscription, variables) {
-  return getApolloClient().subscribe({
+export async function performGqlSubscription(subscription, variables, providerName = 'default') {
+  return getApolloClient(providerName).subscribe({
     query: subscription,
     variables,
   });
@@ -123,23 +126,24 @@ export function stripTypenameDefault<T>(obj: T): Omit<T, "__typename"> {
  *
  * @param {object} query
  * @param {object} variables
+ * @param {string} providerName
  * @returns {Promise<*>}
  */
-export async function performSafeRequestGraphql(query: DocumentNode, variables = {}) {
+export async function performSafeRequestGraphql(query: DocumentNode, variables = {}, providerName = 'default') {
   const queryName = query.definitions.map(def => (<OperationDefinitionNode>def).name).find(def => def.kind === 'Name').value;
   const isQuery = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'query';
   if (isQuery) {
-    return performGqlQuery(query, stripTypename(variables))
+    return performGqlQuery(query, stripTypename(variables), providerName)
       .then((value: ApolloQueryResult<unknown>) => value.data[queryName]);
   }
 
   const isSubscription = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'subscription';
   if (isSubscription) {
-    return performGqlSubscription(query, stripTypename(variables));
+    return performGqlSubscription(query, stripTypename(variables), providerName);
       // .then((value: ApolloQueryResult<unknown>) => value.data[queryName]);
   }
 
-  return performGqlMutation(query, stripTypename(variables))
+  return performGqlMutation(query, stripTypename(variables), providerName)
     .then((value: FetchResult<unknown>) => value.data[queryName]);
 }
 
@@ -147,13 +151,19 @@ export function registryGet(key: string): unknown {
   return Registry.getInstance().get(key);
 }
 
-export function config(): Config {
-  return registryGet('Config');
+export function config(name = 'default'): Config {
+  const defaultConfig = registryGet('Config') as IVueOOPOptions;
+
+  if (name === 'default') {
+    return defaultConfig;
+  }
+
+  return defaultConfig.providers.find(config => config.name === name);
 }
 
-export async function getParsedSchema(): Promise<DocumentNode> {
-  const configSchema = config().schema;
-  const configSchemaUrl = config().schemaUrl;
+export async function getParsedSchema(configName = 'default'): Promise<DocumentNode> {
+  const configSchema = config(configName).schema;
+  const configSchemaUrl = config(configName).schemaUrl;
   let schema = Registry.getInstance().get('schema') as DocumentNode | null;
 
   if (!schema && configSchema) {
@@ -174,24 +184,24 @@ export async function getParsedSchema(): Promise<DocumentNode> {
   return schema;
 }
 
-export async function getSchemaTypeFields(typeName): Promise<string[]> {
-  return ((await getParsedSchema())
+export async function getSchemaTypeFields(typeName, configName = 'default'): Promise<string[]> {
+  return ((await getParsedSchema(configName))
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === typeName)
     .fields
     .map(f => f.name.value);
 }
 
-export async function getSchemaMutation(mutationName) {
-  return ((await getParsedSchema())
+export async function getSchemaMutation(mutationName, configName = 'default') {
+  return ((await getParsedSchema(configName))
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === 'Mutation')
     .fields
     .find(def => (def.name || {}).value === mutationName)
 }
 
-export async function getSchemaQuery(queryName) {
-  return ((await getParsedSchema())
+export async function getSchemaQuery(queryName, configName = 'default') {
+  return ((await getParsedSchema(configName))
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === 'Query')
     .fields

@@ -14,6 +14,8 @@ import { DocumentNode } from 'graphql';
 import { v4 } from "uuid";
 
 export default abstract class Model extends EventEmitter {
+  public providerName = 'default';
+
   public id: string;
 
   public uuid: string;
@@ -61,7 +63,7 @@ export default abstract class Model extends EventEmitter {
    * @type {() => void}
    */
   get doRequest() {
-    return config().graphql ? performSafeRequestGraphql : performSafeRequestREST;
+    return config(this.providerName).graphql ? performSafeRequestGraphql : performSafeRequestREST;
   }
 
   get className() {
@@ -77,7 +79,7 @@ export default abstract class Model extends EventEmitter {
   }
 
   get identifier(): string {
-    return config().graphql ? 'uuid' : 'id';
+    return config(this.providerName).graphql ? 'uuid' : 'id';
   }
 
   public exists(): boolean {
@@ -118,7 +120,7 @@ export default abstract class Model extends EventEmitter {
   }
 
   protected async getInputFields(inputTypeName = `${this.getClassName()}Input`) {
-    return getSchemaTypeFields(inputTypeName);
+    return getSchemaTypeFields(inputTypeName, this.providerName);
   }
 
   public async getUpdateVariables(inputTypeName?: string): Promise<unknown> {
@@ -191,7 +193,7 @@ export default abstract class Model extends EventEmitter {
     const resolvedParams = await this.resolveParams(params);
 
     // istanbul ignore else
-    if (config().graphql) {
+    if (config(this.providerName).graphql) {
       return this.hydrate(
         await this.mutate(resolvedRequest, resolvedParams),
       );
@@ -207,7 +209,7 @@ export default abstract class Model extends EventEmitter {
     const resolvedParams = await this.resolveParams(params);
 
     // istanbul ignore else
-    if (config().graphql) {
+    if (config(this.providerName).graphql) {
       return this.hydrate(
         await this.mutate(resolvedRequest, resolvedParams),
       );
@@ -225,7 +227,7 @@ export default abstract class Model extends EventEmitter {
     const forget = result => this.markNotExists() && result;
 
     // istanbul ignore else
-    if (config().graphql) {
+    if (config(this.providerName).graphql) {
       return this.mutate(resolvedRequest, params || {
         uuid: this.uuid,
       }).then(forget);
@@ -247,9 +249,9 @@ export default abstract class Model extends EventEmitter {
    */
   public async mutate(mutationOrUrl, params, method = this.defaultMethod): Promise<unknown> {
     // istanbul ignore else
-    if (config().graphql) {
+    if (config(this.providerName).graphql) {
       return this.beforeMutate()
-        .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params, null))
+        .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params, this.providerName, null))
         .finally(this.afterMutate.bind(this))
         .finally(this.markExists.bind(this));
     }
@@ -298,7 +300,7 @@ export default abstract class Model extends EventEmitter {
   }
 
   protected async resolveParams(params: unknown): Promise<unknown> {
-    if (config().graphql) {
+    if (config(this.providerName).graphql) {
       const model = await this.getUpdateVariables();
 
       return {

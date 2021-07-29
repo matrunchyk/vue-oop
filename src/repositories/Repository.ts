@@ -23,6 +23,8 @@ import { Observable } from 'apollo-client/util/Observable';
 import to from 'to-case';
 
 export default abstract class Repository<M = unknown> extends EventEmitter {
+  protected providerName = 'default';
+
   /**
    * Existing/Loading flag
    *
@@ -128,7 +130,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
   }
 
   get defaultMethod() {
-    return config().graphql ? 'post' : 'get';
+    return config(this.providerName).graphql ? 'post' : 'get';
   }
 
   public exists() {
@@ -172,7 +174,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     this.emit('onError');
 
     // istanbul ignore else
-    if (config().graphql && (e instanceof GraphQLError)) {
+    if (config(this.providerName).graphql && (e instanceof GraphQLError)) {
       const {
         graphQLErrors: [{ extensions: { errorCode, message } }] = [
           {
@@ -214,7 +216,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
     method: HttpMethod = this.defaultMethod
   ) {
     // istanbul ignore else
-    if (config().graphql) {
+    if (config(this.providerName).graphql) {
       let doc = queryOrUrl as unknown as DocumentNode;
 
       // istanbul ignore else
@@ -223,7 +225,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       }
 
       return this.beforeQuery()
-        .then(this.performSafeRequestGraphql.bind(this, doc, params))
+        .then(this.performSafeRequestGraphql.bind(this, doc, params, this.providerName))
         .then((data) => (
           isSubscription(data) ? this.processSubscription(data, doc) : this.processResponse(responseType, data)
         ))
