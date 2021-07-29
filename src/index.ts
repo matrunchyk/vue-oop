@@ -8,19 +8,25 @@ import Registry from './Registry';
 import * as Utils from './utils';
 import { DocumentNode } from 'graphql';
 
-export interface IVueOOPOptions {
+export interface IVueOOPProvider {
+  name: string;
   rest?: boolean;
   graphql?: boolean;
   schema?: DocumentNode;
   schemaUrl?: string;
   httpEndpoint?: string;
   wsEndpoint?: string;
-  debug?: boolean;
   createProvider?: () => unknown;
+}
+
+export interface IVueOOPOptions extends IVueOOPProvider{
+  debug?: boolean;
+  providers?: IVueOOPProvider[];
 }
 
 // istanbul ignore next
 export class VueOOPOptions implements IVueOOPOptions {
+  name: string;
   /**
    * Use REST plugin.
    *
@@ -74,16 +80,21 @@ export class VueOOPOptions implements IVueOOPOptions {
 }
 
 function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions) {
-  const config = {
+  const defaultConfig = {
     rest: true,
     graphql: false,
     schema: null,
     schemaUrl: null,
     httpEndpoint: null,
     wsEndpoint: null,
-    debug: false,
     createProvider: null,
-    ...options,
+  }
+  const config = {
+    name: 'default',
+    debug: false,
+    providers: [],
+    ...defaultConfig,
+    ...(Array.isArray(options) ? {} : options),
   } as IVueOOPOptions;
 
   const registry = Registry.getInstance();

@@ -5,11 +5,13 @@ import {
   DocumentNode,
   IntrospectionQuery,
   OperationDefinitionNode,
-  buildClientSchema, printSchema
+  buildClientSchema,
+  printSchema,
+  getIntrospectionQuery
 } from 'graphql';
 import { parse } from 'graphql/language/parser';
+import { IVueOOPOptions } from './index';
 import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
-import { getIntrospectionQuery } from 'graphql';
 import omitDeep from 'omit-deep-lodash';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
@@ -19,11 +21,11 @@ export const defaultRESTHeaders = {
   'Content-Type': 'application/json;charset=UTF-8',
 };
 
-export function getApolloClient(): ApolloClient<unknown> {
+export function getApolloClient(providerName = 'default'): ApolloClient<unknown> {
   // eslint-disable-next-line
-  const { apolloClient } = require('./graphql/apolloClient');
+  const makeApolloClients = require('./graphql/apolloClient');
 
-  return config().apolloClient || apolloClient;
+  return config(providerName).apolloClient || makeApolloClients(providerName);
 }
 
 export function camelToKebab(input: string): string {
@@ -147,13 +149,19 @@ export function registryGet(key: string): unknown {
   return Registry.getInstance().get(key);
 }
 
-export function config(): Config {
-  return registryGet('Config');
+export function config(name = 'default'): Config {
+  const defaultConfig = registryGet('Config') as IVueOOPOptions;
+
+  if (name === 'default') {
+    return defaultConfig;
+  }
+
+  return defaultConfig.providers.find(config => config.name === name);
 }
 
-export async function getParsedSchema(): Promise<DocumentNode> {
-  const configSchema = config().schema;
-  const configSchemaUrl = config().schemaUrl;
+export async function getParsedSchema(configName = 'default'): Promise<DocumentNode> {
+  const configSchema = config(configName).schema;
+  const configSchemaUrl = config(configName).schemaUrl;
   let schema = Registry.getInstance().get('schema') as DocumentNode | null;
 
   if (!schema && configSchema) {
@@ -174,24 +182,24 @@ export async function getParsedSchema(): Promise<DocumentNode> {
   return schema;
 }
 
-export async function getSchemaTypeFields(typeName): Promise<string[]> {
-  return ((await getParsedSchema())
+export async function getSchemaTypeFields(typeName, configName = 'default'): Promise<string[]> {
+  return ((await getParsedSchema(configName))
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === typeName)
     .fields
     .map(f => f.name.value);
 }
 
-export async function getSchemaMutation(mutationName) {
-  return ((await getParsedSchema())
+export async function getSchemaMutation(mutationName, configName = 'default') {
+  return ((await getParsedSchema(configName))
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === 'Mutation')
     .fields
     .find(def => (def.name || {}).value === mutationName)
 }
 
-export async function getSchemaQuery(queryName) {
-  return ((await getParsedSchema())
+export async function getSchemaQuery(queryName, configName = 'default') {
+  return ((await getParsedSchema(configName))
     .definitions as ReadonlyArray<ObjectTypeDefinitionNode>)
     .find(def => (def.name || {}).value === 'Query')
     .fields
