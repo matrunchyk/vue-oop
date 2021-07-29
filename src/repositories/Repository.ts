@@ -23,7 +23,7 @@ import { Observable } from 'apollo-client/util/Observable';
 import to from 'to-case';
 
 export default abstract class Repository<M = unknown> extends EventEmitter {
-  protected providerName = 'default';
+  public providerName = 'default';
 
   /**
    * Existing/Loading flag
@@ -225,7 +225,7 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       }
 
       return this.beforeQuery()
-        .then(this.performSafeRequestGraphql.bind(this, doc, params))
+        .then(this.performSafeRequestGraphql.bind(this, doc, params, this.providerName))
         .then((data) => (
           isSubscription(data) ? this.processSubscription(data, doc) : this.processResponse(responseType, data)
         ))

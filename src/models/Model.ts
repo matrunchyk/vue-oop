@@ -251,7 +251,7 @@ export default abstract class Model extends EventEmitter {
     // istanbul ignore else
     if (config(this.providerName).graphql) {
       return this.beforeMutate()
-        .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params, null))
+        .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params, this.providerName, null))
         .finally(this.afterMutate.bind(this))
         .finally(this.markExists.bind(this));
     }

@@ -15,6 +15,7 @@ import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
 import omitDeep from 'omit-deep-lodash';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
+import makeApolloClients from './graphql/makeApolloClients';
 
 export const defaultRESTHeaders = {
   'Accept': 'application/json',
@@ -23,7 +24,7 @@ export const defaultRESTHeaders = {
 
 export function getApolloClient(providerName = 'default'): ApolloClient<unknown> {
   // eslint-disable-next-line
-  const makeApolloClients = require('./graphql/makeApolloClients');
+  // const makeApolloClients = require('./graphql/makeApolloClients');
 
   return config(providerName).apolloClient || makeApolloClients(providerName);
 }
@@ -69,10 +70,11 @@ export async function performSafeRequestREST(url, params = {}, method = 'get', o
  *
  * @param {object} query
  * @param {object} variables
+ * @param {string} providerName
  * @returns {Promise<any>}
  */
-export function performGqlQuery(query, variables) {
-  return getApolloClient().query({
+export function performGqlQuery(query, variables, providerName = 'default') {
+  return getApolloClient(providerName).query({
     query,
     variables,
   });
@@ -83,10 +85,11 @@ export function performGqlQuery(query, variables) {
  *
  * @param {object} mutation
  * @param {object} variables
+ * @param {string} providerName
  * @returns {Promise<any>}
  */
-export function performGqlMutation(mutation, variables) {
-  return getApolloClient().mutate({
+export function performGqlMutation(mutation, variables, providerName = 'default') {
+  return getApolloClient(providerName).mutate({
     mutation,
     variables,
   });
@@ -97,10 +100,11 @@ export function performGqlMutation(mutation, variables) {
  *
  * @param {object} subscription
  * @param {object} variables
+ * @param {string} providerName
  * @returns {Promise<any>}
  */
-export async function performGqlSubscription(subscription, variables) {
-  return getApolloClient().subscribe({
+export async function performGqlSubscription(subscription, variables, providerName = 'default') {
+  return getApolloClient(providerName).subscribe({
     query: subscription,
     variables,
   });
@@ -125,23 +129,24 @@ export function stripTypenameDefault<T>(obj: T): Omit<T, "__typename"> {
  *
  * @param {object} query
  * @param {object} variables
+ * @param {string} providerName
  * @returns {Promise<*>}
  */
-export async function performSafeRequestGraphql(query: DocumentNode, variables = {}) {
+export async function performSafeRequestGraphql(query: DocumentNode, variables = {}, providerName = 'default') {
   const queryName = query.definitions.map(def => (<OperationDefinitionNode>def).name).find(def => def.kind === 'Name').value;
   const isQuery = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'query';
   if (isQuery) {
-    return performGqlQuery(query, stripTypename(variables))
+    return performGqlQuery(query, stripTypename(variables), providerName)
       .then((value: ApolloQueryResult<unknown>) => value.data[queryName]);
   }
 
   const isSubscription = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'subscription';
   if (isSubscription) {
-    return performGqlSubscription(query, stripTypename(variables));
+    return performGqlSubscription(query, stripTypename(variables), providerName);
       // .then((value: ApolloQueryResult<unknown>) => value.data[queryName]);
   }
 
-  return performGqlMutation(query, stripTypename(variables))
+  return performGqlMutation(query, stripTypename(variables), providerName)
     .then((value: FetchResult<unknown>) => value.data[queryName]);
 }
 
