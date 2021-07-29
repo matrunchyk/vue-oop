@@ -94,7 +94,7 @@ function VueOOP<VueOOPOptions>(Vue: typeof _Vue, options?: VueOOPOptions) {
     debug: false,
     providers: [],
     ...defaultConfig,
-    ...(Array.isArray(options) ? {} : options),
+    ...(Array.isArray(options) ? options : {}),
   } as IVueOOPOptions;
 
   const registry = Registry.getInstance();
