@@ -1,7 +1,7 @@
 import { createApolloClient } from 'vue-cli-plugin-apollo/graphql-client';
 import { config } from '../utils';
 
-export default function makeApolloClients(providerName = 'default') {
+export default function makeApolloClient(providerName = 'default') {
   const AUTH_TOKEN = 'accessToken';
   const httpEndpoint = config(providerName).httpEndpoint || process.env.VUE_APP_GRAPHQL_HTTP;
   const wsEndpoint = config(providerName).wsEndpoint || process.env.VUE_APP_GRAPHQL_WS;
@@ -35,4 +35,6 @@ export default function makeApolloClients(providerName = 'default') {
       apolloClient.wsClient = wsClient;
     }
   }
+
+  return apolloClient;
 }
