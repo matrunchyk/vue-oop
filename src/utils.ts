@@ -15,7 +15,7 @@ import { Config, KeyValueUnknown, ResolvingRESTOptions } from './typings';
 import omitDeep from 'omit-deep-lodash';
 import Registry from './Registry';
 import UnexpectedException from './models/Exceptions/UnexpectedException';
-import makeApolloClients from './graphql/makeApolloClients';
+import makeApolloClient from './graphql/makeApolloClient';
 
 export const defaultRESTHeaders = {
   'Accept': 'application/json',
@@ -23,7 +23,7 @@ export const defaultRESTHeaders = {
 };
 
 export function getApolloClient(providerName = 'default'): ApolloClient<unknown> {
-  return config(providerName).apolloClient || makeApolloClients(providerName);
+  return config(providerName).apolloClient || makeApolloClient(providerName);
 }
 
 export function camelToKebab(input: string): string {
