@@ -7,7 +7,8 @@ import {
   OperationDefinitionNode,
   buildClientSchema,
   printSchema,
-  getIntrospectionQuery
+  getIntrospectionQuery,
+  FieldNode
 } from 'graphql';
 import { parse } from 'graphql/language/parser';
 import { IVueOOPOptions } from './index';
@@ -130,11 +131,16 @@ export function stripTypenameDefault<T>(obj: T): Omit<T, "__typename"> {
  * @returns {Promise<*>}
  */
 export async function performSafeRequestGraphql(query: DocumentNode, variables = {}, providerName = 'default') {
-  const queryName = query.definitions.map(def => (<OperationDefinitionNode>def).name).find(def => def.kind === 'Name').value;
+  const operationDefinition = query.definitions.find(def => (<OperationDefinitionNode>def).kind === 'OperationDefinition') as OperationDefinitionNode;
+  const queryName = operationDefinition?.name.value;
+
   const isQuery = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'query';
   if (isQuery) {
+    const firstField = operationDefinition?.selectionSet?.selections?.find(s => s.kind === 'Field') as FieldNode;
+    const name = firstField?.name.value;
+
     return performGqlQuery(query, stripTypename(variables), providerName)
-      .then((value: ApolloQueryResult<unknown>) => value.data[queryName]);
+      .then((value: ApolloQueryResult<unknown>) => name ? value.data[name] : value.data);
   }
 
   const isSubscription = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'subscription';
