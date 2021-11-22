@@ -10,7 +10,7 @@ import {
 import Collection from './Collection';
 import { KeyValueUnknown, ResolvingRESTOptions } from '../typings';
 import EventEmitter from '../EventEmitter';
-import { DocumentNode } from 'graphql';
+import { DocumentNode, GraphQLError } from 'graphql';
 import { v4 } from "uuid";
 
 export default abstract class Model extends EventEmitter {
@@ -35,6 +35,8 @@ export default abstract class Model extends EventEmitter {
   protected performSafeRequestGraphql = performSafeRequestGraphql;
 
   protected performSafeRequestREST = performSafeRequestREST;
+
+  protected lastError: Error | GraphQLError = null;
 
   private _exists = false;
 
@@ -252,6 +254,7 @@ export default abstract class Model extends EventEmitter {
     if (config(this.providerName).graphql) {
       return this.beforeMutate()
         .then(this.performSafeRequestGraphql.bind(this, mutationOrUrl, params, this.providerName, null))
+        .catch(this.onError.bind(this))
         .finally(this.afterMutate.bind(this))
         .finally(this.markExists.bind(this));
     }
@@ -261,6 +264,7 @@ export default abstract class Model extends EventEmitter {
 
     return this.beforeMutate()
       .then(this.performSafeRequestREST.bind(this, resolvedUrl, params, resolvedMethod || method, null))
+      .catch(this.onError.bind(this))
       .finally(this.afterMutate.bind(this))
       .finally(this.markExists.bind(this));
   }
@@ -309,5 +313,18 @@ export default abstract class Model extends EventEmitter {
     }
 
     return params;
+  }
+
+  /**
+   * Handles an error
+   *
+   * @param {Error | GraphQLError} e
+   */
+  protected onError(e: Error | GraphQLError) {
+    this.lastError = e;
+
+    this.emit('onError', e);
+
+    throw e;
   }
 }

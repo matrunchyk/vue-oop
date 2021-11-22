@@ -3,9 +3,6 @@ import InvalidArgumentException from '../models/Exceptions/InvalidArgumentExcept
 import Collection from '../models/Collection';
 // noinspection ES6PreferShortImport
 import {getUrl, config, performSafeRequestREST, performSafeRequestGraphql, isClass, isSubscription} from '../utils';
-import UnexpectedException from '../models/Exceptions/UnexpectedException';
-import ValidationException from '../models/Exceptions/ValidationException';
-import UnauthorizedException from '../models/Exceptions/UnauthorizedException';
 import Model from '../models/Model';
 import EventEmitter from '../EventEmitter';
 // noinspection ES6PreferShortImport
@@ -166,38 +163,14 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
   /**
    * Handles an error
    *
-   * @param {Error | GraphQLErrorBag} e
+   * @param {Error | GraphQLError} e
    */
-  protected onError(e: Error | GraphQLErrorBag) {
+  protected onError(e: Error | GraphQLError) {
     this.lastError = e;
 
-    this.emit('onError');
+    this.emit('onError', e);
 
-    // istanbul ignore else
-    if (config(this.providerName).graphql && (e instanceof GraphQLError)) {
-      const {
-        graphQLErrors: [{ extensions: { errorCode, message } }] = [
-          {
-            extensions: {
-              errorCode: 500,
-              message: 'Server Error',
-            },
-          },
-        ],
-      } = (e as unknown) as GraphQLErrorBag;
-
-      // istanbul ignore else
-      if (errorCode === 401) {
-        throw new UnauthorizedException(message);
-      }
-
-      // istanbul ignore else
-      if (errorCode === 422) {
-        throw new ValidationException(message);
-      }
-
-      throw new UnexpectedException(e.message);
-    }
+    throw e;
   }
 
   /**

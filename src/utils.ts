@@ -8,7 +8,7 @@ import {
   buildClientSchema,
   printSchema,
   getIntrospectionQuery,
-  FieldNode
+  FieldNode, GraphQLError
 } from 'graphql';
 import { parse } from 'graphql/language/parser';
 import { IVueOOPOptions } from './index';
@@ -140,7 +140,21 @@ export async function performSafeRequestGraphql(query: DocumentNode, variables =
     const name = firstField?.name.value;
 
     return performGqlQuery(query, stripTypename(variables), providerName)
-      .then((value: ApolloQueryResult<unknown>) => name ? value.data[name] : value.data);
+      .then((value: ApolloQueryResult<unknown>) => {
+        if (value?.errors?.length) {
+          throw new GraphQLError(
+            value?.errors[0].message,
+            value?.errors[0].nodes,
+            value?.errors[0].source,
+            value?.errors[0].positions,
+            value?.errors[0].path,
+            value?.errors[0].originalError,
+            value?.errors[0].extensions,
+          )
+        }
+
+        return name ? value.data[name] : value.data;
+      })
   }
 
   const isSubscription = (<OperationDefinitionNode>query.definitions.find(def => def.kind === 'OperationDefinition')).operation === 'subscription';

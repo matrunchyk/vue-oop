@@ -1,6 +1,6 @@
 {
   "name": "vue-oop",
-  "version": "1.7.5-alpha",
+  "version": "2.0.0-alpha.1",
   "description": "A library based on Model-Repository patterns for Vue components. Usable for GraphQL and REST APIs.",
   "keywords": [
     "collections",
@@ -43,11 +43,6 @@
     "publish-github": "npm publish --registry https://npm.pkg.github.com/@matrunchyk",
     "test": "jest --config jest.config.json",
     "test:watch": "jest -w"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg1": "commitlint -E HUSKY_GIT_PARAMS"
-    }
   },
   "dependencies": {
     "apollo-boost": "^0.4.9",
