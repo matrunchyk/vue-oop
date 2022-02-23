@@ -16,7 +16,7 @@ import {
   ResponseType,
   PaginationInfo,
 } from '../typings';
-import { Observable } from 'apollo-client/util/Observable';
+import { Observable, Subscription } from 'apollo-client/util/Observable';
 import to from 'to-case';
 
 export default abstract class Repository<M = unknown> extends EventEmitter {
@@ -70,6 +70,13 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
    * @type {object}
    */
   public queryParams: KeyValueUnknown = {};
+
+  /**
+   * Active subscriptions
+   *
+   * @type {Subscription}
+   */
+  public activeSubscriptions: Array<Subscription> = [];
 
   public subscriptions(): unknown[] {
     return [];
@@ -218,12 +225,20 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       .finally(this.afterQuery.bind(this));
   }
 
+  /**
+   * Subscribe
+   *
+   * @param {Observable<any>} observer
+   * @param {DocumentNode} doc
+   * @returns {Subscription}
+   */
   public processSubscription(observer: Observable<unknown>, doc: DocumentNode) {
     const queryName = doc.definitions.map(def => (<OperationDefinitionNode>def).name).find(def => def.kind === 'Name').value;
 
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const that = this; // NOSONAR
-    observer.subscribe({
+
+    return observer.subscribe({
       next({ data }) {
         that[`on${to.pascal(queryName)}`](data[queryName]);
       },
@@ -314,9 +329,19 @@ export default abstract class Repository<M = unknown> extends EventEmitter {
       throw new InvalidArgumentException('There are no subscriptions specified for this repository.')
     }
 
-    for (const subscription of this.subscriptions()) {
+    for (const sub of this.subscriptions()) {
       // @ts-ignore
-      await this.query(subscription, params);
+      const subscription = await this.query(sub, params);
+
+      // @ts-ignore
+      this.activeSubscriptions.push(subscription)
+    }
+
+  }
+
+  public unsubscribeAll() {
+    for (const subscription of this.activeSubscriptions) {
+      subscription.unsubscribe();
     }
 
   }
