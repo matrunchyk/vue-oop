@@ -42,7 +42,9 @@
     "lint": "eslint '*/**/*.{ts,tsx}' --fix",
     "publish-github": "npm publish --registry https://npm.pkg.github.com/@matrunchyk",
     "test": "jest --config jest.config.json",
-    "test:watch": "jest -w"
+    "test:watch": "jest -w",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "dependencies": {
     "apollo-boost": "^0.4.9",
@@ -60,11 +62,12 @@
     "omit-deep-lodash": "^1.1.5",
     "to-case": "^2.0.0",
     "uuid": "^8.1.0",
-    "vue-cli-plugin-apollo": "0.21.3"
+    "vue-cli-plugin-apollo": "0.22.0",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
-    "@release-it/conventional-changelog": "^1.1.4",
+    "@release-it/conventional-changelog": "^2.0.0",
     "@types/graphql": "^14.5.0",
     "@types/jest": "^25.2.3",
     "@types/lodash.camelcase": "^4.3.6",
@@ -77,12 +80,12 @@
     "apollo-client": "^2.6.10",
     "apollo-link-http-common": "^0.2.16",
     "codecov": "^3.7.0",
-    "commitizen": "^4.1.3",
+    "commitizen": "^4.2.4",
     "commitlint": "^9.0.1",
     "cz-conventional-changelog": "^3.2.0",
     "cz-gitmoji": "^0.0.7",
-    "danger": "^10.2.0",
-    "eslint": "^7.1.0",
+    "danger": "^10.8.0",
+    "eslint": "^7.16.0",
     "husky": "^5.0.0",
     "jest": "^26.0.1",
     "ts-jest": "^26.0.0",
@@ -102,5 +105,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "snyk": true
 }
