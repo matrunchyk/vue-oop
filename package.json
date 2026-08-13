@@ -59,7 +59,7 @@
     "lodash.clonedeep": "^4.5.0",
     "omit-deep-lodash": "^1.1.5",
     "to-case": "^2.0.0",
-    "uuid": "^8.1.0",
+    "uuid": "^13.0.1",
     "vue-cli-plugin-apollo": "0.22.2"
   },
   "devDependencies": {
