@@ -221,15 +221,15 @@ describe('Given Utils object', () => {
       expect(cloned).not.toEqual(original);
       expect(cloned).not.toEqual(original);
       expect(cloned.a).toEqual(original.a);
-      expect(cloned.__typename).toBeUndefined();
+      expect((cloned as { __typename?: string }).__typename).toBeUndefined();
       expect(cloned.b).toEqual(original.b);
       expect(cloned.c.d).toEqual(original.c.d);
-      expect(cloned.c.__typename).toBeUndefined();
+      expect((cloned.c as { __typename?: string }).__typename).toBeUndefined();
       expect(cloned.e[0]).toEqual(original.e[0]);
       expect(cloned.e[1]).toEqual(original.e[1]);
       //@ts-ignore
       expect(cloned.e[2].h).toEqual(original.e[2].h);
-      expect(cloned.e[2].__typename).toBeUndefined();
+      expect((cloned.e[2] as { __typename?: string }).__typename).toBeUndefined();
     });
   });
 });
